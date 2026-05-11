@@ -1,59 +1,89 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# PinjolWatch
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+PinjolWatch is an independent, community-driven platform designed to provide a secure and anonymous reporting mechanism for victims of illegal online lending platforms (Pinjol) in Indonesia. The application is built with a strong emphasis on user privacy, modern UI/UX design, and open-source intelligence gathering.
 
-## About Laravel
+## Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+The primary objective of PinjolWatch is to map, report, and provide psychological mitigation for victims of aggressive debt collection practices. By aggregating anonymous reports, the platform aims to generate data-driven insights that can assist local authorities and financial regulators in cracking down on illegal financial operations.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Core Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Anonymous Reporting System**
+  Victims can submit detailed reports regarding debt collector intimidation tactics without revealing their personal identity. The system utilizes unique tracking tickets instead of traditional user accounts.
 
-## Learning Laravel
+- **Threat Intelligence & OSINT Tracking**
+  The platform records detailed aggressive behaviors, such as illegal data distribution, contact harassment, and psychological threats, enabling pattern recognition across different illegal lending syndicates.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Automated Verification Services**
+  - **OJK Integration**: Features a localized weekly synchronization service that fetches the official list of licensed financial technology companies from the Otoritas Jasa Keuangan (OJK) Open Data portal.
+  - **Bank Indonesia API**: Integrates real-time baseline interest rates to provide comparative financial literacy and empirical evidence against predatory lending rates.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Mobile-First Architecture**
+  Engineered with a dedicated mobile-specific layout that employs User-Agent sniffing to deliver an app-like experience (including bottom navigation) for mobile users while preserving a rich, expansive desktop view.
 
-## Laravel Sponsors
+- **Mental Health Assessment**
+  Incorporates a standardized psychological questionnaire (K10 scale) to measure the psychological impact and distress levels of the victims, providing immediate guidance for recovery.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Technology Stack
 
-### Premium Partners
+- **Framework**: Laravel 12.x
+- **Frontend**: Livewire 3.x, Alpine.js, Tailwind CSS
+- **Database**: MySQL
+- **User-Agent Parsing**: Jenssegers Agent
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Installation and Setup
+
+### Prerequisites
+
+- PHP 8.2 or higher
+- Composer
+- Node.js & NPM
+- MySQL Database
+
+### Installation Steps
+
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/diskonnekted/pinjolwatch.git
+   cd pinjolwatch
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   composer install
+   npm install
+   npm run build
+   ```
+
+3. **Environment Configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   Update the `.env` file with your database credentials.
+
+4. **Database Migration and Seeding**
+   ```bash
+   php artisan migrate --seed
+   ```
+
+5. **Start the Development Server**
+   ```bash
+   php artisan serve
+   ```
+
+## Scheduled Tasks
+
+To ensure the local database remains up to date with the latest official fintech registry, ensure the Laravel scheduler is running. This handles the automated synchronization with the OJK Open Data portal.
+
+```bash
+php artisan schedule:work
+```
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Contributions are welcome. Please ensure that your pull requests adhere to the PSR-12 coding standard and that no sensitive victim data is compromised in your testing environments.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is proprietary and intended solely for the use of independent tracking and public service reporting. All rights reserved.
