@@ -100,8 +100,14 @@
                             @error('threat_type_id') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
                         </div>
 
+                        <div>
+                            <label for="pinjol_count" class="block text-sm font-semibold text-gray-700 mb-2">Berapa banyak aplikasi pinjol yang menjerat Anda?</label>
+                            <input id="pinjol_count" wire:model.live="pinjol_count" type="number" min="1" max="50" class="w-full border-gray-300 text-gray-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 @error('pinjol_count') border-red-500 @enderror">
+                            @error('pinjol_count') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
+                        </div>
+
                         <div class="border-t border-gray-100 pt-6">
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Aplikasi Pinjol</label>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Aplikasi Pinjol Utama</label>
                             
                             <div class="space-y-4">
                                 <div>
@@ -143,6 +149,14 @@
                                         </div>
                                     @endif
                                 </div>
+                                
+                                @if($pinjol_count > 1)
+                                <div class="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <label for="involved_apps" class="block text-sm font-semibold text-gray-700 mb-2">Sebutkan nama aplikasi pinjol lainnya (pisahkan dengan koma)</label>
+                                    <textarea id="involved_apps" wire:model="involved_apps" rows="2" class="w-full border-gray-300 text-gray-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Contoh: PinjolCepat, DanaKaget, PinjamRia"></textarea>
+                                    @error('involved_apps') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>

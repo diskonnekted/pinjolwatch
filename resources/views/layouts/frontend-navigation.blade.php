@@ -5,8 +5,8 @@
 /* NAV */
 .pw-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 9999; background: rgba(2,6,23,.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,.07); font-family: 'Inter', sans-serif; transition: all .3s; }
 .pw-nav.scrolled { background: rgba(2,6,23,.97); box-shadow: 0 4px 30px rgba(0,0,0,.4); }
-.pw-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.pw-logo img { height: 42px; width: auto; display: block; }
+.pw-nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 80px; }
+.pw-logo img { height: 64px; width: auto; display: block; filter: brightness(0) invert(1); }
 
 /* Desktop nav links */
 .pw-links { display: flex; align-items: center; gap: 4px; }
@@ -42,7 +42,7 @@
 
 /* Mobile hamburger */
 .pw-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: #94a3b8; }
-.pw-mobile-menu { display: none; position: fixed; top: 64px; left: 0; right: 0; background: rgba(2,6,23,.98); border-bottom: 1px solid rgba(255,255,255,.07); padding: 16px; z-index: 9998; }
+.pw-mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: rgba(2,6,23,.98); border-bottom: 1px solid rgba(255,255,255,.07); padding: 16px; z-index: 9998; }
 .pw-mobile-menu.open { display: block; }
 .pw-mobile-link { display: block; padding: 12px 16px; color: #94a3b8; font-weight: 600; font-size: .95rem; text-decoration: none; border-radius: 10px; margin-bottom: 4px; }
 .pw-mobile-link:hover { background: rgba(255,255,255,.07); color: #f1f5f9; }
@@ -86,6 +86,9 @@
             {{-- Peta Sebaran --}}
             <a href="{{ route('map') }}" class="pw-link {{ request()->routeIs('map') ? 'active' : '' }}">Peta Sebaran</a>
 
+            {{-- Statistik --}}
+            <a href="{{ route('statistik') }}" class="pw-link {{ request()->routeIs('statistik') ? 'active' : '' }}">Statistik</a>
+
             {{-- Laporan dropdown --}}
             <div class="pw-dropdown">
                 <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') ? 'active' : '' }}">
@@ -112,7 +115,7 @@
 
             {{-- Bantuan dropdown --}}
             <div class="pw-dropdown">
-                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('panduan-keluarga') ? 'active' : '' }}">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('panduan-keluarga') || request()->routeIs('mental-health-directory') || request()->routeIs('panduan-dc') || request()->routeIs('anti-stigma') || request()->routeIs('panduan-keuangan') || request()->routeIs('bahaya-joki') ? 'active' : '' }}">
                     Bantuan
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
                 </span>
@@ -122,6 +125,13 @@
                         <div>
                             <div style="color:#e2e8f0;font-weight:700;">Cek Kesehatan Jiwa</div>
                             <div style="font-size:.75rem;color:#64748b;">Tes psikologis gratis K10</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('mental-health-directory') }}" class="pw-dropdown-item">
+                        <div class="icon">📋</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Direktori Bantuan</div>
+                            <div style="font-size:.75rem;color:#64748b;">Daftar layanan kesehatan mental</div>
                         </div>
                     </a>
                     <a href="{{ route('panduan-keluarga') }}" class="pw-dropdown-item">
@@ -157,14 +167,6 @@
                         <div>
                             <div style="color:#e2e8f0;font-weight:700;">Bahaya Joki Palsu</div>
                             <div style="font-size:.75rem;color:#64748b;">Hindari jebakan penipu</div>
-                        </div>
-                    </a>
-                    <div class="pw-dropdown-divider"></div>
-                    <a href="tel:119" class="pw-dropdown-item">
-                        <div class="icon">📞</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Hotline 119 ext.8</div>
-                            <div style="font-size:.75rem;color:#64748b;">Bantuan psikologis cepat</div>
                         </div>
                     </a>
                 </div>
@@ -229,17 +231,18 @@
     <a href="{{ route('stories') }}" class="pw-mobile-link">📰 Artikel</a>
     <a href="{{ route('info-pinjol') }}" class="pw-mobile-link">📋 Info Pinjol</a>
     <a href="{{ route('map') }}" class="pw-mobile-link">🗺️ Peta Sebaran</a>
+    <a href="{{ route('statistik') }}" class="pw-mobile-link">📊 Statistik</a>
     <div class="pw-mobile-section">Laporan</div>
     <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Lapor Kasus</a>
     <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Cek Tiket</a>
     <div class="pw-mobile-section">Bantuan</div>
     <a href="{{ route('quiz') }}" class="pw-mobile-link">🧠 Cek Kesehatan Jiwa</a>
+    <a href="{{ route('mental-health-directory') }}" class="pw-mobile-link">📋 Direktori Bantuan</a>
     <a href="{{ route('panduan-keluarga') }}" class="pw-mobile-link">💚 Panduan Keluarga</a>
     <a href="{{ route('panduan-dc') }}" class="pw-mobile-link">🚨 Menghadapi DC</a>
     <a href="{{ route('anti-stigma') }}" class="pw-mobile-link">🤝 Anti-Stigma</a>
     <a href="{{ route('panduan-keuangan') }}" class="pw-mobile-link">📈 Pemulihan Keuangan</a>
     <a href="{{ route('bahaya-joki') }}" class="pw-mobile-link">🛑 Bahaya Joki Palsu</a>
-    <a href="tel:119" class="pw-mobile-link">📞 Hotline 119 ext.8</a>
     <div class="pw-mobile-section">Info</div>
     <a href="{{ route('about') }}" class="pw-mobile-link">🌐 Tentang Kami</a>
     <a href="{{ route('disclaimer') }}" class="pw-mobile-link">⚖️ Disclaimer</a>

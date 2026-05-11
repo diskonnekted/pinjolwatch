@@ -14,8 +14,10 @@ class Report extends Model
         'ticket_id',
         'kabupaten_id',
         'threat_type_id',
+        'pinjol_count',
         'legal_pinjol_id',
         'app_name',
+        'involved_apps',
         'chronology',
         'contact_phone_number',
         'identity_disclosure',
@@ -38,6 +40,7 @@ class Report extends Model
         'is_anonymous' => 'boolean',
         'whatsapp_consent' => 'boolean',
         'dc_actions' => 'array',
+        'involved_apps' => 'array',
         'verification_checklist' => 'array',
     ];
 

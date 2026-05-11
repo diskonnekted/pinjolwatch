@@ -15,6 +15,14 @@ Route::get('/peta', function () {
     return view('map');
 })->name('map');
 
+Route::get('/statistik', function () {
+    return view('statistik');
+})->name('statistik');
+
+Route::get('/test', function () {
+    return view('test');
+})->name('test');
+
 Route::get('/cek-tiket', function () {
     return view('track');
 })->name('track');
@@ -50,6 +58,10 @@ Route::get('/pemulihan-keuangan', function () {
 Route::get('/waspada-joki-pinjol', function () {
     return view('bahaya-joki');
 })->name('bahaya-joki');
+
+Route::get('/bantuan-mental', function () {
+    return view('mental-health-directory');
+})->name('mental-health-directory');
 
 Route::get('/disclaimer', function () {
     return view('disclaimer');
@@ -115,6 +127,7 @@ Route::middleware(['auth', 'role:super-admin|moderator', 'audit'])->prefix('admi
     Route::get('/cms', \App\Livewire\AdminCmsList::class)->name('cms.index');
     Route::get('/cms/create', \App\Livewire\AdminCmsForm::class)->name('cms.create');
     Route::get('/cms/{article}/edit', \App\Livewire\AdminCmsForm::class)->name('cms.edit');
+    Route::get('/audit-log', \App\Livewire\AdminAuditLog::class)->name('audit-log');
 
     Route::get('/reports/evidence/{id}/stream', function ($id) {
         $evidence = \App\Models\ReportEvidence::findOrFail($id);

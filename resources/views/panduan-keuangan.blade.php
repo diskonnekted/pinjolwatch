@@ -43,6 +43,93 @@
                 </p>
             </div>
 
+            {{-- KALKULATOR PINJOL ILEGAL --}}
+            <div x-data="{
+                pokok: 1000000,
+                bungaHarian: 2,
+                hariTerlambat: 0,
+                formatRupiah(num) {
+                    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(num);
+                },
+                hitungBunga(hari) {
+                    return this.pokok * (this.bungaHarian / 100) * hari;
+                },
+                hitungDenda() {
+                    return this.pokok * (8 / 100) * this.hariTerlambat;
+                },
+                hitungTotal(hari) {
+                    return this.pokok + this.hitungBunga(hari) + this.hitungDenda();
+                }
+            }" class="bg-slate-900 border border-red-900/50 shadow-[0_4px_30px_rgba(225,29,72,0.15)] rounded-3xl p-8 md:p-12 relative overflow-hidden mb-12">
+                <div class="absolute top-0 right-0 w-48 h-48 bg-red-900/20 rounded-full blur-3xl"></div>
+                
+                <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-red-900/30 border border-red-800 text-red-400 text-sm font-bold mb-4">
+                    🧮 SIMULATOR JEBAKAN PINJOL ILEGAL
+                </div>
+                <h2 class="text-2xl font-bold text-slate-100 mb-2">Seberapa Cepat Utang Anda Membengkak?</h2>
+                <p class="text-slate-400 mb-8">Pinjol ilegal sering membebankan bunga 1%-3% per hari dan denda keterlambatan hingga 8% per hari. Gunakan kalkulator ini untuk melihat realitanya.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    {{-- Input --}}
+                    <div class="space-y-6 z-10 relative">
+                        <div>
+                            <label class="block text-sm font-bold text-slate-300 mb-2">Pokok Pinjaman (Rp)</label>
+                            <input type="number" x-model.number="pokok" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-4 py-3 focus:ring-red-500 focus:border-red-500 font-mono text-lg" min="100000" step="100000">
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-bold text-slate-300">Bunga per Hari (%)</label>
+                                <span class="text-red-400 font-bold" x-text="bungaHarian + '%'"></span>
+                            </div>
+                            <input type="range" x-model.number="bungaHarian" min="1" max="3" step="0.1" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-red-500">
+                            <div class="flex justify-between text-xs text-slate-500 mt-1">
+                                <span>1%</span>
+                                <span>3% (Sangat Ilegal)</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="text-sm font-bold text-slate-300">Hari Terlambat (Denda 8%/hari)</label>
+                                <span class="text-red-400 font-bold" x-text="hariTerlambat + ' Hari'"></span>
+                            </div>
+                            <input type="range" x-model.number="hariTerlambat" min="0" max="30" step="1" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-red-500">
+                            <div class="flex justify-between text-xs text-slate-500 mt-1">
+                                <span>0 Hari</span>
+                                <span>30 Hari</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-red-950/30 border border-red-900 rounded-xl mt-4">
+                            <p class="text-xs text-red-200 leading-relaxed">
+                                <strong class="text-red-400">Info:</strong> Pinjol legal OJK membatasi total biaya (bunga + denda + biaya lain) maksimum 100% dari pokok pinjaman. Pinjol ilegal <strong>tidak memiliki batas</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Output --}}
+                    <div class="z-10 relative">
+                        <h3 class="text-lg font-bold text-slate-200 mb-4 border-b border-slate-700 pb-2">Total Utang yang Harus Dibayar</h3>
+                        
+                        <div class="space-y-3">
+                            <template x-for="hari in [3, 7, 14, 30, 365]" :key="hari">
+                                <div class="p-4 bg-slate-800/80 border border-slate-700 rounded-xl flex justify-between items-center transition-all hover:border-red-500/50 hover:bg-slate-800">
+                                    <div>
+                                        <div class="text-sm font-bold text-slate-300" x-text="hari == 365 ? '1 Tahun' : hari + ' Hari'"></div>
+                                        <div class="text-xs text-slate-500 mt-1">Bunga: <span x-text="formatRupiah(hitungBunga(hari))"></span></div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-lg font-black text-red-400" x-text="formatRupiah(hitungTotal(hari))"></div>
+                                        <div x-show="hariTerlambat > 0" class="text-xs text-amber-500 mt-1">+Denda: <span x-text="formatRupiah(hitungDenda())"></span></div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- BI COMPARISON COMPONENT --}}
             <x-bi-interest-comparison />
 

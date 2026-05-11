@@ -147,10 +147,3 @@ Sebelum mengakses layanan, pastikan:
 > 💙 **Pesan Penutup**:  
 > *"Memulihkan mental bukan tentang menghapus masa lalu, tapi tentang membangun kembali rasa aman untuk hari ini. Setiap langkah kecil menuju bantuan adalah kemenangan."*
 
-Jika Anda ingin, saya bisa buatkan:
-- ✅ **Halaman `/direktori-bantuan-mental`** lengkap dengan filter lokasi & jenis layanan
-- ✅ **Template PDF "Panduan Akses Bantuan Mental"** yang bisa diunduh korban
-- ✅ **Integrasi API sederhana** untuk menampilkan jadwal konseling gratis IPK Indonesia
-- ✅ **Script WhatsApp auto-reply** untuk mengarahkan korban ke layanan darurat
-
-Silakan tentukan prioritas berikutnya. Dukungan kesehatan mental adalah pilar penting dalam ekosistem PinjolWatch. 💙🧠

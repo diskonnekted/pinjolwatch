@@ -1,12 +1,12 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-24">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="/pw-logo.png" class="block h-12 w-auto" alt="PinjolWatch Logo">
+                        <img src="/pw-logo.png" class="block h-20 w-auto" alt="PinjolWatch Logo" style="filter: brightness(0) invert(1);">
                     </a>
                 </div>
 
@@ -32,6 +32,9 @@
                     </x-nav-link>
                     <x-nav-link :href="route('map')" :active="request()->routeIs('map')">
                         {{ __('Peta Sebaran') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('statistik')" :active="request()->routeIs('statistik')">
+                        {{ __('Statistik') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -107,6 +110,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('map')" :active="request()->routeIs('map')">
                 {{ __('Peta Sebaran') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('quiz')" :active="request()->routeIs('quiz')">
+                {{ __('Cek Jiwa') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('statistik')" :active="request()->routeIs('statistik')">
+                {{ __('Statistik') }}
             </x-responsive-nav-link>
         </div>
 

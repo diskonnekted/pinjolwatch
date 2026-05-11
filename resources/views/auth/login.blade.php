@@ -37,12 +37,12 @@
                 <!-- Remember Me -->
                 <div class="flex items-center justify-between">
                     <label for="remember_me" class="inline-flex items-center cursor-pointer group">
-                        <input id="remember_me" type="checkbox" class="rounded border-slate-700 bg-slate-800 text-teal-500 shadow-sm focus:ring-teal-500 transition duration-150" name="remember">
+                        <input id="remember_me" type="checkbox" class="rounded border-slate-700 bg-slate-800 text-primary-500 shadow-sm focus:ring-primary-500 transition duration-150" name="remember">
                         <span class="ms-2 text-sm text-slate-400 group-hover:text-slate-200 transition duration-150">{{ __('Ingat saya') }}</span>
                     </label>
 
                     @if (Route::has('password.request'))
-                        <a class="text-sm font-semibold text-teal-400 hover:text-teal-300 transition duration-150" href="{{ route('password.request') }}">
+                        <a class="text-sm font-semibold text-primary-400 hover:text-primary-300 transition duration-150" href="{{ route('password.request') }}">
                             {{ __('Lupa password?') }}
                         </a>
                     @endif
@@ -56,7 +56,7 @@
 
                 <div class="text-center text-sm text-slate-400 mt-6">
                     Belum punya akun? 
-                    <a href="{{ route('register') }}" class="font-bold text-teal-400 hover:text-teal-300 transition duration-150 underline decoration-teal-800/50 underline-offset-4">
+                    <a href="{{ route('register') }}" class="font-bold text-primary-400 hover:text-primary-300 transition duration-150 underline decoration-primary-800/50 underline-offset-4">
                         Daftar Gratis
                     </a>
                 </div>

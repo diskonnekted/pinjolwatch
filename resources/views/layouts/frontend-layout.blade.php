@@ -20,7 +20,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" style="background:#020617;color:#f1f5f9;font-family:'Inter',sans-serif;">
-        <div class="min-h-screen">
+        <div class="min-h-screen pt-20">
             @include('layouts.frontend-navigation')
 
             <!-- Page Heading -->

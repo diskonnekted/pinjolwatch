@@ -26,8 +26,10 @@ class ReportForm extends Component
     public $province_id;
     public $kabupaten_id;
     public $threat_type_id;
+    public $pinjol_count = 1;
     public $legal_pinjol_id;
     public $app_name = '';
+    public $involved_apps = ''; // Changed to string for textarea
     public $app_legal_status = null;
     public $chronology = '';
     public $contact_phone_number = '';
@@ -60,8 +62,10 @@ class ReportForm extends Component
                 'province_id' => 'required|exists:provinces,id',
                 'kabupaten_id' => 'required|exists:kabupaten,id',
                 'threat_type_id' => 'required|exists:threat_types,id',
+                'pinjol_count' => 'required|integer|min:1|max:50',
                 'legal_pinjol_id' => 'nullable|exists:legal_pinjols,id',
                 'app_name' => 'nullable|string|max:100',
+                'involved_apps' => 'nullable|string|max:1000',
             ]);
         } elseif ($this->step == 2) {
             $this->validate([
@@ -132,8 +136,10 @@ class ReportForm extends Component
             'ticket_id' => $this->generateTicket(),
             'kabupaten_id' => $this->kabupaten_id,
             'threat_type_id' => $this->threat_type_id,
+            'pinjol_count' => $this->pinjol_count,
             'legal_pinjol_id' => $this->legal_pinjol_id ?: null,
             'app_name' => $this->app_name,
+            'involved_apps' => $this->involved_apps ? array_map('trim', explode(',', $this->involved_apps)) : null,
             'chronology' => $this->chronology,
             'contact_phone_number' => $this->contact_phone_number,
             'identity_disclosure' => $this->identity_disclosure ?: null,
@@ -196,7 +202,7 @@ class ReportForm extends Component
 
     protected function resetForm()
     {
-        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'legal_pinjol_id', 'app_name', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'whatsapp_consent', 'reporter_whatsapp', 'evidence', 'consent_scope', 'step']);
+        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'pinjol_count', 'legal_pinjol_id', 'app_name', 'involved_apps', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'whatsapp_consent', 'reporter_whatsapp', 'evidence', 'consent_scope', 'step']);
     }
 
     protected function generateTicket(): string

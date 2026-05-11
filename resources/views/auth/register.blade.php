@@ -55,7 +55,7 @@
 
                 <div class="text-center text-sm text-slate-400 mt-6">
                     Sudah punya akun? 
-                    <a href="{{ route('login') }}" class="font-bold text-teal-400 hover:text-teal-300 transition duration-150 underline decoration-teal-800/50 underline-offset-4">
+                    <a href="{{ route('login') }}" class="font-bold text-primary-400 hover:text-primary-300 transition duration-150 underline decoration-primary-800/50 underline-offset-4">
                         Masuk di sini
                     </a>
                 </div>

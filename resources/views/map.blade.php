@@ -15,14 +15,14 @@
                     <h3 class="text-lg font-semibold text-slate-100">Filter Peta</h3>
                     <div>
                         <label for="start_date" class="text-sm font-medium text-slate-300">Tgl Mulai:</label>
-                        <input type="date" id="start_date" class="bg-slate-900 border-slate-700 text-slate-300 rounded-md shadow-sm text-sm focus:border-teal-500 focus:ring-teal-500">
+                        <input type="date" id="start_date" class="bg-slate-900 border-slate-700 text-slate-300 rounded-md shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                     </div>
                     <div>
                         <label for="end_date" class="text-sm font-medium text-slate-300">Tgl Selesai:</label>
-                        <input type="date" id="end_date" class="bg-slate-900 border-slate-700 text-slate-300 rounded-md shadow-sm text-sm focus:border-teal-500 focus:ring-teal-500">
+                        <input type="date" id="end_date" class="bg-slate-900 border-slate-700 text-slate-300 rounded-md shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                     </div>
                     <div>
-                        <button id="filterBtn" class="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-500 text-sm font-semibold transition-colors duration-200 shadow-lg shadow-teal-900/20">Terapkan Filter</button>
+                        <button id="filterBtn" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-500 text-sm font-semibold transition-colors duration-200 shadow-lg shadow-primary-900/20">Terapkan Filter</button>
                     </div>
                 </div>
 

@@ -56,9 +56,11 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
 @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 /* Hero responsive */
-@media (max-width: 900px) {
-    .hero-grid { grid-template-columns: 1fr !important; }
+@media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
     .hero-img-col { display: none !important; }
+    .hero-text { text-align: center !important; }
+    .hero-btns { justify-content: center !important; }
 }
 </style>
 
@@ -70,10 +72,10 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
     <div class="orb orb-2"></div>
 
     <div style="max-width: 1280px; margin: 0 auto; padding: 120px 32px 80px; width: 100%; position: relative; z-index: 1;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+        <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
 
             {{-- LEFT: Text content --}}
-            <div>
+            <div class="hero-text">
                 <div class="badge" style="margin-bottom: 32px;">
                     <span style="width:8px;height:8px;background:var(--teal-l);border-radius:50%;animation:pulse 2s infinite;"></span>
                     Platform Pengaduan #1 Indonesia
@@ -88,7 +90,7 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
                     Ruang aman untuk melaporkan teror pinjol ilegal secara <strong style="color: #e2e8f0;">100% anonim</strong>. Data terenkripsi. Didampingi tim hukum. Kesehatan mental Anda diprioritaskan.
                 </p>
 
-                <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px;">
+                <div class="hero-btns" style="display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px;">
                     <a href="{{ route('report') }}" class="btn-primary">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"/></svg>
                         Lapor Sekarang
@@ -297,15 +299,24 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
 <div class="divider"></div>
 
 {{-- FINAL CTA --}}
-<section style="background: var(--dark); padding: 120px 32px; text-align: center; position: relative; overflow: hidden;">
+<section style="background: var(--dark); padding: 120px 32px; position: relative; overflow: hidden;">
     <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(13,148,136,.15) 0%, transparent 70%);"></div>
-    <div style="max-width: 760px; margin: 0 auto; position: relative; z-index: 1;">
-        <div class="badge" style="margin: 0 auto 32px; width: fit-content;">Siap Melangkah?</div>
-        <h2 style="font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px;" class="grad">Ketahanan Anda Sudah Cukup.<br>Izinkan Kami Berjuang Bersama.</h2>
-        <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.8; margin-bottom: 48px;">Setiap langkah kecil menuju ketenangan itu berharga. Kami siap mendampingi Anda.</p>
-        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <a href="{{ route('report') }}" class="btn-primary" style="font-size: 1.1rem; padding: 18px 48px;">Mulai Pengaduan</a>
-            <a href="{{ route('quiz') }}" class="btn-ghost" style="font-size: 1.1rem; padding: 18px 48px;">Cek Kondisi Jiwa</a>
+    <div style="max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;">
+        <div class="hero-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+            <div class="hero-text" style="text-align: left;">
+                <div class="badge" style="margin-bottom: 32px;">Siap Melangkah?</div>
+                <h2 style="font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px;" class="grad">Ketahanan Anda Sudah Cukup.<br>Izinkan Kami Berjuang Bersama.</h2>
+                <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.8; margin-bottom: 48px;">Setiap langkah kecil menuju ketenangan itu berharga. Kami siap mendampingi Anda.</p>
+                <div class="hero-btns" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                    <a href="{{ route('report') }}" class="btn-primary" style="font-size: 1.1rem; padding: 18px 48px;">Mulai Pengaduan</a>
+                    <a href="{{ route('quiz') }}" class="btn-ghost" style="font-size: 1.1rem; padding: 18px 48px;">Cek Kondisi Jiwa</a>
+                </div>
+            </div>
+            <div class="hero-img-col">
+                <div style="position: relative; aspect-ratio: 1/1; border-radius: 40px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05);">
+                    <img src="/Pembebasan dari Beban.png" alt="Ilustrasi Pembebasan dari Beban" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+            </div>
         </div>
     </div>
 </section>

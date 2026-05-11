@@ -11,25 +11,32 @@
             {{-- HERO SECTION --}}
             <div class="bg-slate-900 border border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.3)] rounded-3xl overflow-hidden relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-teal-900/40 to-slate-900 z-0"></div>
-                <div class="relative z-10 p-10 md:p-16 text-center">
-                    <h1 class="text-4xl md:text-5xl font-black text-slate-100 leading-tight mb-6">
-                        Pinjol Bukan Pilihan Gaya Hidup.<br>
-                        <span class="text-teal-400">Ini Adalah Jalan Bertahan.</span>
-                    </h1>
-                    <p class="text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto mb-10">
-                        Di balik tagihan, teror, dan tangisan, ada manusia yang sedang berjuang memenuhi kebutuhan dasar. Mari kita ganti stigma dengan empati, dan penghakiman dengan dukungan.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="{{ route('panduan-keluarga') }}" class="px-8 py-4 bg-teal-600 text-white font-bold rounded-2xl shadow-[0_4px_14px_rgba(13,148,136,0.4)] hover:bg-teal-500 hover:-translate-y-0.5 transition-all active:scale-95 whitespace-nowrap">
-                            🤝 Cara Mendukung Tanpa Menghakimi
-                        </a>
-                        <a href="{{ route('report') }}" class="px-8 py-4 bg-slate-800 border border-slate-700 text-slate-200 font-bold rounded-2xl hover:bg-slate-700 transition-all whitespace-nowrap">
-                            🛡️ Laporkan Teror
-                        </a>
+                <div class="relative z-10 p-8 md:p-12">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="text-left">
+                            <h1 class="text-4xl md:text-5xl font-black text-slate-100 leading-tight mb-6">
+                                Pinjol Bukan Pilihan Gaya Hidup.<br>
+                                <span class="text-teal-400">Ini Adalah Jalan Bertahan.</span>
+                            </h1>
+                            <p class="text-lg text-slate-300 leading-relaxed mb-10">
+                                Di balik tagihan, teror, dan tangisan, ada manusia yang sedang berjuang memenuhi kebutuhan dasar. Mari kita ganti stigma dengan empati, dan penghakiman dengan dukungan.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="{{ route('panduan-keluarga') }}" class="px-8 py-4 bg-teal-600 text-white font-bold rounded-2xl shadow-[0_4px_14px_rgba(13,148,136,0.4)] hover:bg-teal-500 hover:-translate-y-0.5 transition-all active:scale-95 whitespace-nowrap">
+                                    🤝 Cara Mendukung
+                                </a>
+                                <a href="{{ route('report') }}" class="px-8 py-4 bg-slate-800 border border-slate-700 text-slate-200 font-bold rounded-2xl hover:bg-slate-700 transition-all whitespace-nowrap">
+                                    🛡️ Laporkan Teror
+                                </a>
+                            </div>
+                        </div>
+                        <div class="hidden lg:block relative">
+                            <div class="absolute inset-0 bg-teal-500/20 blur-3xl rounded-full"></div>
+                            <div class="relative z-10 aspect-square overflow-hidden rounded-3xl transform -rotate-2 hover:rotate-0 transition-all duration-500 shadow-2xl">
+                                <img src="/Kekuatan Komunitas.png" alt="Ilustrasi Kekuatan Komunitas" class="w-full h-full object-cover">
+                            </div>
+                        </div>
                     </div>
-                    <p class="mt-6 text-sm text-slate-500 font-medium italic">
-                        Bertahan hidup bukan aib. Meminjam saat darurat bukan kejahatan.
-                    </p>
                 </div>
             </div>
 
