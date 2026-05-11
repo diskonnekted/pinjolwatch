@@ -7,7 +7,7 @@
 
         <div class="mb-10">
             <label for="pinjol_search" class="block text-sm font-bold text-slate-300 mb-2 uppercase tracking-widest">Pilih Aplikasi Pinjol</label>
-            <select wire:model.live="pinjolId" id="pinjol_search" class="w-full bg-slate-900 border-slate-700 text-slate-200 rounded-xl shadow-sm focus:border-teal-500 focus:ring-teal-500 py-3">
+            <select wire:model.live="pinjolId" id="pinjol_search" class="w-full bg-slate-900 border-slate-700 text-slate-200 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 py-3">
                 <option value="">-- Pilih dari Daftar --</option>
                 @foreach($pinjols as $p)
                     <option value="{{ $p->id }}">{{ $p->app_name }} ({{ $p->company_name }})</option>
@@ -28,7 +28,7 @@
                             </div>
                             <div>
                                 <dt class="font-bold text-slate-200">Website Resmi</dt>
-                                <dd><a href="{{ $selectedPinjol->website }}" target="_blank" class="text-teal-400 hover:underline break-all">{{ $selectedPinjol->website }}</a></dd>
+                                <dd><a href="{{ $selectedPinjol->website }}" target="_blank" class="text-primary-400 hover:underline break-all">{{ $selectedPinjol->website }}</a></dd>
                             </div>
                             <div>
                                 <dt class="font-bold text-slate-200">Jenis Usaha</dt>
@@ -56,14 +56,14 @@
                 </div>
 
                 {{-- Collection Patterns --}}
-                <div class="p-6 bg-teal-900/30 rounded-2xl border border-teal-800">
-                    <h3 class="text-sm font-bold text-teal-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div class="p-6 bg-primary-900/30 rounded-2xl border border-primary-800">
+                    <h3 class="text-sm font-bold text-primary-400 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         Pola Penagihan (Desk/Field Collection)
                     </h3>
-                    <p class="text-teal-100 leading-relaxed">{{ $selectedPinjol->collection_patterns }}</p>
+                    <p class="text-primary-100 leading-relaxed">{{ $selectedPinjol->collection_patterns }}</p>
                 </div>
 
                 {{-- Notable Cases --}}

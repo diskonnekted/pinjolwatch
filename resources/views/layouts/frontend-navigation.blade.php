@@ -1,5 +1,5 @@
 <style>
-:root { --teal:#0d9488; --teal-l:#2dd4bf; --dark:#020617; --dark2:#0f172a; }
+:root { --teal:#0d9488; --primary-l:#2dd4bf; --dark:#020617; --dark2:#0f172a; }
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 
 /* NAV */
@@ -12,7 +12,7 @@
 .pw-links { display: flex; align-items: center; gap: 4px; }
 .pw-link { padding: 8px 14px; border-radius: 8px; color: #94a3b8; font-weight: 600; font-size: .875rem; text-decoration: none; transition: all .2s; white-space: nowrap; }
 .pw-link:hover, .pw-link.active { color: #f1f5f9; background: rgba(255,255,255,.07); }
-.pw-link.active { color: var(--teal-l); }
+.pw-link.active { color: var(--primary-l); }
 
 /* Dropdown wrapper */
 .pw-dropdown { position: relative; }
@@ -58,7 +58,7 @@
 .pw-bottom-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9998; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px); border-top: 1px solid rgba(255,255,255,.07); padding-bottom: env(safe-area-inset-bottom); }
 .pw-bottom-nav-inner { display: flex; justify-content: space-around; align-items: center; height: 60px; padding: 0 8px; }
 .pw-bottom-link { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 64px; height: 100%; color: #64748b; text-decoration: none; transition: all .2s; }
-.pw-bottom-link.active { color: var(--teal-l); }
+.pw-bottom-link.active { color: var(--primary-l); }
 .pw-bottom-link svg { width: 22px; height: 22px; margin-bottom: 3px; }
 .pw-bottom-link span { font-size: 0.65rem; font-weight: 600; }
 

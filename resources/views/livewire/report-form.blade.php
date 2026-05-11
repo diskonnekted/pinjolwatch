@@ -161,8 +161,25 @@
                         </h2>
                         <div class="border-b border-gray-100 pb-6 mb-6">
                             <label for="contact_phone_number" class="block text-sm font-semibold text-gray-700 mb-2">Nomor HP/WA Penagih (Opsional)</label>
-                            <input id="contact_phone_number" wire:model="contact_phone_number" type="text" class="w-full border-gray-300 text-gray-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Contoh: 08123456789">
+                            <input id="contact_phone_number" wire:model.live="contact_phone_number" type="text" class="w-full border-gray-300 text-gray-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Contoh: 08123456789">
                             @error('contact_phone_number') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
+                            
+                            <div class="mt-4 p-4 bg-primary-50 rounded-xl border border-primary-100 shadow-sm flex flex-col gap-3">
+                                <div class="flex gap-3 items-start">
+                                    <div class="flex h-6 items-center">
+                                        <input id="whatsapp_consent" wire:model.live="whatsapp_consent" type="checkbox" class="h-4 w-4 rounded border-primary-300 text-primary-600 focus:ring-primary-600 bg-white cursor-pointer">
+                                    </div>
+                                    <div class="text-sm leading-6">
+                                        <label for="whatsapp_consent" class="font-bold text-primary-900 cursor-pointer">Bersedia dihubungi via WhatsApp</label>
+                                        <p class="text-primary-700 text-xs">Centang opsi ini jika Anda mengizinkan tim Pendamping/Verifikator kami untuk menghubungi Anda via WhatsApp demi keperluan advokasi.</p>
+                                    </div>
+                                </div>
+                                <div x-show="$wire.whatsapp_consent" x-transition class="ml-7 mt-2">
+                                    <label for="reporter_whatsapp" class="block text-xs font-bold text-primary-800 mb-1">Nomor WhatsApp Anda</label>
+                                    <input id="reporter_whatsapp" wire:model="reporter_whatsapp" type="text" class="w-full sm:w-2/3 border-primary-200 text-primary-900 rounded-lg shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Contoh: 08123456789">
+                                    @error('reporter_whatsapp') <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p> @enderror
+                                </div>
+                            </div>
                         </div>
 
                         <div class="border-b border-gray-100 pb-6 mb-6 grid grid-cols-1 md:grid-cols-2 gap-6">

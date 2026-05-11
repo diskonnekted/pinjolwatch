@@ -1,112 +1,174 @@
 <x-mobile-layout>
-    {{-- Top Header / Profile Area --}}
-    <div class="bg-gradient-to-br from-primary-600 to-primary-800 pt-12 pb-24 px-6 rounded-b-[40px] relative shadow-lg">
-        {{-- Soft Glow --}}
-        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute bottom-0 left-10 w-24 h-24 bg-primary-400/30 rounded-full blur-xl"></div>
+    <style>
+        /* Mobile-specific animations and overrides */
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        @keyframes float-y {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:active {
+            transform: scale(0.96);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #2dd4bf 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        /* Override body for dark theme specific to mobile */
+        body { background-color: #020617; }
+        .mobile-container { background-color: #020617; min-height: 100vh; position: relative; overflow-x: hidden; }
+    </style>
+
+    <div class="mobile-container pb-28 text-slate-100">
         
-        <div class="relative z-10 flex justify-between items-center">
+        {{-- Ambient Orbs --}}
+        <div class="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full bg-teal-600/30 blur-[80px] pointer-events-none" style="animation: pulse-slow 8s infinite alternate;"></div>
+        <div class="absolute top-[20%] right-[-20%] w-[250px] h-[250px] rounded-full bg-cyan-600/20 blur-[60px] pointer-events-none"></div>
+
+        {{-- Top Navigation / Header --}}
+        <div class="px-6 pt-12 pb-6 relative z-10 flex justify-between items-center">
             <div>
-                <h1 class="text-white text-2xl font-black tracking-tight leading-none mb-1">PinjolWatch</h1>
-                <p class="text-primary-100 text-sm font-medium">Platform Aman & Anonim</p>
+                <p class="text-xs font-bold tracking-widest text-teal-400 uppercase mb-1 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
+                    Sistem Aktif
+                </p>
+                <h1 class="text-3xl font-black tracking-tight leading-none text-white drop-shadow-md">
+                    Pinjol<span class="text-gradient">Watch</span>
+                </h1>
             </div>
-            <div class="w-12 h-12 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-inner">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
-                    <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.89-.777.89-2.038 0-2.815ZM12 15a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5Z" clip-rule="evenodd" />
+            <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center shadow-xl border-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-teal-400" style="animation: float-y 4s ease-in-out infinite;">
+                    <path fill-rule="evenodd" d="M11.484 2.17a.75.75 0 0 1 1.032 0 11.209 11.209 0 0 0 7.877 3.08.75.75 0 0 1 .722.515 12.74 12.74 0 0 1 .436 4.464c-.389 4.298-2.607 7.973-5.918 10.378a1.75 1.75 0 0 1-1.905 0C10.155 18.2 7.747 14.526 7.41 10.23a12.744 12.744 0 0 1 .436-4.463.75.75 0 0 1 .721-.516 11.21 11.21 0 0 0 7.878-3.08ZM12 11.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" clip-rule="evenodd" />
+                    <path d="M12 12.75a3 3 0 0 0-3 3v.75a.75.75 0 0 0 1.5 0v-.75a1.5 1.5 0 0 1 3 0v.75a.75.75 0 0 0 1.5 0v-.75a3 3 0 0 0-3-3Z" />
                 </svg>
             </div>
         </div>
-    </div>
 
-    {{-- Floating Summary Stats --}}
-    <div class="px-6 -mt-14 relative z-20 mb-8">
-        <div class="bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-5 shadow-xl shadow-gray-200/50 flex divide-x divide-gray-100">
-            <div class="flex-1 text-center pr-2">
-                <div class="text-3xl font-black text-gray-900 mb-1 tracking-tighter">100%</div>
-                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Anonim</div>
-            </div>
-            <div class="flex-1 text-center pl-2">
-                <div class="text-3xl font-black text-primary-600 mb-1 tracking-tighter" id="stat-reports">200+</div>
-                <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Laporan</div>
+        {{-- Hero Call to Action --}}
+        <div class="px-6 mb-8 relative z-10">
+            <div class="relative w-full rounded-[28px] overflow-hidden shadow-2xl border border-white/10" style="background: linear-gradient(145deg, #0f172a 0%, #020617 100%);">
+                {{-- Inner Glow --}}
+                <div class="absolute inset-0 bg-gradient-to-tr from-teal-500/10 to-transparent"></div>
+                
+                <div class="p-8 relative">
+                    <h2 class="text-2xl font-black text-white mb-2 leading-tight">Korban Teror<br>Pinjol Ilegal?</h2>
+                    <p class="text-slate-400 text-sm mb-6 max-w-[80%] leading-relaxed">Laporkan secara anonim, aman, dan tanpa jejak. Kami bantu melawan.</p>
+                    
+                    <a href="{{ route('report') }}" class="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white shadow-[0_0_20px_rgba(20,184,166,0.3)] hover:shadow-[0_0_30px_rgba(20,184,166,0.5)] transition-all active:scale-95" style="background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%); text-transform: uppercase; letter-spacing: 0.05em;">
+                        Buat Laporan
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M12.97 3.97a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 1 1-1.06-1.06l6.22-6.22H3a.75.75 0 0 1 0-1.5h16.19l-6.22-6.22a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    {{-- Main Menu Grid --}}
-    <div class="px-6 mb-8">
-        <h2 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">Akses Cepat</h2>
-        
-        <div class="grid grid-cols-4 gap-4">
-            <!-- Menu 1 -->
-            <a href="{{ route('report') }}" class="flex flex-col items-center gap-2 group cursor-pointer">
-                <div class="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center transition-all group-active:scale-95 group-active:bg-red-100 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" /></svg>
+        {{-- Live Statistics Banner --}}
+        <div class="px-6 mb-8 relative z-10">
+            <div class="glass-panel rounded-2xl p-4 flex items-center justify-around divide-x divide-white/10">
+                <div class="text-center px-2 w-1/2">
+                    <div class="text-xs font-semibold tracking-wider text-slate-400 uppercase mb-1">Enkripsi</div>
+                    <div class="text-2xl font-black text-teal-400">100%</div>
                 </div>
-                <span class="text-[11px] font-semibold text-gray-700 text-center leading-tight">Lapor Teror</span>
-            </a>
+                <div class="text-center px-2 w-1/2">
+                    <div class="text-xs font-semibold tracking-wider text-slate-400 uppercase mb-1">Laporan</div>
+                    <div class="text-2xl font-black text-white" id="stat-reports">200+</div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Bento Grid Menu --}}
+        <div class="px-6 mb-10 relative z-10">
+            <div class="flex justify-between items-end mb-4">
+                <h3 class="text-lg font-bold text-white tracking-tight">Eksplorasi</h3>
+            </div>
             
-            <!-- Menu 2 -->
-            <a href="{{ route('track') }}" class="flex flex-col items-center gap-2 group cursor-pointer">
-                <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center transition-all group-active:scale-95 group-active:bg-blue-100 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" /></svg>
-                </div>
-                <span class="text-[11px] font-semibold text-gray-700 text-center leading-tight">Lacak Tiket</span>
-            </a>
+            <div class="grid grid-cols-2 gap-4">
+                {{-- Card 1 --}}
+                <a href="{{ route('track') }}" class="glass-card rounded-[24px] p-5 relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-blue-500/20 rounded-full blur-xl"></div>
+                    <div class="w-12 h-12 rounded-full bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4 text-blue-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1">Lacak Tiket</h4>
+                    <p class="text-[10px] text-slate-400 leading-tight">Pantau status laporan kasus Anda.</p>
+                </a>
 
-            <!-- Menu 3 -->
-            <a href="{{ route('quiz') }}" class="flex flex-col items-center gap-2 group cursor-pointer">
-                <div class="w-14 h-14 bg-emerald-50 text-emerald-500 rounded-2xl flex items-center justify-center transition-all group-active:scale-95 group-active:bg-emerald-100 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" /></svg>
-                </div>
-                <span class="text-[11px] font-semibold text-gray-700 text-center leading-tight">Cek Mental</span>
-            </a>
+                {{-- Card 2 --}}
+                <a href="{{ route('quiz') }}" class="glass-card rounded-[24px] p-5 relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-500/20 rounded-full blur-xl"></div>
+                    <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4 text-emerald-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" /></svg>
+                    </div>
+                    <h4 class="text-sm font-bold text-white mb-1">Cek Mental</h4>
+                    <p class="text-[10px] text-slate-400 leading-tight">Ukur tingkat stres akibat teror.</p>
+                </a>
 
-            <!-- Menu 4 -->
-            <a href="{{ route('info-pinjol') }}" class="flex flex-col items-center gap-2 group cursor-pointer">
-                <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center transition-all group-active:scale-95 group-active:bg-amber-100 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z" clip-rule="evenodd" /></svg>
+                {{-- Card 3 (Full width) --}}
+                <a href="{{ route('info-pinjol') }}" class="col-span-2 glass-card rounded-[24px] p-5 relative overflow-hidden flex items-center justify-between">
+                    <div class="absolute left-0 top-0 w-full h-full bg-gradient-to-r from-amber-500/5 to-transparent pointer-events-none"></div>
+                    <div class="flex items-center gap-4 relative z-10">
+                        <div class="w-12 h-12 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" /></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white mb-0.5">Direktori Resmi OJK</h4>
+                            <p class="text-[10px] text-slate-400 leading-tight">Cek legalitas pinjaman online sebelum meminjam.</p>
+                        </div>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-slate-500 shrink-0"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
+                </a>
+            </div>
+        </div>
+
+        {{-- Map Banner --}}
+        <div class="px-6 mb-6 relative z-10">
+            <a href="{{ route('map') }}" class="block w-full h-36 rounded-[28px] relative overflow-hidden group border border-white/10 shadow-lg">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-40" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Indonesia_map_blank.svg/1024px-Indonesia_map_blank.svg.png'); filter: blur(1px);"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+                
+                <div class="absolute bottom-5 left-5 right-5 flex justify-between items-end">
+                    <div>
+                        <div class="flex items-center gap-1.5 mb-1">
+                            <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                            <span class="text-[10px] font-bold tracking-widest text-red-400 uppercase">Live Map</span>
+                        </div>
+                        <h4 class="text-base font-black text-white leading-tight">Peta Sebaran Kasus</h4>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" /></svg>
+                    </div>
                 </div>
-                <span class="text-[11px] font-semibold text-gray-700 text-center leading-tight">Direktori OJK</span>
             </a>
         </div>
-    </div>
 
-    {{-- Banner Alert --}}
-    <div class="px-6 mb-8">
-        <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-5 relative overflow-hidden flex items-center justify-between">
-            <div class="absolute -right-4 -bottom-4 text-7xl opacity-10">🛡️</div>
-            <div class="relative z-10 w-2/3">
-                <h3 class="text-white font-black text-lg mb-1 leading-tight">Hadapi Ancaman DC!</h3>
-                <p class="text-gray-300 text-xs leading-relaxed">Jangan panik jika data disebar. Pahami hak hukum Anda di sini.</p>
-            </div>
-            <a href="{{ route('panduan-dc') }}" class="relative z-10 bg-white text-gray-900 w-12 h-12 rounded-2xl flex items-center justify-center active:scale-90 transition-transform">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z" clip-rule="evenodd" /></svg>
-            </a>
-        </div>
-    </div>
-
-    {{-- Peta Terdampak Card --}}
-    <div class="px-6 mb-12">
-        <h2 class="text-sm font-bold text-gray-900 mb-4 uppercase tracking-wider">Peta Sebaran Kasus</h2>
-        <a href="{{ route('map') }}" class="block w-full h-40 bg-gray-100 rounded-3xl relative overflow-hidden group shadow-sm">
-            <div class="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-50 transition-opacity" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Indonesia_map_blank.svg/1024px-Indonesia_map_blank.svg.png');"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4 text-white">
-                <div class="text-lg font-black leading-tight flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-red-500"><path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" /></svg>
-                    Lihat Peta Real-Time
-                </div>
-                <p class="text-xs text-gray-300 mt-1">Lacak area yang paling rentan teror pinjol.</p>
-            </div>
-        </a>
     </div>
 
     <script>
+        // Fetch stats silently to update the report counter
         fetch('/api/map-stats')
             .then(res => res.json())
             .then(data => {
                 let cnt = data.reduce((a, b) => a + b.count, 0);
-                if(cnt > 0) document.getElementById('stat-reports').innerText = cnt;
+                if(cnt > 0) document.getElementById('stat-reports').innerText = cnt.toLocaleString('id');
             })
             .catch(e => console.log('Stats err', e));
     </script>

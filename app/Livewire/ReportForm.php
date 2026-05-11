@@ -34,6 +34,8 @@ class ReportForm extends Component
     public $identity_disclosure = '';
     public $communication_tone = '';
     public $dc_actions = [];
+    public $whatsapp_consent = false;
+    public $reporter_whatsapp = '';
     public $evidence = []; // array of uploaded files
     public $consent_scope;
     public $is_anonymous = true;
@@ -69,6 +71,8 @@ class ReportForm extends Component
                 'communication_tone' => 'nullable|in:santun_resmi,kasar_ancaman',
                 'dc_actions' => 'nullable|array',
                 'dc_actions.*' => 'string',
+                'whatsapp_consent' => 'boolean',
+                'reporter_whatsapp' => 'nullable|required_if:whatsapp_consent,true|string|max:20',
             ]);
         } elseif ($this->step == 3) {
             $this->validate([
@@ -135,6 +139,8 @@ class ReportForm extends Component
             'identity_disclosure' => $this->identity_disclosure ?: null,
             'communication_tone' => $this->communication_tone ?: null,
             'dc_actions' => $this->dc_actions ?: null,
+            'reporter_whatsapp' => $this->whatsapp_consent ? $this->reporter_whatsapp : null,
+            'whatsapp_consent' => $this->whatsapp_consent,
             'is_anonymous' => $this->is_anonymous,
             'consent_scope' => $this->consent_scope,
             'ip_hash' => Hash::make(request()->ip()),
@@ -190,7 +196,7 @@ class ReportForm extends Component
 
     protected function resetForm()
     {
-        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'legal_pinjol_id', 'app_name', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'evidence', 'consent_scope', 'step']);
+        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'legal_pinjol_id', 'app_name', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'whatsapp_consent', 'reporter_whatsapp', 'evidence', 'consent_scope', 'step']);
     }
 
     protected function generateTicket(): string

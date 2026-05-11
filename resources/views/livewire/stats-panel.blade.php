@@ -3,7 +3,7 @@
     <div class="bg-slate-900 p-6 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-slate-800">
         <p class="text-sm font-medium text-slate-400 uppercase">Total Laporan</p>
         <p class="text-3xl font-bold text-slate-100 mt-2">{{ number_format($total) }}</p>
-        <p class="text-xs text-teal-400 mt-1">Laporan masuk dari masyarakat</p>
+        <p class="text-xs text-primary-400 mt-1">Laporan masuk dari masyarakat</p>
     </div>
     <div class="bg-slate-900 p-6 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-slate-800">
         <p class="text-sm font-medium text-slate-400 uppercase">Terverifikasi</p>
@@ -28,7 +28,7 @@
                         <span class="text-slate-400">{{ $stat->total }} laporan ({{ round($percent, 1) }}%)</span>
                     </div>
                     <div class="w-full bg-slate-800 rounded-full h-2">
-                        <div class="bg-teal-500 h-2 rounded-full" style="width: {{ $percent }}%"></div>
+                        <div class="bg-primary-500 h-2 rounded-full" style="width: {{ $percent }}%"></div>
                     </div>
                 </div>
             @endforeach

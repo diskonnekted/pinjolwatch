@@ -21,10 +21,13 @@ class Report extends Model
         'identity_disclosure',
         'communication_tone',
         'dc_actions',
+        'reporter_whatsapp',
+        'whatsapp_consent',
         'is_anonymous',
         'consent_scope',
         'status',
         'ip_hash',
+        'verification_checklist',
     ];
 
     protected $hidden = [
@@ -33,7 +36,9 @@ class Report extends Model
 
     protected $casts = [
         'is_anonymous' => 'boolean',
+        'whatsapp_consent' => 'boolean',
         'dc_actions' => 'array',
+        'verification_checklist' => 'array',
     ];
 
     public function kabupaten()

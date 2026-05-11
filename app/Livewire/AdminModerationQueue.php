@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
 use App\Models\Report;
 
 use App\Models\AuditLog;
@@ -13,12 +14,18 @@ class AdminModerationQueue extends Component
 {
     use WithPagination;
 
+    #[Layout('components.admin-layout')]
     public $search = '';
     public $statusFilter = '';
 
     protected $queryString = ['search', 'statusFilter'];
 
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingStatusFilter()
     {
         $this->resetPage();
     }
@@ -73,9 +80,11 @@ class AdminModerationQueue extends Component
     {
         $reports = Report::with(['kabupaten', 'threatType'])
             ->when($this->search, function($query) {
-                $query->where('ticket_id', 'like', '%' . $this->search . '%')
+                $query->where(function($q) {
+                    $q->where('ticket_id', 'like', '%' . $this->search . '%')
                       ->orWhere('app_name', 'like', '%' . $this->search . '%')
                       ->orWhere('chronology', 'like', '%' . $this->search . '%');
+                });
             })
             ->when($this->statusFilter, function($query) {
                 $query->where('status', $this->statusFilter);

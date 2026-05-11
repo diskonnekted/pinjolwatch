@@ -45,7 +45,7 @@
     {{-- Bottom Navigation --}}
     <div class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
         <div class="w-full max-w-md pointer-events-auto">
-            @include('frontend-navigation')
+            @include('layouts.frontend-navigation')
         </div>
     </div>
 

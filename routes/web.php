@@ -64,6 +64,9 @@ Route::get('/cek-kesehatan', function () {
 })->name('quiz');
 
 Route::get('/dashboard', function () {
+    if (auth()->user() && auth()->user()->hasAnyRole(['super-admin', 'moderator'])) {
+        return redirect()->route('admin.overview');
+    }
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -100,12 +103,42 @@ Route::get('/stories/create', function () {
 
 Route::middleware(['auth', 'role:super-admin|moderator', 'audit'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function() {
-        return redirect()->route('admin.dashboard');
+        return redirect()->route('admin.overview');
     });
 
+    Route::get('/overview', \App\Livewire\AdminOverview::class)->name('overview');
     Route::get('/dashboard', \App\Livewire\AdminModerationQueue::class)->name('dashboard');
 
     Route::get('/reports/{ticket}', \App\Livewire\ReportDetail::class)->name('reports.detail');
+    
+    // CMS Routes
+    Route::get('/cms', \App\Livewire\AdminCmsList::class)->name('cms.index');
+    Route::get('/cms/create', \App\Livewire\AdminCmsForm::class)->name('cms.create');
+    Route::get('/cms/{article}/edit', \App\Livewire\AdminCmsForm::class)->name('cms.edit');
+
+    Route::get('/reports/evidence/{id}/stream', function ($id) {
+        $evidence = \App\Models\ReportEvidence::findOrFail($id);
+        
+        if (!auth()->user()->hasAnyRole(['super-admin', 'moderator'])) {
+            abort(403);
+        }
+
+        $headers = [
+            'Content-Type' => $evidence->mime_type,
+            'Cache-Control' => 'no-store, no-cache',
+        ];
+
+        return response()->stream(function () use ($evidence) {
+            $source = fopen(\Illuminate\Support\Facades\Storage::disk('local')->path($evidence->encrypted_path), 'rb');
+            while (!feof($source)) {
+                $line = fgets($source);
+                if (trim($line) !== '') {
+                    echo \Illuminate\Support\Facades\Crypt::decrypt($line);
+                }
+            }
+            fclose($source);
+        }, 200, $headers);
+    })->name('reports.stream-evidence');
 
     Route::middleware('consent')->get('/export-reports', [ReportExportController::class, 'exportPdf'])->name('export');
 });

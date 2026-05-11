@@ -1,8 +1,8 @@
 <div class="max-w-xl mx-auto py-8 px-4">
     <div class="bg-slate-900 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] p-8 border border-slate-800">
         <div class="text-center mb-8">
-            <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-teal-900/30 mb-4 border border-teal-800/50">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-teal-400">
+            <div class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary-900/30 mb-4 border border-primary-800/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-primary-400">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196 7.5 7.5 0 0010.607 10.607z" />
                 </svg>
             </div>
@@ -62,14 +62,14 @@
                             </div>
                         </div>
 
-                        <div class="bg-teal-900/30 border border-teal-800 rounded-xl p-4 mt-4">
-                            <h4 class="text-xs font-bold text-teal-400 uppercase tracking-widest flex items-center gap-2">
+                        <div class="bg-primary-900/30 border border-primary-800 rounded-xl p-4 mt-4">
+                            <h4 class="text-xs font-bold text-primary-400 uppercase tracking-widest flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                 </svg>
                                 Informasi Terbaru
                             </h4>
-                            <p class="text-sm text-teal-100 mt-2 leading-relaxed">
+                            <p class="text-sm text-primary-100 mt-2 leading-relaxed">
                                 @if($report->status == 'received')
                                     Laporan Anda telah kami terima dan sedang dalam antrean verifikasi tim moderasi.
                                 @elseif($report->status == 'verified')
