@@ -75,6 +75,22 @@ Route::get('/cek-kesehatan', function () {
     return view('quiz');
 })->name('quiz');
 
+Route::get('/panduan/negosiasi-utang', function () {
+    return view('keuangan.template-negosiasi');
+})->name('panduan.negosiasi-utang');
+
+Route::get('/panduan/cek-slik', function () {
+    return view('keuangan.cek-slik');
+})->name('panduan.cek-slik');
+
+Route::get('/panduan/perencanaan-keuangan', function () {
+    return view('keuangan.perencanaan-keuangan');
+})->name('panduan.perencanaan-keuangan');
+
+Route::get('/panduan/dana-darurat', function () {
+    return view('keuangan.dana-darurat');
+})->name('panduan.dana-darurat');
+
 Route::get('/dashboard', function () {
     if (auth()->user() && auth()->user()->hasAnyRole(['super-admin', 'moderator'])) {
         return redirect()->route('admin.overview');
@@ -82,11 +98,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/dashboard/tools', function () {
+    return redirect()->route('dashboard', ['tab' => 'security']);
+})->middleware(['auth', 'verified'])->name('dashboard.tools');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/lapor', function () {
         return view('report');
     })->name('report');
+
+    // User report detail — uses ticket_id, shows user-facing view
+    Route::get('/my-reports/{ticket}', function ($ticket) {
+        return view('my-report', ['ticket' => $ticket]);
+    })->name('report.show');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

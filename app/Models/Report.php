@@ -63,4 +63,10 @@ class Report extends Model
     {
         return $this->hasMany(ReportEvidence::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

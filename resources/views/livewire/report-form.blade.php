@@ -258,6 +258,33 @@
                             @error('dc_actions') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
                         </div>
 
+                        <div class="border-b border-gray-100 pb-6 mb-6">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">Apakah Anda sudah pernah melaporkan kasus ini ke pihak lain?</label>
+                            <p class="text-xs text-gray-500 mb-3">Pilih semua yang sesuai. Ini membantu kami agar tidak terjadi pelaporan ganda. PinjolWatch tidak akan melaporkan ulang kecuali ada permintaan khusus.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                @php
+                                    $report_channels = [
+                                        'ojk' => ['icon' => '🏛️', 'label' => 'OJK'],
+                                        'polisi' => ['icon' => '👮', 'label' => 'Polisi'],
+                                        'kominfo' => ['icon' => '📡', 'label' => 'Kominfo'],
+                                        'kantor_pinjol' => ['icon' => '🏢', 'label' => 'Kantor Resmi Pinjol'],
+                                    ];
+                                @endphp
+                                @foreach($report_channels as $key => $item)
+                                    <label class="relative flex items-start p-3 border border-gray-200 rounded-xl cursor-pointer hover:bg-gray-50 transition-all has-[:checked]:bg-primary-50 has-[:checked]:border-primary-300">
+                                        <div class="flex items-center h-5">
+                                            <input type="checkbox" wire:model="previousReports" value="{{ $key }}" class="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500">
+                                        </div>
+                                        <div class="ml-3 text-sm flex items-center gap-2">
+                                            <span class="text-lg">{{ $item['icon'] }}</span>
+                                            <span class="font-medium text-gray-900">{{ $item['label'] }}</span>
+                                        </div>
+                                    </label>
+                                @endforeach
+                            </div>
+                            @error('previousReports') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
+                        </div>
+
                         <div>
                             <label for="chronology" class="block text-sm font-semibold text-gray-700 mb-2">Jelaskan secara jujur dan padat</label>
                             <textarea id="chronology" wire:model="chronology" rows="6" class="w-full border-gray-300 text-gray-900 rounded-2xl shadow-sm focus:border-primary-500 focus:ring-primary-500" placeholder="Contoh: 'Pada tanggal 10 Mei, saya dihubungi oleh nomor 0812... yang mengaku dari PinjolCepat dan mengancam akan menyebar data KTP saya...'"></textarea>

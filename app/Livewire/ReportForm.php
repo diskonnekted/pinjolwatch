@@ -133,6 +133,7 @@ class ReportForm extends Component
         ]);
 
         $report = Report::create([
+            'user_id' => auth()->id(),
             'ticket_id' => $this->generateTicket(),
             'kabupaten_id' => $this->kabupaten_id,
             'threat_type_id' => $this->threat_type_id,
@@ -149,6 +150,7 @@ class ReportForm extends Component
             'whatsapp_consent' => $this->whatsapp_consent,
             'is_anonymous' => $this->is_anonymous,
             'consent_scope' => $this->consent_scope,
+            'previous_reports' => $this->previousReports,
             'ip_hash' => Hash::make(request()->ip()),
         ]);
 

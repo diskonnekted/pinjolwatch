@@ -110,6 +110,13 @@
                             <div style="font-size:.75rem;color:#64748b;">Pantau status laporan</div>
                         </div>
                     </a>
+                    <a href="{{ route('dashboard.tools') }}" class="pw-dropdown-item">
+                        <div class="icon">🛠️</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Pusat Alat</div>
+                            <div style="font-size:.75rem;color:#64748b;">Template jawaban DC</div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
@@ -208,7 +215,7 @@
         <div style="display:flex;align-items:center;gap:16px;">
             <div class="pw-auth">
                 @auth
-                    <a href="{{ route('dashboard') }}" style="color:#94a3b8;font-size:.85rem;font-weight:600;text-decoration:none;">{{ Auth::user()->name }}</a>
+                    <a href="{{ route('dashboard') }}" style="color:#94a3b8;font-size:.85rem;font-weight:600;text-decoration:none;">{{ Auth::user()->nickname ?: Auth::user()->name }}</a>
                     <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                         @csrf
                         <button type="submit" style="background:none;border:none;color:#64748b;font-size:.85rem;font-weight:600;cursor:pointer;">Keluar</button>
@@ -235,6 +242,7 @@
     <div class="pw-mobile-section">Laporan</div>
     <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Lapor Kasus</a>
     <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Cek Tiket</a>
+    <a href="{{ route('dashboard.tools') }}" class="pw-mobile-link">🛠️ Pusat Alat & Bantuan</a>
     <div class="pw-mobile-section">Bantuan</div>
     <a href="{{ route('quiz') }}" class="pw-mobile-link">🧠 Cek Kesehatan Jiwa</a>
     <a href="{{ route('mental-health-directory') }}" class="pw-mobile-link">📋 Direktori Bantuan</a>
@@ -249,7 +257,7 @@
     <a href="{{ route('privacy.policy') }}" class="pw-mobile-link">🔒 Kebijakan Privasi</a>
     <div style="height:1px;background:rgba(255,255,255,.07);margin:12px 0;"></div>
     @auth
-        <a href="{{ route('dashboard') }}" class="pw-mobile-link">Dashboard</a>
+        <a href="{{ route('dashboard') }}" class="pw-mobile-link">Dashboard ({{ Auth::user()->nickname ?: Auth::user()->name }})</a>
     @else
         <a href="{{ route('login') }}" class="pw-mobile-link">Masuk</a>
         <a href="{{ route('register') }}" class="pw-mobile-link">Daftar</a>

@@ -48,13 +48,17 @@ class AdminCmsForm extends Component
     public function save()
     {
         $this->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'title'       => 'required|string|max:255',
+            'content'     => 'required|string',
             'author_name' => 'required|string|max:100',
-            'type' => 'required|in:news,experience,article',
-            'status' => 'required|in:pending,published,archived',
-            'image' => 'nullable|image|max:2048', // Max 2MB
+            'type'        => 'required|in:news,experience,article',
+            'status'      => 'required|in:pending,published,archived',
+            'image'       => 'nullable|image|max:2048',
         ]);
+
+        // Strip dangerous tags but keep formatting HTML
+        $this->content = strip_tags($this->content, '<p><br><h2><h3><h4><strong><em><u><ul><ol><li><blockquote><a><hr><code><pre>');
+
 
         $imagePath = $this->existing_image_path;
         
