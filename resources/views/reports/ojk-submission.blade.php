@@ -97,7 +97,7 @@
 </head>
 <body>
     <div class="kop">
-        <img src="{{ public_path('pw-logo.png') }}" class="logo-img" alt="Logo">
+        <img src="{{ asset('pw-logo.png') }}" class="logo-img" alt="Logo">
         <div class="kop-text">
             <h1>PINJOLWATCH</h1>
             <p><strong>Gedung Teknologi Informasi, Banjarnegara, Jawa Tengah</strong></p>
