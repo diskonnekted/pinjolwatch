@@ -190,6 +190,32 @@
                 </div>
 
                 <form wire:submit.prevent="updateUser" class="space-y-6">
+                    <div class="flex flex-col items-center justify-center mb-6">
+                        <div class="relative group">
+                            <div class="w-24 h-24 rounded-[2rem] bg-slate-950 border-2 border-dashed border-white/10 flex items-center justify-center overflow-hidden transition-all group-hover:border-teal-500/50 shadow-2xl">
+                                @if ($editingAvatar)
+                                    <img src="{{ $editingAvatar->temporaryUrl() }}" class="w-full h-full object-cover">
+                                @elseif($editingAvatarUrl)
+                                    <img src="{{ $editingAvatarUrl }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="text-3xl font-black text-slate-800 uppercase italic">{{ substr($editingName, 0, 1) }}</div>
+                                @endif
+                                
+                                <div class="absolute inset-0 bg-slate-950/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>
+                                </div>
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer">
+                                <input type="file" wire:model="editingAvatar" class="hidden" accept="image/*">
+                            </label>
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-xl flex items-center justify-center text-white shadow-lg border-4 border-slate-900 group-hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-4">Ubah Foto Profil</p>
+                        @error('editingAvatar') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
                     <div>
                         <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
                         <input wire:model="editingName" type="text" class="w-full px-5 py-4 bg-slate-950 border-white/5 rounded-2xl text-sm font-bold text-white focus:ring-teal-500 focus:border-teal-500 transition-all">
@@ -274,6 +300,26 @@
                 </div>
 
                 <form wire:submit.prevent="createUser" class="space-y-6">
+                    <div class="flex flex-col items-center justify-center mb-6">
+                        <div class="relative group">
+                            <div class="w-24 h-24 rounded-[2rem] bg-slate-950 border-2 border-dashed border-white/10 flex items-center justify-center overflow-hidden transition-all group-hover:border-teal-500/50">
+                                @if ($newAvatar)
+                                    <img src="{{ $newAvatar->temporaryUrl() }}" class="w-full h-full object-cover">
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-slate-700"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z" /></svg>
+                                @endif
+                            </div>
+                            <label class="absolute inset-0 cursor-pointer">
+                                <input type="file" wire:model="newAvatar" class="hidden" accept="image/*">
+                            </label>
+                            <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-xl flex items-center justify-center text-white shadow-lg border-4 border-slate-900 group-hover:scale-110 transition-transform">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                            </div>
+                        </div>
+                        <p class="text-[10px] font-black text-slate-600 uppercase tracking-widest mt-4">Pilih Foto Profil</p>
+                        @error('newAvatar') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
                     <div>
                         <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
                         <input wire:model="newName" type="text" placeholder="Masukkan nama lengkap" class="w-full px-5 py-4 bg-slate-950 border-white/5 rounded-2xl text-sm font-bold text-white focus:ring-teal-500 focus:border-teal-500 transition-all">

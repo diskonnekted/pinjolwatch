@@ -4,12 +4,13 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Layout;
 use App\Models\User;
 
 class AdminUserList extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
 
     #[Layout('components.admin-layout')]
 
@@ -44,12 +45,15 @@ class AdminUserList extends Component
     public $editingEmail;
     public $editingRoles = [];
     public $newPassword;
+    public $editingAvatar;
+    public $editingAvatarUrl;
 
     // Create User Fields
     public $newName;
     public $newEmail;
     public $newUserPassword;
     public $newUserRoles = ['user'];
+    public $newAvatar;
 
     public function openCreateModal()
     {
@@ -57,6 +61,7 @@ class AdminUserList extends Component
         $this->newEmail = '';
         $this->newUserPassword = '';
         $this->newUserRoles = ['user'];
+        $this->newAvatar = null;
         $this->isCreateModalOpen = true;
     }
 
@@ -66,12 +71,20 @@ class AdminUserList extends Component
             'newName' => 'required|string|max:255',
             'newEmail' => 'required|email|unique:users,email',
             'newUserPassword' => 'required|min:8',
+            'newAvatar' => 'nullable|image|max:1024',
         ]);
+
+        $avatarUrl = null;
+        if ($this->newAvatar) {
+            $path = $this->newAvatar->store('avatars', 'public');
+            $avatarUrl = asset('storage/' . $path);
+        }
 
         $user = User::create([
             'name' => $this->newName,
             'email' => $this->newEmail,
             'password' => \Illuminate\Support\Facades\Hash::make($this->newUserPassword),
+            'avatar_url' => $avatarUrl,
             'email_verified_at' => now(), // Auto verify if created by admin
         ]);
 
@@ -87,6 +100,8 @@ class AdminUserList extends Component
         $this->editingUserId = $userId;
         $this->editingName = $user->name;
         $this->editingEmail = $user->email;
+        $this->editingAvatarUrl = $user->avatar_url;
+        $this->editingAvatar = null;
         $this->editingRoles = $user->roles->pluck('name')->toArray();
         $this->isEditModalOpen = true;
     }
@@ -96,13 +111,22 @@ class AdminUserList extends Component
         $this->validate([
             'editingName' => 'required|string|max:255',
             'editingEmail' => 'required|email|unique:users,email,' . $this->editingUserId,
+            'editingAvatar' => 'nullable|image|max:1024',
         ]);
 
         $user = User::findOrFail($this->editingUserId);
-        $user->update([
+        
+        $data = [
             'name' => $this->editingName,
             'email' => $this->editingEmail,
-        ]);
+        ];
+
+        if ($this->editingAvatar) {
+            $path = $this->editingAvatar->store('avatars', 'public');
+            $data['avatar_url'] = asset('storage/' . $path);
+        }
+
+        $user->update($data);
 
         $user->syncRoles($this->editingRoles);
 
