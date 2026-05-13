@@ -4,29 +4,103 @@
     <meta charset="UTF-8">
     <title>Laporan Pengaduan Masyarakat - OJK</title>
     <style>
-        @page { margin: 2.5cm; }
-        body { font-family: 'Times New Roman', Times, serif; line-height: 1.5; color: #000; font-size: 12pt; }
-        .kop { text-align: center; border-bottom: 3px double #000; padding-bottom: 10px; margin-bottom: 30px; position: relative; }
-        .logo-container { position: absolute; left: 0; top: 0; width: 60px; height: 60px; background: linear-gradient(135deg, #2563eb, #4f46e5); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 24pt; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
-        .kop-text { margin-left: 70px; }
-        .kop h1 { margin: 0; font-size: 18pt; text-transform: uppercase; color: #1e40af; }
-        .kop p { margin: 2px 0; font-size: 10pt; color: #444; }
-        .content { text-align: justify; }
-        .identitas-tabel { margin: 20px 0; width: 100%; border-collapse: collapse; }
-        .identitas-tabel td { padding: 4px 0; vertical-align: top; }
+        @page { margin: 2cm; }
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            line-height: 1.6; 
+            color: #000000 !important; 
+            background-color: #ffffff !important;
+            font-size: 11pt; 
+            margin: 0;
+            padding: 0;
+        }
+        .kop { 
+            text-align: center; 
+            border-bottom: 3px double #000000; 
+            padding-bottom: 15px; 
+            margin-bottom: 30px; 
+            position: relative; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-img { 
+            height: 70px; 
+            width: auto; 
+            margin-right: 20px;
+        }
+        .kop-text { 
+            text-align: center;
+        }
+        .kop h1 { 
+            margin: 0; 
+            font-size: 18pt; 
+            text-transform: uppercase; 
+            color: #000000 !important; 
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+        .kop p { 
+            margin: 2px 0; 
+            font-size: 9pt; 
+            color: #333333 !important; 
+            font-family: Arial, sans-serif;
+        }
+        .content { 
+            text-align: justify; 
+            color: #000000 !important;
+        }
+        .content p, .content td {
+            color: #000000 !important;
+        }
+        .identitas-tabel { 
+            margin: 25px 0; 
+            width: 100%; 
+            border-collapse: collapse; 
+        }
+        .identitas-tabel td { 
+            padding: 6px 0; 
+            vertical-align: top; 
+            color: #000000 !important;
+        }
         .identitas-tabel td:first-child { width: 30%; font-weight: bold; }
         .identitas-tabel td:nth-child(2) { width: 5%; }
-        .section-title { font-weight: bold; margin-top: 20px; text-decoration: underline; }
-        .signature-area { margin-top: 50px; text-align: right; }
-        .footer { position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 8pt; color: #666; font-style: italic; }
+        .section-title { 
+            font-weight: bold; 
+            margin-top: 25px; 
+            margin-bottom: 10px;
+            text-decoration: underline; 
+            text-transform: uppercase;
+            font-size: 11pt;
+            color: #000000 !important;
+        }
+        .signature-area { 
+            margin-top: 60px; 
+            text-align: right; 
+            color: #000000 !important;
+        }
+        .signature-area p {
+            color: #000000 !important;
+        }
+        .footer { 
+            position: fixed; 
+            bottom: 0.5cm; 
+            width: 100%; 
+            text-align: center; 
+            font-size: 8pt; 
+            color: #666666 !important; 
+            font-style: italic; 
+            border-top: 1px solid #eeeeee;
+            padding-top: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="kop">
-        <div class="logo-container">P</div>
+        <img src="{{ public_path('pw-logo.png') }}" class="logo-img" alt="Logo">
         <div class="kop-text">
             <h1>PINJOLWATCH</h1>
-            <p>Gedung Teknologi Informasi, Banjarnegara, Jawa Tengah</p>
+            <p><strong>Gedung Teknologi Informasi, Banjarnegara, Jawa Tengah</strong></p>
             <p>Email: bantuan@pinjolwatch.id | Website: www.pinjolwatch.id</p>
         </div>
     </div>

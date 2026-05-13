@@ -26,14 +26,14 @@
                 {{-- Nama Lengkap --}}
                 <div class="space-y-2">
                     <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-4">Nama Lengkap</label>
-                    <input wire:model="full_name" type="text" class="w-full bg-slate-950 border-slate-800 rounded-2xl px-6 py-4 text-slate-200 focus:ring-teal-500 focus:border-teal-500 transition-all font-medium" placeholder="Masukkan nama sesuai identitas">
+                    <input wire:model="full_name" type="text" class="w-full bg-slate-950 border-slate-800 rounded-2xl px-6 py-4 text-slate-200 focus:ring-teal-500 focus:border-teal-500 transition-all font-medium" placeholder="Contoh: Budi Santoso">
                     @error('full_name') <span class="text-rose-500 text-[10px] font-bold uppercase ml-4">{{ $message }}</span> @enderror
                 </div>
 
                 {{-- Email --}}
                 <div class="space-y-2">
                     <label class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-4">Email Aktif</label>
-                    <input wire:model="email" type="email" class="w-full bg-slate-950 border-slate-800 rounded-2xl px-6 py-4 text-slate-200 focus:ring-teal-500 focus:border-teal-500 transition-all font-medium" placeholder="Alamat email Anda">
+                    <input wire:model="email" type="email" class="w-full bg-slate-950 border-slate-800 rounded-2xl px-6 py-4 text-slate-200 focus:ring-teal-500 focus:border-teal-500 transition-all font-medium" placeholder="Contoh: budisantoso@gmail.com">
                     @error('email') <span class="text-rose-500 text-[10px] font-bold uppercase ml-4">{{ $message }}</span> @enderror
                 </div>
 
