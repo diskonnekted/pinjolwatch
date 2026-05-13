@@ -85,11 +85,11 @@
         {{-- OJK Macro Cards --}}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             <div class="glass p-10 group border-amber-500/10 hover:bg-amber-500/5 transition-all">
-                <div class="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-4">Outstanding Pinjaman</div>
+                <div class="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-4">Jumlah Pinjaman / 2026</div>
                 <div class="text-4xl font-black text-white leading-tight">Rp101,03<br><span class="text-xl grad">Trilyun</span></div>
             </div>
             <div class="glass p-10 group border-blue-500/10 hover:bg-blue-500/5 transition-all">
-                <div class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4">Peminjam Terdaftar</div>
+                <div class="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-4">Peminjam / Jml Penduduk</div>
                 <div class="text-4xl font-black text-white leading-tight">146,5<br><span class="text-xl grad">Juta Akun</span></div>
             </div>
             <div class="glass p-10 group border-rose-500/10 hover:bg-rose-500/5 transition-all">
