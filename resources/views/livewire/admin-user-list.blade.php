@@ -64,6 +64,7 @@
                         </th>
                         <th class="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Peran</th>
                         <th class="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Status</th>
+                        <th class="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Progress Pemulihan</th>
                         <th class="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">
                             <button wire:click="sortBy('created_at')" class="flex items-center gap-1 mx-auto hover:text-indigo-600 transition-colors">
                                 Bergabung
@@ -117,6 +118,21 @@
                                     </span>
                                 @endif
                             </td>
+                            <td class="px-6 py-5">
+                                @php
+                                    $completedCount = $user->recoveryProgress->whereNotNull('completed_at')->count();
+                                    $percentage = $totalStages > 0 ? round(($completedCount / $totalStages) * 100) : 0;
+                                @endphp
+                                <div class="max-w-[120px] mx-auto">
+                                    <div class="flex justify-between items-center mb-1.5">
+                                        <span class="text-[9px] font-black text-slate-400 uppercase tracking-tighter">{{ $completedCount }}/{{ $totalStages }} Fase</span>
+                                        <span class="text-[9px] font-black text-indigo-600">{{ $percentage }}%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden border border-slate-200/50">
+                                        <div class="bg-indigo-500 h-full transition-all duration-500" style="width: {{ $percentage }}%"></div>
+                                    </div>
+                                </div>
+                            </td>
                             <td class="px-6 py-5 text-center text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                                 {{ $user->created_at->format('d M Y') }}
                             </td>
@@ -149,7 +165,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-20 text-center opacity-30">
+                            <td colspan="6" class="py-20 text-center opacity-30">
                                 <p class="text-[10px] font-black uppercase tracking-widest">Tidak ada pengguna ditemukan</p>
                             </td>
                         </tr>

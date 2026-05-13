@@ -116,7 +116,7 @@ class AdminUserList extends Component
 
     public function render()
     {
-        $query = User::with('roles')
+        $query = User::with(['roles', 'recoveryProgress'])
             ->where(function($query) {
                 $query->where('name', 'like', '%' . $this->search . '%')
                       ->orWhere('email', 'like', '%' . $this->search . '%');
@@ -137,7 +137,8 @@ class AdminUserList extends Component
 
         return view('livewire.admin-user-list', [
             'users' => $users,
-            'availableRoles' => \Spatie\Permission\Models\Role::all()
+            'availableRoles' => \Spatie\Permission\Models\Role::all(),
+            'totalStages' => \App\Models\RecoveryStage::count()
         ]);
     }
 }
