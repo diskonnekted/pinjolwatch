@@ -36,6 +36,65 @@ class AdminUserList extends Component
         $this->resetPage();
     }
 
+    public $isEditModalOpen = false;
+    public $isResetModalOpen = false;
+    public $editingUserId;
+    public $editingName;
+    public $editingEmail;
+    public $editingRoles = [];
+    public $newPassword;
+
+    public function openEditModal($userId)
+    {
+        $user = User::findOrFail($userId);
+        $this->editingUserId = $userId;
+        $this->editingName = $user->name;
+        $this->editingEmail = $user->email;
+        $this->editingRoles = $user->roles->pluck('name')->toArray();
+        $this->isEditModalOpen = true;
+    }
+
+    public function updateUser()
+    {
+        $this->validate([
+            'editingName' => 'required|string|max:255',
+            'editingEmail' => 'required|email|unique:users,email,' . $this->editingUserId,
+        ]);
+
+        $user = User::findOrFail($this->editingUserId);
+        $user->update([
+            'name' => $this->editingName,
+            'email' => $this->editingEmail,
+        ]);
+
+        $user->syncRoles($this->editingRoles);
+
+        $this->isEditModalOpen = false;
+        session()->flash('message', 'User updated successfully.');
+    }
+
+    public function openResetModal($userId)
+    {
+        $this->editingUserId = $userId;
+        $this->newPassword = '';
+        $this->isResetModalOpen = true;
+    }
+
+    public function saveNewPassword()
+    {
+        $this->validate([
+            'newPassword' => 'required|min:8',
+        ]);
+
+        $user = User::findOrFail($this->editingUserId);
+        $user->update([
+            'password' => \Illuminate\Support\Facades\Hash::make($this->newPassword),
+        ]);
+
+        $this->isResetModalOpen = false;
+        session()->flash('message', 'Password reset successfully for ' . $user->name);
+    }
+
     public function verifyUser($userId)
     {
         $user = User::findOrFail($userId);

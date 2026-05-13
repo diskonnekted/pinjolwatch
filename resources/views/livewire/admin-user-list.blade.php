@@ -122,8 +122,18 @@
                             </td>
                             <td class="px-6 py-5">
                                 <div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <button wire:click="openEditModal({{ $user->id }})" class="p-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white rounded-lg transition-all" title="Edit User">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                        </svg>
+                                    </button>
+                                    <button wire:click="openResetModal({{ $user->id }})" class="p-2 bg-amber-50 text-amber-600 hover:bg-amber-600 hover:text-white rounded-lg transition-all" title="Reset Password">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
+                                        </svg>
+                                    </button>
                                     @if(!$user->email_verified_at)
-                                        <button wire:click="verifyUser({{ $user->id }})" class="p-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white rounded-lg transition-all" title="Verifikasi">
+                                        <button wire:click="verifyUser({{ $user->id }})" class="p-2 bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white rounded-lg transition-all" title="Verifikasi">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                                             </svg>
@@ -152,5 +162,89 @@
     <div class="mt-8">
         {{ $users->links() }}
     </div>
+
+    {{-- Edit User Modal --}}
+    @if($isEditModalOpen)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl border border-white/20">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Edit Pengguna</h2>
+                    <button wire:click="$set('isEditModalOpen', false)" class="text-slate-400 hover:text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <form wire:submit.prevent="updateUser" class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
+                        <input wire:model="editingName" type="text" class="w-full px-5 py-4 bg-slate-50 border-slate-100 rounded-2xl text-sm font-bold focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                        @error('editingName') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Alamat Email</label>
+                        <input wire:model="editingEmail" type="email" class="w-full px-5 py-4 bg-slate-50 border-slate-100 rounded-2xl text-sm font-bold focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                        @error('editingEmail') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Peran Akses</label>
+                        <div class="flex flex-wrap gap-2 p-2 bg-slate-50 rounded-2xl border border-slate-100">
+                            @foreach($availableRoles as $role)
+                                <label class="flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer hover:bg-white transition-all">
+                                    <input type="checkbox" wire:model="editingRoles" value="{{ $role->name }}" class="rounded text-indigo-600 focus:ring-indigo-500">
+                                    <span class="text-[10px] font-black uppercase tracking-tight text-slate-600">{{ $role->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-4 bg-indigo-600 text-white rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-indigo-700 shadow-lg shadow-indigo-600/30 transition-all">
+                            Simpan Perubahan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    {{-- Reset Password Modal --}}
+    @if($isResetModalOpen)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-fade-in">
+        <div class="bg-white rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl border border-white/20">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Reset Password</h2>
+                    <button wire:click="$set('isResetModalOpen', false)" class="text-slate-400 hover:text-slate-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <div class="mb-6 p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                    <p class="text-[10px] font-bold text-amber-700 uppercase tracking-tight leading-relaxed">
+                        Tindakan ini akan mengganti password pengguna secara paksa. Berikan password baru kepada pengguna setelah berhasil.
+                    </p>
+                </div>
+
+                <form wire:submit.prevent="saveNewPassword" class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 ml-1">Password Baru</label>
+                        <input wire:model="newPassword" type="password" placeholder="Minimal 8 karakter" class="w-full px-5 py-4 bg-slate-50 border-slate-100 rounded-2xl text-sm font-bold focus:ring-amber-500 focus:border-amber-500 transition-all">
+                        @error('newPassword') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-4 bg-amber-600 text-white rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-amber-700 shadow-lg shadow-amber-600/30 transition-all">
+                            Konfirmasi Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
 
