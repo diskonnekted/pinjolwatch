@@ -7,20 +7,20 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-black text-slate-100 uppercase italic">Cek Kesehatan Jiwa</h2>
+                <h2 class="text-3xl font-black text-slate-100 uppercase">Cek Kesehatan Jiwa</h2>
                 <p class="mt-4 text-slate-400 leading-relaxed max-w-lg mx-auto">Kuis ini diadaptasi dari standar skala distres psikologis (K10) untuk membantu Anda memahami dampak teror pinjol terhadap kesehatan mental Anda.</p>
                 <div class="mt-10">
                     <button wire:click="startQuiz" class="px-10 py-4 bg-primary-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary-500 shadow-lg shadow-primary-900/20 transition-all active:scale-95">
                         Mulai Tes Sekarang
                     </button>
                 </div>
-                <p class="mt-6 text-[10px] text-slate-500 uppercase tracking-widest font-bold italic">Waktu pengerjaan: ± 2 Menit</p>
+                <p class="mt-6 text-[10px] text-slate-500 uppercase tracking-widest font-bold">Waktu pengerjaan: ± 2 Menit</p>
             </div>
 
         @elseif($step <= 10)
             <div class="p-10">
                 <div class="flex justify-between items-center mb-8">
-                    <span class="text-xs font-black uppercase tracking-widest text-primary-400 italic">Pertanyaan {{ $step }} / 10</span>
+                    <span class="text-xs font-black uppercase tracking-widest text-primary-400">Pertanyaan {{ $step }} / 10</span>
                     <div class="w-32 bg-slate-800 h-2 rounded-full overflow-hidden">
                         <div class="bg-primary-500 h-full transition-all duration-500" style="width: {{ ($step/10)*100 }}%"></div>
                     </div>
@@ -54,16 +54,16 @@
                 </div>
 
                 <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Hasil Analisis Anda:</p>
-                <h2 class="text-4xl font-black text-slate-100 mb-6 italic">{{ $resultLevel }}</h2>
+                <h2 class="text-4xl font-black text-slate-100 mb-6">{{ $resultLevel }}</h2>
                 
                 <div class="p-8 bg-slate-800/50 rounded-3xl border border-slate-700 mb-8">
-                    <p class="text-slate-300 leading-relaxed italic">"{{ $resultAdvice }}"</p>
+                    <p class="text-slate-300 leading-relaxed">"{{ $resultAdvice }}"</p>
                 </div>
 
                 @guest
                     <div class="mb-10 p-8 rounded-[2rem] bg-gradient-to-br from-indigo-900/20 to-primary-900/20 border border-indigo-500/20 relative overflow-hidden group">
                         <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all"></div>
-                        <h4 class="text-lg font-black text-white uppercase italic mb-3">Butuh Analisis Lebih Valid?</h4>
+                        <h4 class="text-lg font-black text-white uppercase mb-3">Butuh Analisis Lebih Valid?</h4>
                         <p class="text-sm text-slate-400 mb-6">Daftarkan akun PinjolWatch untuk mendapatkan akses ke <strong>Tes Kesehatan Jiwa Premium</strong> dan konsultasi langsung dengan responder kami secara gratis.</p>
                         <a href="{{ route('register') }}" class="inline-block px-8 py-3 bg-indigo-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20">
                             Daftar Sekarang

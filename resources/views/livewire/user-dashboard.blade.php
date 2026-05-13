@@ -636,7 +636,9 @@
          }"
          x-on:open-user-doc-preview.window="open = true; ticketId = $event.detail.ticket;"
          class="relative z-[200]"
-         x-cloak>
+         x-show="open"
+         x-cloak
+         style="display: none">
         
         <div x-show="open" 
              x-transition:enter="ease-out duration-300"
@@ -645,9 +647,12 @@
              x-transition:leave="ease-in duration-200"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl transition-opacity"></div>
+             class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl transition-opacity"
+             style="display: none"></div>
 
-        <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
+        <div x-show="open" 
+             class="fixed inset-0 z-10 overflow-y-auto"
+             style="display: none">
             <div class="flex min-h-full items-center justify-center p-4">
                 <div x-show="open"
                      x-transition:enter="ease-out duration-300"

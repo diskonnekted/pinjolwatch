@@ -420,7 +420,9 @@
             type: 'rose'
          })"
          class="relative z-[100]"
-         x-cloak>
+         x-show="open"
+         x-cloak
+         style="display: none">
         
         {{-- Backdrop --}}
         <div x-show="open" 
@@ -430,11 +432,13 @@
              x-transition:leave="ease-in duration-200"
              x-transition:leave-start="opacity-100"
              x-transition:leave-end="opacity-0"
-             class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+             class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"
+             style="display: none"></div>
 
         {{-- Modal Content --}}
         <div x-show="open" 
-             class="fixed inset-0 z-10 overflow-y-auto">
+             class="fixed inset-0 z-10 overflow-y-auto"
+             style="display: none">
             <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
                 <div x-show="open"
                      x-transition:enter="ease-out duration-300"
