@@ -5,7 +5,7 @@
             <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
             Simulasi Gali Lobang Tutup Lobang
         </div>
-        <h2 class="text-5xl font-black text-white italic uppercase tracking-tighter mb-4 grad">Visualisasi Siklus Hutang.</h2>
+        <h2 class="text-5xl font-black text-white uppercase tracking-tighter mb-4 grad">Visualisasi Siklus Hutang.</h2>
         <p class="text-slate-400 text-lg max-w-2xl mx-auto">
             Gunakan kalkulator ini untuk melihat bagaimana hutang Anda membengkak saat mencoba menutup lubang lama dengan lubang baru.
         </p>
@@ -23,7 +23,7 @@
                         </svg>
                     </div>
                     <div>
-                        <h3 class="text-lg font-black text-white uppercase tracking-tighter italic">Total Hutang Saat Ini</h3>
+                        <h3 class="text-lg font-black text-white uppercase tracking-tighter">Total Hutang Saat Ini</h3>
                         <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hutang yang sudah ada sebelum Gali Lobang dimulai</p>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
 
             <div class="glass p-8 rounded-[2.5rem] border-slate-800">
                 <div class="flex items-center justify-between mb-8">
-                    <h3 class="text-xl font-black text-white uppercase tracking-tighter italic">Daftar Pinjol Baru</h3>
+                    <h3 class="text-xl font-black text-white uppercase tracking-tighter">Daftar Pinjol Baru</h3>
                     <button wire:click="addLoan" class="p-3 bg-teal-500/10 hover:bg-teal-500/20 text-teal-500 rounded-2xl transition-all border border-teal-500/20 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 group-hover:rotate-90 transition-transform">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -106,7 +106,7 @@
         {{-- Summary Section --}}
         <div class="space-y-6">
             <div class="glass p-8 rounded-[2.5rem] border-teal-500/20 bg-gradient-to-br from-slate-900 to-slate-950 sticky top-24">
-                <h3 class="text-xl font-black text-white uppercase tracking-tighter italic mb-8 flex items-center gap-3">
+                <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-8 flex items-center gap-3">
                     <span class="w-8 h-8 bg-teal-500 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-white">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-3-9.75V18m-3-3V18m3-9.75ZM6 7.5h12M5.25 18h13.5A2.25 2.25 0 0 0 21 15.75V9.456a2.25 2.25 0 0 0-1.061-1.915l-6-3.6a2.25 2.25 0 0 0-2.378 0l-6 3.6A2.25 2.25 0 0 0 3 9.456v6.294A2.25 2.25 0 0 0 5.25 18Z" />
@@ -151,7 +151,7 @@
 
                     <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800">
                         <label class="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-1 text-center">Total Akumulasi Hutang (Jika Dilanjut)</label>
-                        <div class="text-lg font-black text-white tracking-tighter text-center italic opacity-60">Rp {{ number_format($debtAccumulation, 0, ',', '.') }}</div>
+                        <div class="text-lg font-black text-white tracking-tighter text-center opacity-60">Rp {{ number_format($debtAccumulation, 0, ',', '.') }}</div>
                     </div>
                 </div>
 

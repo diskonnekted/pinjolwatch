@@ -32,7 +32,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-teal-500">
                     <path fill-rule="evenodd" d="M11.484 2.17a.75.75 0 0 1 1.032 0 11.209 11.209 0 0 0 7.877 3.08.75.75 0 0 1 .722.515 12.74 12.74 0 0 1 .436 4.464c-.389 4.298-2.607 7.973-5.918 10.378a1.75 1.75 0 0 1-1.905 0C10.155 18.2 7.747 14.526 7.41 10.23a12.744 12.744 0 0 1 .436-4.463.75.75 0 0 1 .721-.516 11.21 11.21 0 0 0 7.878-3.08ZM12 11.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" clip-rule="evenodd" />
                 </svg>
-                <span class="text-xl font-black tracking-tight italic uppercase">Admin<span class="text-teal-500">Watch</span></span>
+                <span class="text-xl font-black tracking-tight uppercase">Admin<span class="text-teal-500">Watch</span></span>
             </div>
 
             {{-- Scrollable Nav --}}

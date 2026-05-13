@@ -2,7 +2,7 @@
     <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
             <div class="badge mb-4">Update Industri</div>
-            <h2 class="text-5xl font-black text-white italic uppercase tracking-tighter mb-4 grad">Feed Berita Pinjol.</h2>
+            <h2 class="text-5xl font-black text-white uppercase tracking-tighter mb-4 grad">Feed Berita Pinjol.</h2>
             <p class="text-slate-400 text-lg max-w-xl">
                 Pantau perkembangan regulasi, kasus hukum, dan berita terkini mengenai industri fintech lending di Indonesia.
             </p>
@@ -40,7 +40,7 @@
                         </span>
                     </div>
 
-                    <h3 class="text-xl font-black text-white uppercase tracking-tighter italic mb-4 group-hover:text-teal-400 transition-colors leading-tight">
+                    <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-4 group-hover:text-teal-400 transition-colors leading-tight">
                         {{ $item->title }}
                     </h3>
 
@@ -66,7 +66,7 @@
     @if($news->isEmpty())
         <div class="text-center py-20 glass rounded-[3rem] border-slate-800">
             <div class="text-6xl mb-6 opacity-30">📭</div>
-            <h3 class="text-2xl font-black text-white italic uppercase tracking-tighter mb-2">Belum Ada Berita.</h3>
+            <h3 class="text-2xl font-black text-white uppercase tracking-tighter mb-2">Belum Ada Berita.</h3>
             <p class="text-slate-500 uppercase text-[10px] font-black tracking-widest">Kami akan segera memperbarui feed ini dengan informasi terkini.</p>
         </div>
     @endif

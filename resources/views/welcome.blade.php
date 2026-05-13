@@ -42,7 +42,7 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
 .step-num { width: 48px; height: 48px; background: linear-gradient(135deg, var(--teal), #0891b2); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.25rem; color: #fff; flex-shrink: 0; }
 
 /* Testimonial */
-.quote-mark { font-size: 5rem; line-height: 0; color: var(--teal); font-style: italic; }
+.quote-mark { font-size: 5rem; line-height: 0; color: var(--teal); }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: var(--dark2); } ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
