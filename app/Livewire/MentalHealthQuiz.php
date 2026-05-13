@@ -61,6 +61,16 @@ class MentalHealthQuiz extends Component
             $this->resultLevel = 'Sangat Tinggi (Butuh Bantuan Segera)';
             $this->resultAdvice = 'Kondisi Anda saat ini sangat mengkhawatirkan. Mohon segera hubungi tenaga profesional (psikolog/psikiater) atau hotline darurat kesehatan jiwa (119 ext 8). Nyawa dan ketenangan Anda jauh lebih berharga daripada hutang apa pun.';
         }
+
+        // Save to Database for analytics
+        \App\Models\MentalHealthTest::create([
+            'user_id' => auth()->id(),
+            'total_score' => $this->totalScore,
+            'result_level' => $this->resultLevel,
+            'responses' => $this->answers,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
         
         $this->step = 11;
     }

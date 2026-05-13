@@ -17,6 +17,7 @@ class ReportDetail extends Component
     public Report $report;
     public array $revealedEvidence = [];
     public array $verification_checklist = [];
+    public bool $showOjkPreview = false;
 
     public function mount($ticket)
     {
@@ -90,6 +91,37 @@ class ReportDetail extends Component
         ]);
 
         session()->flash('message', "Status laporan diperbarui ke " . ucfirst($status));
+    }
+
+    public function toggleOjkPreview()
+    {
+        $this->showOjkPreview = !$this->showOjkPreview;
+    }
+
+    public function sendToOjk()
+    {
+        // 1. Update Status and Timestamp
+        $this->report->update([
+            'status' => 'forwarded',
+            'ojk_submitted_at' => now(),
+        ]);
+
+        // 2. Log Action
+        AuditLog::create([
+            'user_id' => Auth::id(),
+            'route_name' => 'admin.reports.send_ojk',
+            'http_method' => 'POST',
+            'url' => request()->fullUrl(),
+            'ip_masked' => $this->maskIP(request()->ip()),
+            'payload_summary' => json_encode([
+                'ticket_id' => $this->report->ticket_id,
+                'action' => 'Sent Document to OJK/Satgas PASTI'
+            ]),
+        ]);
+
+        // 3. Close Preview & Flash
+        $this->showOjkPreview = false;
+        session()->flash('message', "Dokumen berhasil dikirim ke Satgas PASTI/OJK!");
     }
 
     private function maskIP(?string $ip): string

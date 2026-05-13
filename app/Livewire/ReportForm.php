@@ -8,6 +8,8 @@ use App\Models\Report;
 use App\Models\Province;
 use App\Models\Kabupaten;
 use App\Models\ThreatType;
+use App\Models\User;
+use App\Notifications\AdminAlert;
 use App\Models\ConsentLog;
 use App\Models\LegalPinjol;
 use Illuminate\Support\Facades\Storage;
@@ -190,6 +192,16 @@ class ReportForm extends Component
         ]);
 
         RateLimiter::hit('reports-'.$this->maskIP(request()->ip()), 3600);
+
+        // Notify Admins
+        $admins = User::role(['super-admin', 'admin'])->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new AdminAlert(
+                "Laporan Baru: {$report->ticket_id}",
+                "Seorang pengguna baru saja mengirimkan laporan terkait " . ($report->app_name ?: 'Pinjol Tidak Teridentifikasi') . ".",
+                'report'
+            ));
+        }
 
         Session::flash('consent_receipt', [
             'ticket' => $report->ticket_id,

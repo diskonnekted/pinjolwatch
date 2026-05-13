@@ -66,15 +66,72 @@
                     <p class="text-primary-100 leading-relaxed">{{ $selectedPinjol->collection_patterns }}</p>
                 </div>
 
-                {{-- Notable Cases --}}
-                <div class="p-6 bg-amber-900/30 rounded-2xl border border-amber-800">
-                    <h3 class="text-sm font-bold text-amber-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.34c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                        </svg>
-                        Riwayat Kasus / Keluhan Publik
-                    </h3>
-                    <p class="text-amber-100 leading-relaxed">{{ $selectedPinjol->notable_cases }}</p>
+                {{-- Media Highlights & News Feed --}}
+                <div class="p-8 bg-slate-950/50 rounded-[2.5rem] border border-slate-800 relative overflow-hidden group">
+                    <div class="absolute -right-16 -top-16 w-48 h-48 bg-primary-500/5 rounded-full blur-3xl group-hover:bg-primary-500/10 transition-colors duration-700"></div>
+                    
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="space-y-1">
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-[0.2em] flex items-center gap-2 italic">
+                                <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+                                Media Highlights & News Feed
+                            </h3>
+                            @if($lastScanned)
+                                <div class="text-[9px] font-bold text-primary-500/70 uppercase tracking-widest animate-in fade-in duration-500">
+                                    Last Scan: {{ $lastScanned }} (Live Results)
+                                </div>
+                            @endif
+                        </div>
+                        <button 
+                            wire:click="scanNews" 
+                            wire:loading.attr="disabled" 
+                            wire:key="scan-btn-{{ $pinjolId }}"
+                            class="group/scan flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800 hover:bg-primary-600 transition-all border border-slate-700 hover:border-primary-500 disabled:opacity-50"
+                        >
+                            <span wire:loading.remove wire:target="scanNews" class="text-[9px] font-black text-slate-400 group-hover/scan:text-white uppercase tracking-widest">Update Feed</span>
+                            <span wire:loading wire:target="scanNews" class="text-[9px] font-black text-white uppercase tracking-widest animate-pulse">Scanning DB...</span>
+                            <svg wire:loading.remove wire:target="scanNews" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3 h-3 text-slate-500 group-hover/scan:text-white group-hover/scan:rotate-180 transition-transform duration-500">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    @if($selectedPinjol->news_links && count($selectedPinjol->news_links) > 0)
+                        <div class="space-y-4">
+                            @foreach($selectedPinjol->news_links as $news)
+                                <a href="{{ $news['url'] }}" target="_blank" class="block p-4 bg-slate-900/50 rounded-2xl border border-slate-800 hover:border-primary-500/50 hover:bg-slate-900 transition-all group/news relative overflow-hidden">
+                                    <div class="flex gap-4 items-start relative z-10">
+                                        <div class="w-12 h-12 rounded-xl bg-slate-800 flex-shrink-0 flex items-center justify-center text-xl group-hover/news:scale-110 transition-transform">
+                                            📰
+                                        </div>
+                                        <div class="space-y-1">
+                                            <div class="flex items-center gap-2 text-[10px] font-black text-primary-500 uppercase tracking-widest">
+                                                {{ $news['source'] ?? 'Online Media' }}
+                                                <span class="text-slate-600">•</span>
+                                                <span class="text-slate-500">{{ $news['date'] ?? 'Recent' }}</span>
+                                            </div>
+                                            <h4 class="text-sm font-bold text-slate-200 leading-snug group-hover/news:text-white transition-colors">{{ $news['title'] }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover/news:opacity-100 transition-opacity">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary-500">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                                        </svg>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="p-6 bg-amber-900/10 rounded-2xl border border-amber-900/30">
+                            <div class="flex gap-4 items-start">
+                                <div class="text-2xl">⚠️</div>
+                                <div class="space-y-1">
+                                    <h4 class="text-sm font-bold text-amber-200 uppercase tracking-wider">Riwayat Kasus Terlacak</h4>
+                                    <p class="text-amber-100/70 text-xs leading-relaxed">{{ $selectedPinjol->notable_cases ?? 'Belum ada riwayat kasus besar yang tercatat untuk aplikasi ini.' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         @else

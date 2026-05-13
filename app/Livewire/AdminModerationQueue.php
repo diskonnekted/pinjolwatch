@@ -17,8 +17,22 @@ class AdminModerationQueue extends Component
     #[Layout('components.admin-layout')]
     public $search = '';
     public $statusFilter = '';
+    public $showOjkPreview = false;
+    public $selectedReport = null;
 
     protected $queryString = ['search', 'statusFilter'];
+
+    public function previewOjk($reportId)
+    {
+        $this->selectedReport = Report::with(['kabupaten', 'threatType', 'legalPinjol'])->findOrFail($reportId);
+        $this->showOjkPreview = true;
+    }
+
+    public function closePreview()
+    {
+        $this->showOjkPreview = false;
+        $this->selectedReport = null;
+    }
 
     public function updatingSearch()
     {

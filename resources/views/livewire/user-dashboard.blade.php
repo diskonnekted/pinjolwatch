@@ -42,6 +42,14 @@
                         @if($activeTab === 'reports') <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> @endif
                     </button>
 
+                    <button wire:click="setTab('documents')" 
+                        class="w-full flex items-center justify-between px-5 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-300 group {{ $activeTab === 'documents' ? 'bg-teal-600 text-white shadow-[0_0_20px_rgba(13,148,136,0.3)]' : 'text-slate-500 hover:bg-slate-900/50 hover:text-slate-300' }}">
+                        <span class="flex items-center gap-3">
+                            <span class="text-lg opacity-70 group-hover:scale-110 transition-transform">📂</span> Dokumen & Bukti
+                        </span>
+                        @if($activeTab === 'documents') <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> @endif
+                    </button>
+
                     <button wire:click="setTab('security')" 
                         class="w-full flex items-center justify-between px-5 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-300 group {{ $activeTab === 'security' ? 'bg-teal-600 text-white shadow-[0_0_20px_rgba(13,148,136,0.3)]' : 'text-slate-500 hover:bg-slate-900/50 hover:text-slate-300' }}">
                         <span class="flex items-center gap-3">
@@ -64,6 +72,14 @@
                             <span class="text-lg opacity-70 group-hover:scale-110 transition-transform">🧠</span> Mental
                         </span>
                         @if($activeTab === 'mental') <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> @endif
+                    </button>
+
+                    <button wire:click="setTab('stories')" 
+                        class="w-full flex items-center justify-between px-5 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all duration-300 group {{ $activeTab === 'stories' ? 'bg-teal-600 text-white shadow-[0_0_20px_rgba(13,148,136,0.3)]' : 'text-slate-500 hover:bg-slate-900/50 hover:text-slate-300' }}">
+                        <span class="flex items-center gap-3">
+                            <span class="text-lg opacity-70 group-hover:scale-110 transition-transform">📝</span> Cerita Kita
+                        </span>
+                        @if($activeTab === 'stories') <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> @endif
                     </button>
 
                     <button wire:click="setTab('messages')" 
@@ -545,9 +561,81 @@
                 </div>
                 @endif
 
+                {{-- TAB: STORIES --}}
+                @if($activeTab === 'stories')
+                <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <livewire:user-story-form />
+                </div>
+                @endif
+
                 {{-- TAB: MESSAGES --}}
                 @if($activeTab === 'messages')
                     <livewire:user-messaging />
+                @endif
+
+                {{-- TAB: DOCUMENTS --}}
+                @if($activeTab === 'documents')
+                <div class="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
+                    <div>
+                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Dokumen & Bukti Resmi</h3>
+                        <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Arsip dokumen yang telah diteruskan ke otoritas</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-6">
+                        @php
+                            $submittedReports = $reports->whereNotNull('ojk_submitted_at');
+                        @endphp
+
+                        @forelse($submittedReports as $r)
+                        <div class="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-8 shadow-xl flex flex-col md:flex-row justify-between items-center gap-6">
+                            <div class="flex items-center gap-6">
+                                <div class="w-14 h-14 bg-indigo-500/10 text-indigo-400 rounded-2xl flex items-center justify-center text-2xl">
+                                    📜
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-black uppercase text-sm">Surat Pengaduan OJK</h4>
+                                    <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1">Tiket: #{{ $r->ticket_id }} • Dikirim: {{ $r->ojk_submitted_at->format('d/m/Y H:i') }}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <button x-data @click="$dispatch('open-user-doc-preview', { ticket: '{{ $r->ticket_id }}' })" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-[10px] rounded-xl uppercase tracking-widest shadow-lg shadow-indigo-500/20 transition-all">
+                                    Pratinjau Dokumen
+                                </button>
+                                <a href="#" class="px-6 py-3 bg-slate-800 text-slate-400 font-black text-[10px] rounded-xl uppercase tracking-widest hover:bg-slate-700 transition-all">
+                                    Unduh PDF
+                                </a>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-20 text-center">
+                            <div class="text-6xl mb-6 grayscale opacity-30">📁</div>
+                            <h4 class="text-slate-400 font-black uppercase tracking-widest">Belum ada dokumen resmi</h4>
+                            <p class="text-slate-600 text-sm mt-2">Dokumen akan muncul di sini setelah laporan Anda diteruskan ke OJK oleh tim admin.</p>
+                        </div>
+                        @endforelse
+                    </div>
+
+                    {{-- Evidence Section --}}
+                    <div class="mt-12">
+                         <h3 class="text-xl font-black text-white italic uppercase tracking-tighter mb-6 flex items-center gap-4">
+                            <span class="w-8 h-px bg-teal-500"></span>
+                            Bukti Digital Terunggah
+                        </h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                            @foreach($reports as $r)
+                                @foreach($r->evidence as $ev)
+                                <div class="aspect-square bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden relative group">
+                                    <img src="{{ Storage::url($ev->file_path) }}" class="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-60"></div>
+                                    <div class="absolute bottom-3 left-3">
+                                        <div class="text-[8px] font-black text-teal-400 uppercase tracking-widest">#{{ substr($r->ticket_id, 0, 4) }}</div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
                 @endif
 
                 {{-- TAB: SETTINGS --}}
@@ -607,6 +695,62 @@
                 @endif
 
             </main>
+        </div>
+    </div>
+
+    {{-- User Document Preview Modal --}}
+    <div x-data="{ 
+            open: false, 
+            ticketId: '',
+            isLoading: false
+         }"
+         x-on:open-user-doc-preview.window="open = true; ticketId = $event.detail.ticket;"
+         class="relative z-[200]"
+         x-cloak>
+        
+        <div x-show="open" 
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-950/90 backdrop-blur-xl transition-opacity"></div>
+
+        <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4">
+                <div x-show="open"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-8 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     @click.away="open = false"
+                     class="relative bg-white w-full max-w-4xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+                    
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight">Salinan Dokumen <span class="text-primary-600">OJK</span></h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest" x-text="'ID TIKET: #' + ticketId"></p>
+                        </div>
+                        <button @click="open = false" class="p-2 hover:bg-slate-200 rounded-full transition-colors text-slate-400 hover:text-slate-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto p-10 bg-slate-200 custom-scrollbar">
+                        <div class="bg-white shadow-2xl mx-auto p-12 min-h-[1000px] w-full max-w-[800px] border border-slate-300 text-black">
+                            {{-- We'll use a hidden template or simple dynamic display here --}}
+                            <div class="text-center italic text-slate-400 py-20 font-bold uppercase tracking-widest text-xs">
+                                Memuat Salinan Dokumen Resmi...
+                                <p class="mt-2 font-medium normal-case tracking-normal">Harap tunggu sebentar, sistem sedang menarik data dari arsip.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 border-t border-slate-100 bg-white flex items-center justify-end">
+                        <button @click="open = false" class="px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">Tutup Arsip</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -178,21 +178,33 @@
                 
                 <div class="space-y-3">
                     @if($report->status == 'received')
-                        <button wire:click="updateStatus('verified')" wire:confirm="Tandai laporan ini sebagai valid?" class="w-full flex justify-between items-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-blue-500/20">
+                        <button x-on:click="$dispatch('open-confirm-modal', { 
+                            title: 'Verifikasi Laporan',
+                            message: 'Apakah Anda yakin ingin menandai laporan ini sebagai valid? Status akan berubah menjadi VERIFIED.',
+                            action: 'updateStatus',
+                            param: 'verified',
+                            type: 'blue'
+                        })" class="w-full flex justify-between items-center px-4 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-blue-500/20">
                             Verifikasi Valid
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
                         </button>
                     @endif
                     
                     @if($report->status == 'verified')
-                        <button wire:click="updateStatus('forwarded')" wire:confirm="Teruskan laporan ini ke otoritas hukum/OJK?" class="w-full flex justify-between items-center px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-purple-500/20">
+                        <button wire:click="toggleOjkPreview" class="w-full flex justify-between items-center px-4 py-3 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-purple-500/20">
                             Teruskan ke Otoritas
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" /></svg>
                         </button>
                     @endif
 
                     @if($report->status == 'forwarded')
-                        <button wire:click="updateStatus('resolved')" wire:confirm="Selesaikan kasus ini?" class="w-full flex justify-between items-center px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-emerald-500/20">
+                        <button x-on:click="$dispatch('open-confirm-modal', { 
+                            title: 'Selesaikan Kasus',
+                            message: 'Tandai kasus ini sebagai SELESAI. Pastikan tindakan lanjutan sudah dilakukan.',
+                            action: 'updateStatus',
+                            param: 'resolved',
+                            type: 'emerald'
+                        })" class="w-full flex justify-between items-center px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-sm transition-colors shadow-lg shadow-emerald-500/20">
                             Tandai Selesai
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
                         </button>
@@ -246,7 +258,7 @@
                                 {{-- Overlay Lock / Reveal Button --}}
                                 @if(!$isRevealed)
                                     <div class="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <button wire:click="revealEvidence({{ $evidence->id }})" wire:confirm="Sistem akan mencatat aktivitas Anda saat membuka sensor bukti ini di dalam Audit Log. Lanjutkan?" class="px-4 py-2 bg-white rounded-lg shadow-lg font-bold text-sm text-slate-900 hover:bg-primary-50 transition-colors flex items-center gap-2">
+                                        <button x-on:click="$dispatch('open-reveal-modal', { id: {{ $evidence->id }} })" class="px-4 py-2 bg-white rounded-lg shadow-lg font-bold text-sm text-slate-900 hover:bg-primary-50 transition-colors flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-rose-500"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" /></svg>
                                             Buka Sensor
                                         </button>
@@ -276,6 +288,147 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+    {{-- OJK Document Preview Modal --}}
+    @if($showOjkPreview)
+        <div class="fixed inset-0 z-[110] overflow-y-auto" x-transition>
+            <div class="flex min-h-full items-center justify-center p-4">
+                <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-md" wire:click="toggleOjkPreview"></div>
+                
+                <div class="relative bg-white w-full max-w-4xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+                    {{-- Modal Header --}}
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight">Pratinjau Dokumen <span class="text-primary-600">OJK</span></h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Laporan Pengaduan Masyarakat v1.0</p>
+                        </div>
+                        <button wire:click="toggleOjkPreview" class="p-2 hover:bg-slate-200 rounded-full transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+
+                    {{-- Document Viewer --}}
+                    <div class="flex-1 overflow-y-auto p-10 bg-slate-100 custom-scrollbar">
+                        <div class="bg-white shadow-lg mx-auto p-12 min-h-[1000px] w-full max-w-[800px] border border-slate-200">
+                            @include('reports.ojk-submission', ['report' => $report])
+                        </div>
+                    </div>
+
+                    {{-- Modal Footer Actions --}}
+                    <div class="p-6 border-t border-slate-100 bg-white flex items-center justify-between">
+                        <div class="flex items-center gap-3 text-slate-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" /></svg>
+                            <span class="text-xs font-bold uppercase tracking-widest">Kirim ke: konsumen@ojk.go.id</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <button wire:click="toggleOjkPreview" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">Tutup</button>
+                            <button wire:click="sendToOjk" class="px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg shadow-primary-500/30 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" /></svg>
+                                Kirim ke OJK / Satgas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    {{-- Custom Confirmation Modal --}}
+    <div x-data="{ 
+            open: false, 
+            title: '',
+            message: '',
+            action: '',
+            param: null,
+            type: 'primary',
+            confirmAction(data) {
+                this.title = data.title;
+                this.message = data.message;
+                this.action = data.action;
+                this.param = data.param;
+                this.type = data.type || 'primary';
+                this.open = true;
+            },
+            execute() {
+                if (this.action === 'revealEvidence') {
+                    $wire.revealEvidence(this.param);
+                } else if (this.action === 'updateStatus') {
+                    $wire.updateStatus(this.param);
+                }
+                this.open = false;
+            }
+         }"
+         x-on:open-confirm-modal.window="confirmAction($event.detail)"
+         x-on:open-reveal-modal.window="confirmAction({
+            title: 'Peringatan Keamanan',
+            message: 'Sistem akan mencatat aktivitas Anda saat membuka sensor bukti ini di dalam Audit Log untuk alasan akuntabilitas. Lanjutkan?',
+            action: 'revealEvidence',
+            param: $event.detail.id,
+            type: 'rose'
+         })"
+         class="relative z-[100]"
+         x-cloak>
+        
+        {{-- Backdrop --}}
+        <div x-show="open" 
+             x-transition:enter="ease-out duration-300"
+             x-transition:enter-start="opacity-0"
+             x-transition:enter-end="opacity-100"
+             x-transition:leave="ease-in duration-200"
+             x-transition:leave-start="opacity-100"
+             x-transition:leave-end="opacity-0"
+             class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+
+        {{-- Modal Content --}}
+        <div x-show="open" 
+             class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div x-show="open"
+                     x-transition:enter="ease-out duration-300"
+                     x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave="ease-in duration-200"
+                     x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
+                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                     @click.away="open = false"
+                     class="relative transform overflow-hidden rounded-[2.5rem] bg-white p-8 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-lg border border-slate-100">
+                    
+                    <div class="mb-6">
+                        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl mb-6 border"
+                             :class="{
+                                'bg-blue-50 text-blue-600 border-blue-100': type === 'blue',
+                                'bg-purple-50 text-purple-600 border-purple-100': type === 'purple',
+                                'bg-emerald-50 text-emerald-600 border-emerald-100': type === 'emerald',
+                                'bg-rose-50 text-rose-600 border-rose-100': type === 'rose',
+                                'bg-slate-50 text-slate-600 border-slate-100': type === 'primary'
+                             }">
+                            <template x-if="type === 'rose'">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-8 w-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75A11.959 11.959 0 0 1 12 2.714Z" /></svg>
+                            </template>
+                            <template x-if="type !== 'rose'">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-8 w-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" /></svg>
+                            </template>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight mb-2" x-text="title"></h3>
+                            <p class="text-sm font-medium text-slate-500 leading-relaxed" x-html="message"></p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <button @click="open = false" class="py-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">Batalkan</button>
+                        <button @click="execute" class="py-4 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg shadow-primary-500/30"
+                                :class="{
+                                    'bg-blue-600 hover:bg-blue-500 shadow-blue-500/20': type === 'blue',
+                                    'bg-purple-600 hover:bg-purple-500 shadow-purple-500/20': type === 'purple',
+                                    'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-500/20': type === 'emerald',
+                                    'bg-rose-600 hover:bg-rose-500 shadow-rose-500/20': type === 'rose',
+                                    'bg-primary-600 hover:bg-primary-500 shadow-primary-500/20': type === 'primary'
+                                }">Konfirmasi</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

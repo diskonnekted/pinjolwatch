@@ -26,7 +26,12 @@
         @forelse($articles as $article)
             <article class="bg-slate-900 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-slate-800 overflow-hidden flex flex-col hover:shadow-[0_8px_30px_rgba(13,148,136,0.15)] hover:border-primary-900 transition-all duration-300">
                 @if($article->image_path)
-                    <img src="{{ Storage::url($article->image_path) }}" alt="{{ $article->title }}" class="h-48 w-full object-cover">
+                    @php
+                        $imageUrl = str_starts_with($article->image_path, '/') 
+                            ? asset($article->image_path) 
+                            : asset('storage/' . $article->image_path);
+                    @endphp
+                    <img src="{{ $imageUrl }}" alt="{{ $article->title }}" class="h-48 w-full object-cover">
                 @endif
                 <div class="p-6 flex-auto">
                     <div class="flex items-center gap-2 mb-4">
@@ -39,7 +44,9 @@
                         <span class="text-[10px] text-slate-500 font-medium">{{ $article->created_at->format('d M Y') }}</span>
                     </div>
                     <h3 class="text-xl font-bold text-slate-100 leading-tight mb-3">{{ $article->title }}</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed line-clamp-4">{{ Str::limit(strip_tags($article->content), 200) }}</p>
+                    <p class="text-slate-400 text-sm leading-relaxed line-clamp-4">
+                        {!! Str::limit(html_entity_decode(strip_tags(\Illuminate\Support\Str::markdown($article->content))), 200) !!}
+                    </p>
                 </div>
                 <div class="p-6 pt-0 mt-auto border-t border-slate-800 flex items-center justify-between">
                     <div class="flex items-center gap-2">

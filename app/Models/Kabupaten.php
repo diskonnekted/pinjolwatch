@@ -11,7 +11,7 @@ class Kabupaten extends Model
 
     protected $table = 'kabupaten';
 
-    protected $fillable = ['province_id', 'kode_bps', 'nama', 'provinsi', 'geojson'];
+    protected $fillable = ['province_id', 'kode_bps', 'nama', 'provinsi', 'geojson', 'latitude', 'longitude'];
 
     protected $casts = [
         'geojson' => 'array',

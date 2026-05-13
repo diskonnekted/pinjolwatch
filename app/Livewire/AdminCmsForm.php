@@ -24,6 +24,7 @@ class AdminCmsForm extends Component
     public $author_name = 'Anonim';
     public $type = 'article';
     public $status = 'pending';
+    public $rejection_reason = '';
     public $image; // Uploaded file
     public $existing_image_path = null;
 
@@ -39,6 +40,7 @@ class AdminCmsForm extends Component
             $this->author_name = $article->author_name;
             $this->type = $article->type;
             $this->status = $article->status;
+            $this->rejection_reason = $article->rejection_reason;
             $this->existing_image_path = $article->image_path;
         } else {
             $this->author_name = Auth::user()->name;
@@ -52,7 +54,8 @@ class AdminCmsForm extends Component
             'content'     => 'required|string',
             'author_name' => 'required|string|max:100',
             'type'        => 'required|in:news,experience,article',
-            'status'      => 'required|in:pending,published,archived',
+            'status'      => 'required|in:pending,published,archived,rejected',
+            'rejection_reason' => 'nullable|string',
             'image'       => 'nullable|image|max:2048',
         ]);
 
@@ -76,6 +79,7 @@ class AdminCmsForm extends Component
             'author_name' => $this->author_name,
             'type' => $this->type,
             'status' => $this->status,
+            'rejection_reason' => $this->status === 'rejected' ? $this->rejection_reason : null,
             'image_path' => $imagePath,
         ];
 

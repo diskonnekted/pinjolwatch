@@ -24,6 +24,7 @@ class User extends Authenticatable
         'nickname',
         'email',
         'password',
+        'avatar_url',
     ];
 
     /**
@@ -47,5 +48,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'user_id');
+    }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
     }
 }

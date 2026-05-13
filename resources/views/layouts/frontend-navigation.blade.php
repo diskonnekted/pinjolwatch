@@ -89,6 +89,9 @@
             {{-- Statistik --}}
             <a href="{{ route('statistik') }}" class="pw-link {{ request()->routeIs('statistik') ? 'active' : '' }}">Statistik</a>
 
+            {{-- Unduh --}}
+            <a href="{{ route('download') }}" class="pw-link {{ request()->routeIs('download') ? 'active' : '' }}">Unduh</a>
+
             {{-- Laporan dropdown --}}
             <div class="pw-dropdown">
                 <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') ? 'active' : '' }}">
@@ -239,6 +242,7 @@
     <a href="{{ route('info-pinjol') }}" class="pw-mobile-link">📋 Info Pinjol</a>
     <a href="{{ route('map') }}" class="pw-mobile-link">🗺️ Peta Sebaran</a>
     <a href="{{ route('statistik') }}" class="pw-mobile-link">📊 Statistik</a>
+    <a href="{{ route('download') }}" class="pw-mobile-link">📥 Unduh Materi</a>
     <div class="pw-mobile-section">Laporan</div>
     <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Lapor Kasus</a>
     <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Cek Tiket</a>

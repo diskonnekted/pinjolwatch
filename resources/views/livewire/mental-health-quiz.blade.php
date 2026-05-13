@@ -48,12 +48,28 @@
 
         @elseif($step == 11)
             <div class="p-10 text-center animate-in fade-in zoom-in duration-700">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/30 border border-emerald-900/50 rounded-full text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-6">
+                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Statistik Tersimpan untuk Analisis
+                </div>
+
                 <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-2">Hasil Analisis Anda:</p>
                 <h2 class="text-4xl font-black text-slate-100 mb-6 italic">{{ $resultLevel }}</h2>
                 
                 <div class="p-8 bg-slate-800/50 rounded-3xl border border-slate-700 mb-8">
                     <p class="text-slate-300 leading-relaxed italic">"{{ $resultAdvice }}"</p>
                 </div>
+
+                @guest
+                    <div class="mb-10 p-8 rounded-[2rem] bg-gradient-to-br from-indigo-900/20 to-primary-900/20 border border-indigo-500/20 relative overflow-hidden group">
+                        <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all"></div>
+                        <h4 class="text-lg font-black text-white uppercase italic mb-3">Butuh Analisis Lebih Valid?</h4>
+                        <p class="text-sm text-slate-400 mb-6">Daftarkan akun PinjolWatch untuk mendapatkan akses ke <strong>Tes Kesehatan Jiwa Premium</strong> dan konsultasi langsung dengan responder kami secara gratis.</p>
+                        <a href="{{ route('register') }}" class="inline-block px-8 py-3 bg-indigo-600 text-white font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-900/20">
+                            Daftar Sekarang
+                        </a>
+                    </div>
+                @endguest
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('report') }}" class="px-8 py-4 bg-primary-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-primary-500 shadow-lg shadow-primary-900/20 transition-all">
@@ -65,7 +81,7 @@
                 </div>
                 
                 <p class="mt-8 text-[10px] text-slate-500 leading-relaxed max-w-md mx-auto">
-                    <strong>Disclaimer:</strong> Hasil tes ini bukan diagnosis klinis. Jika Anda merasa membutuhkan bantuan segera, hubungi layanan kesehatan jiwa terdekat.
+                    <strong>Disclaimer:</strong> Hasil tes ini bukan diagnosis klinis. Data Anda dianonimkan untuk kepentingan riset dampak pinjol nasional.
                 </p>
             </div>
         @endif

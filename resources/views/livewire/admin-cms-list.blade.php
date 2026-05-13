@@ -44,7 +44,8 @@
                 <select wire:model.live="filterStatus" class="w-full md:w-40 border-slate-200 rounded-xl focus:ring-primary-500 focus:border-primary-500 text-sm">
                     <option value="">Semua Status</option>
                     <option value="published">Diterbitkan</option>
-                    <option value="pending">Draft / Menunggu</option>
+                    <option value="pending">Menunggu Moderasi</option>
+                    <option value="rejected">Ditolak</option>
                     <option value="archived">Diarsipkan</option>
                 </select>
             </div>
@@ -77,7 +78,12 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-slate-900 truncate max-w-sm" title="{{ $article->title }}">{{ $article->title }}</div>
-                                        <div class="text-xs text-slate-500 mt-0.5">Oleh: {{ $article->author_name }}</div>
+                                        <div class="text-xs text-slate-500 mt-0.5 flex items-center gap-2">
+                                            Oleh: {{ $article->author_name }}
+                                            @if($article->user_id)
+                                                <span class="px-1.5 py-0.5 bg-primary-50 text-primary-600 rounded text-[9px] font-black uppercase tracking-tighter border border-primary-100">User Post</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -103,17 +109,24 @@
                                     $statusColors = [
                                         'published' => 'bg-emerald-50 text-emerald-700 border-emerald-200 dot-emerald-500',
                                         'pending' => 'bg-amber-50 text-amber-700 border-amber-200 dot-amber-500',
+                                        'rejected' => 'bg-rose-50 text-rose-700 border-rose-200 dot-rose-500',
                                         'archived' => 'bg-slate-50 text-slate-600 border-slate-200 dot-slate-400',
+                                    ];
+                                    $statusLabels = [
+                                        'published' => 'Published',
+                                        'pending' => 'Moderasi',
+                                        'rejected' => 'Ditolak',
+                                        'archived' => 'Arsip',
                                     ];
                                     $sClass = $statusColors[$article->status] ?? 'bg-slate-50 text-slate-600 border-slate-200';
                                     preg_match('/dot-([a-z0-9\-]+)/', $sClass, $dotMatch);
                                     $dotClass = $dotMatch ? 'bg-' . $dotMatch[1] : 'bg-slate-400';
                                     $sClass = preg_replace('/dot-[a-z0-9\-]+/', '', $sClass);
                                 @endphp
-                                <button wire:click="toggleStatus({{ $article->id }})" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-widest font-bold rounded-full border {{ trim($sClass) }} hover:scale-105 transition-transform">
+                                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] uppercase tracking-widest font-bold rounded-full border {{ trim($sClass) }}">
                                     <span class="w-1.5 h-1.5 rounded-full {{ $dotClass }}"></span>
-                                    {{ $article->status == 'pending' ? 'Draft' : ucfirst($article->status) }}
-                                </button>
+                                    {{ $statusLabels[$article->status] ?? ucfirst($article->status) }}
+                                </div>
                             </td>
                             <td class="px-6 py-4 text-slate-500">
                                 {{ $article->created_at->format('d M Y, H:i') }}

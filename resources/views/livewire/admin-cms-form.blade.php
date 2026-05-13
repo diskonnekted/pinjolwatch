@@ -172,13 +172,22 @@
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-2">Status Publikasi</label>
-                    <select wire:model="status" class="w-full border-slate-200 text-slate-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm">
-                        <option value="pending">Draft (Belum Rilis)</option>
+                    <select wire:model.live="status" class="w-full border-slate-200 text-slate-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm">
+                        <option value="pending">Draft / Menunggu Moderasi</option>
                         <option value="published">Published (Rilis Publik)</option>
+                        <option value="rejected">Rejected (Ditolak)</option>
                         <option value="archived">Diarsipkan (Sembunyikan)</option>
                     </select>
                     @error('status') <p class="text-rose-500 text-xs mt-1 font-bold">{{ $message }}</p> @enderror
                 </div>
+
+                @if($status === 'rejected')
+                <div class="animate-in fade-in slide-in-from-top-2 duration-300">
+                    <label class="block text-xs font-bold text-rose-700 mb-2">Alasan Penolakan</label>
+                    <textarea wire:model="rejection_reason" class="w-full border-rose-200 bg-rose-50 text-slate-900 rounded-xl shadow-sm focus:border-rose-500 focus:ring-rose-500 text-xs p-3" rows="3" placeholder="Tulis alasan mengapa konten ditolak..."></textarea>
+                    @error('rejection_reason') <p class="text-rose-500 text-xs mt-1 font-bold">{{ $message }}</p> @enderror
+                </div>
+                @endif
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700 mb-2">Nama Penulis</label>

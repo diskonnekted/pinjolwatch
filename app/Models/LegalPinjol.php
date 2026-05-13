@@ -21,6 +21,11 @@ class LegalPinjol extends Model
         'phone',
         'collection_patterns',
         'notable_cases',
+        'news_links',
+    ];
+
+    protected $casts = [
+        'news_links' => 'array',
     ];
 
     public function reports()

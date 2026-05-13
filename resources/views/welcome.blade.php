@@ -264,31 +264,57 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
             <div class="badge" style="margin: 0 auto 20px; width: fit-content;">Kekuatan dalam Berbagi</div>
             <h2 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900;" class="grad">Mereka Sudah Bangkit</h2>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-            <div class="glass" style="padding: 40px; transition: all .3s;">
-                <div class="quote-mark">"</div>
-                <p style="color: #cbd5e1; line-height: 1.8; margin: 16px 0 32px; font-style: italic;">"Awalnya saya takut luar biasa saat diancam sebar data. Tapi setelah lapor di sini dan baca panduan, saya jadi lebih tenang dan tahu hak-hak saya."</p>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 44px; height: 44px; background: linear-gradient(135deg, var(--teal), #0891b2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">R</div>
-                    <div><div style="font-weight: 700; font-size: .9rem;">Rina</div><div style="font-size: .75rem; color: #64748b;">Jakarta</div></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+            @foreach($featuredStories as $story)
+            <div class="glass" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between; transition: all .4s cubic-bezier(0.4, 0, 0.2, 1); min-height: 480px; position: relative; overflow: hidden; group;">
+                
+                <div>
+                    {{-- Article Thumbnail --}}
+                    <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; margin-bottom: 24px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);">
+                        @if($story->image_path)
+                            @php
+                                $imageUrl = str_starts_with($story->image_path, '/') 
+                                    ? asset($story->image_path) 
+                                    : asset('storage/' . $story->image_path);
+                            @endphp
+                            <img src="{{ $imageUrl }}" alt="{{ $story->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
+                        @else
+                            <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--teal), #0f172a); color: rgba(255,255,255,0.2);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                            </div>
+                        @endif
+                        
+                        {{-- Floating Badge --}}
+                        <div style="position: absolute; top: 12px; right: 12px; padding: 4px 10px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); border-radius: 99px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.6rem; font-weight: 800; color: var(--teal-l); text-transform: uppercase; letter-spacing: 0.05em;">
+                            {{ $story->type === 'experience' ? 'Cerita Nyata' : 'Edukasi' }}
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--teal), #0891b2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem; color: #fff;">
+                            {{ substr($story->author_name ?? 'P', 0, 1) }}
+                        </div>
+                        <div style="font-size: 0.8rem; color: #64748b;">
+                            Oleh <span style="color: #cbd5e1; font-weight: 600;">{{ $story->author_name ?? 'Anonim' }}</span>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size: 1.25rem; font-weight: 900; line-height: 1.4; margin-bottom: 12px; color: #fff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 3.5rem;">
+                        {{ $story->title }}
+                    </h3>
+
+                    <p style="color: #94a3b8; line-height: 1.6; font-size: 0.9rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 24px;">
+                        {!! Str::limit(html_entity_decode(strip_tags(Str::markdown($story->content))), 180) !!}
+                    </p>
+                </div>
+
+                <div style="display: flex; align-items: center; justify-content: flex-end; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                    <a href="{{ route('stories.show', $story->slug) }}" style="display: inline-flex; align-items: center; gap: 6px; color: var(--teal-l); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; text-decoration: none; transition: all 0.3s ease;">
+                        Baca Kisah →
+                    </a>
                 </div>
             </div>
-            <div class="glass" style="padding: 40px; transition: all .3s;">
-                <div class="quote-mark">"</div>
-                <p style="color: #cbd5e1; line-height: 1.8; margin: 16px 0 32px; font-style: italic;">"Jangan pernah menyerah pada teror. Mereka mengandalkan rasa takut kita. Fokuslah pada keluarga dan pekerjaan, proses hukum pasti ada jalannya."</p>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #0891b2, #6366f1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">B</div>
-                    <div><div style="font-weight: 700; font-size: .9rem;">Budi</div><div style="font-size: .75rem; color: #64748b;">Surabaya</div></div>
-                </div>
-            </div>
-            <div class="glass" style="padding: 40px; transition: all .3s;">
-                <div class="quote-mark">"</div>
-                <p style="color: #cbd5e1; line-height: 1.8; margin: 16px 0 32px; font-style: italic;">"Pola penagihan memang agresif di awal, tapi kalau kita tahu hak kita dan kooperatif, ada jalan keluarnya. PinjolWatch bantu saya menemukan itu."</p>
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #0d9488, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900;">S</div>
-                    <div><div style="font-weight: 700; font-size: .9rem;">Siti</div><div style="font-size: .75rem; color: #64748b;">Bandung</div></div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div style="text-align: center; margin-top: 48px;">
             <a href="{{ route('stories') }}" class="btn-ghost">Baca Semua Cerita</a>

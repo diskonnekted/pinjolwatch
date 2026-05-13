@@ -24,7 +24,7 @@ class UserDashboard extends Component
 
         // If tab is set in query, use it
         $requestedTab = request()->query('tab');
-        if (in_array($requestedTab, ['overview', 'reports', 'security', 'finance', 'mental', 'community', 'settings'])) {
+        if (in_array($requestedTab, ['overview', 'reports', 'security', 'finance', 'mental', 'community', 'settings', 'stories', 'documents', 'messages'])) {
             $this->activeTab = $requestedTab;
         }
     }

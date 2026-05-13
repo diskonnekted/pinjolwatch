@@ -141,6 +141,13 @@
                                         </button>
                                     @endif
 
+                                    {{-- OJK Preview Button (ShortCut) --}}
+                                    @if($report->ojk_submitted_at)
+                                        <button wire:click="previewOjk({{ $report->id }})" class="w-8 h-8 flex items-center justify-center rounded-lg bg-indigo-50 border border-indigo-200 text-indigo-600 hover:bg-indigo-600 hover:text-white hover:border-indigo-600 shadow-sm transition-all" title="Pratinjau Dokumen OJK">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M5.127 3.502L5.25 3.5h9.5c.38 0 .726.154.975.402A1.375 1.375 0 0116 4.875V15.125c0 .38-.154.726-.402.975a1.375 1.375 0 01-.973.4h-9.5a1.375 1.375 0 01-.975-.402A1.375 1.375 0 014 15.125V4.875c0-.38.154-.726.402-.975A1.375 1.375 0 015.127 3.502zM13 3.5v2a.5.5 0 01-.5.5H10V3.5h3z" /></svg>
+                                        </button>
+                                    @endif
+
                                     {{-- Delete Button --}}
                                     <button wire:click="deleteReport({{ $report->id }})" wire:confirm="Anda yakin ingin menghapus laporan ini? Tindakan ini tidak bisa dibatalkan." class="w-8 h-8 flex items-center justify-center rounded-lg bg-white border border-slate-200 text-rose-500 hover:bg-rose-500 hover:text-white hover:border-rose-500 shadow-sm transition-all" title="Hapus Laporan">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd" /></svg>
@@ -170,4 +177,41 @@
             {{ $reports->links() }}
         </div>
     </div>
+
+    {{-- OJK Document Preview Modal --}}
+    @if($showOjkPreview && $selectedReport)
+        <div class="fixed inset-0 z-[110] overflow-y-auto" x-transition>
+            <div class="flex min-h-full items-center justify-center p-4">
+                <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-md" wire:click="closePreview"></div>
+                
+                <div class="relative bg-white w-full max-w-4xl rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col h-[90vh]">
+                    {{-- Modal Header --}}
+                    <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div>
+                            <h3 class="text-xl font-black text-slate-900 uppercase tracking-tight">Arsip Dokumen <span class="text-primary-600">OJK</span></h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Tiket: #{{ $selectedReport->ticket_id }} • Dikirim: {{ $selectedReport->ojk_submitted_at->format('d/m/Y H:i') }}</p>
+                        </div>
+                        <button wire:click="closePreview" class="p-2 hover:bg-slate-200 rounded-full transition-colors text-slate-400 hover:text-slate-900">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                        </button>
+                    </div>
+
+                    {{-- Document Viewer --}}
+                    <div class="flex-1 overflow-y-auto p-10 bg-slate-100 custom-scrollbar">
+                        <div class="bg-white shadow-lg mx-auto p-12 min-h-[1000px] w-full max-w-[800px] border border-slate-200 text-black">
+                            @include('reports.ojk-submission', ['report' => $selectedReport])
+                        </div>
+                    </div>
+
+                    {{-- Modal Footer Actions --}}
+                    <div class="p-6 border-t border-slate-100 bg-white flex items-center justify-end gap-3">
+                        <button wire:click="closePreview" class="px-8 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-2xl font-black text-xs uppercase tracking-widest transition-all">Tutup Arsip</button>
+                        <a href="{{ route('admin.reports.detail', ['ticket' => $selectedReport->ticket_id]) }}" class="px-8 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg shadow-primary-500/20">
+                            Buka Detail Laporan
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>

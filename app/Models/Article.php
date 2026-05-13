@@ -11,6 +11,7 @@ class Article extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'title',
         'slug',
         'content',
@@ -18,6 +19,7 @@ class Article extends Model
         'author_name',
         'type',
         'status',
+        'rejection_reason',
     ];
 
     protected static function boot()
@@ -28,5 +30,9 @@ class Article extends Model
                 $article->slug = Str::slug($article->title) . '-' . Str::random(5);
             }
         });
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

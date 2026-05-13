@@ -28,6 +28,7 @@ class Report extends Model
         'is_anonymous',
         'consent_scope',
         'status',
+        'ojk_submitted_at',
         'ip_hash',
         'verification_checklist',
     ];
@@ -39,6 +40,7 @@ class Report extends Model
     protected $casts = [
         'is_anonymous' => 'boolean',
         'whatsapp_consent' => 'boolean',
+        'ojk_submitted_at' => 'datetime',
         'dc_actions' => 'array',
         'involved_apps' => 'array',
         'verification_checklist' => 'array',

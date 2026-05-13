@@ -34,6 +34,19 @@
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
 
+                <!-- Math CAPTCHA -->
+                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
+                    <x-input-label for="captcha" :value="__('Verifikasi Manusia')" class="text-slate-300 font-semibold mb-2" />
+                    <div class="flex items-center gap-4">
+                        <div class="px-4 py-2 bg-slate-900 rounded-lg border border-slate-700 text-primary-400 font-black tracking-widest">
+                            {{ $captcha_question }}
+                        </div>
+                        <x-text-input id="captcha" class="block w-full bg-slate-800 border-slate-700 text-slate-200 text-center font-bold" 
+                                      type="text" name="captcha" required placeholder="Hasil?" />
+                    </div>
+                    <x-input-error :messages="$errors->get('captcha')" class="mt-2" />
+                </div>
+
                 <!-- Remember Me -->
                 <div class="flex items-center justify-between">
                     <label for="remember_me" class="inline-flex items-center cursor-pointer group">

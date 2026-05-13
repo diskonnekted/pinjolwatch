@@ -5,10 +5,33 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $agent = new \Jenssegers\Agent\Agent();
-    if ($agent->isMobile() || $agent->isTablet()) {
-        return view('mobile.home');
+    
+    // Fetch specific experience articles for the landing page
+    $featuredTitles = [
+        'Di Balik Langit Cerahmu: Undangan untuk Berempat',
+        'Ponsel itu Bergetar, dan Hatiku Runtuh. Tapi Kita Akan Bangun Ulang.',
+        'Aku Hanya Butuh Didengar, Bukan Divonis'
+    ];
+
+    $featuredStories = \App\Models\Article::whereIn('title', $featuredTitles)
+        ->where('status', 'published')
+        ->get();
+
+    // Fallback if specific titles not found (maybe minor typos in DB)
+    if ($featuredStories->count() < 3) {
+        $extraStories = \App\Models\Article::where('type', 'experience')
+            ->where('status', 'published')
+            ->whereNotIn('title', $featuredTitles)
+            ->latest()
+            ->take(3 - $featuredStories->count())
+            ->get();
+        $featuredStories = $featuredStories->concat($extraStories);
     }
-    return view('welcome');
+
+    if ($agent->isMobile() || $agent->isTablet()) {
+        return view('mobile.home', ['featuredStories' => $featuredStories]);
+    }
+    return view('welcome', ['featuredStories' => $featuredStories]);
 });
 
 Route::get('/peta', function () {
@@ -74,6 +97,10 @@ Route::get('/tentang-kami', function () {
 Route::get('/cek-kesehatan', function () {
     return view('quiz');
 })->name('quiz');
+
+Route::get('/unduh-materi', function () {
+    return view('download');
+})->name('download');
 
 Route::get('/panduan/negosiasi-utang', function () {
     return view('keuangan.template-negosiasi');
@@ -153,6 +180,14 @@ Route::middleware(['auth', 'role:super-admin|moderator', 'audit'])->prefix('admi
     Route::get('/cms', \App\Livewire\AdminCmsList::class)->name('cms.index');
     Route::get('/cms/create', \App\Livewire\AdminCmsForm::class)->name('cms.create');
     Route::get('/cms/{article}/edit', \App\Livewire\AdminCmsForm::class)->name('cms.edit');
+    
+    // System & Tools
+    Route::get('/map', \App\Livewire\AdminMap::class)->name('map');
+    Route::get('/users', \App\Livewire\AdminUserList::class)->name('users');
+    Route::get('/settings', \App\Livewire\AdminSettings::class)->name('settings');
+    Route::get('/messages', \App\Livewire\AdminMessaging::class)->name('messages');
+    Route::get('/broadcast', \App\Livewire\AdminBroadcast::class)->name('broadcast');
+    Route::get('/comments', \App\Livewire\AdminCommentModeration::class)->name('comments.index');
     Route::get('/audit-log', \App\Livewire\AdminAuditLog::class)->name('audit-log');
 
     Route::get('/reports/evidence/{id}/stream', function ($id) {
