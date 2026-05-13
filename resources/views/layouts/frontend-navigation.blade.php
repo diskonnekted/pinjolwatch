@@ -72,7 +72,7 @@
     <div class="pw-nav-inner">
         {{-- Logo --}}
         <a href="{{ url('/') }}" class="pw-logo">
-            <img src="/pw-logo.png" alt="PinjolWatch">
+            <img src="/pw-logo.webp" alt="PinjolWatch">
         </a>
 
         {{-- Desktop Links --}}

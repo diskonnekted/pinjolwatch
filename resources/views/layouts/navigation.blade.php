@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="/pw-logo.png" class="block h-20 w-auto" alt="PinjolWatch Logo" style="filter: brightness(0) invert(1);">
+                        <img src="/pw-logo.webp" class="block h-20 w-auto" alt="PinjolWatch Logo" style="filter: brightness(0) invert(1);">
                     </a>
                 </div>
 

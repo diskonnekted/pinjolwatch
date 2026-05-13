@@ -4,7 +4,7 @@
             <div class="mb-8 text-center">
                 <a href="/">
                     <div class="inline-flex items-center justify-center mb-4">
-                        <img src="/pw-logo.png" class="h-20 w-auto" alt="PinjolWatch Logo">
+                        <img src="/pw-logo.webp" class="h-20 w-auto" alt="PinjolWatch Logo">
                     </div>
                 </a>
                 <h2 class="text-2xl font-bold text-slate-100 tracking-tight">Selamat Datang Kembali</h2>

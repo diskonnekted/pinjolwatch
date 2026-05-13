@@ -12,7 +12,7 @@
             <div class="bg-slate-900 border border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.3)] rounded-3xl overflow-hidden relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-slate-900 z-0"></div>
                 <div class="relative z-10 p-10 md:p-16 text-center">
-                    <img src="/pw-logo.png" alt="PinjolWatch Logo Utama" class="mx-auto h-40 w-auto mb-8 drop-shadow-2xl" style="filter: brightness(0) invert(1);">
+                    <img src="/pw-logo.webp" alt="PinjolWatch Logo Utama" class="mx-auto h-40 w-auto mb-8 drop-shadow-2xl" style="filter: brightness(0) invert(1);">
                     <div class="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-blue-900/50 border border-blue-800 text-blue-400 text-sm font-bold mb-6">
                         🌐 TENTANG KAMI
                     </div>

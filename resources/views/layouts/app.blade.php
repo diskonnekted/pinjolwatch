@@ -9,7 +9,7 @@
         <meta name="description" content="Laporkan ancaman debt collector pinjol ilegal secara 100% anonim. Data terenkripsi, sesuai UU PDP. Prioritaskan kesehatan mentalmu, kami yang mengawal prosesnya.">
         <meta name="keywords" content="pinjol ilegal, teror debt collector, laporan anonim, kesehatan mental, UU PDP, OJK, Kominfo, pendampingan hukum">
 
-        <link rel="icon" type="image/png" href="/pw-logo.png">
+        <link rel="icon" type="image/png" href="/pw-logo.webp">
 
 
         <!-- Fonts -->
