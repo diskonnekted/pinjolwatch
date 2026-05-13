@@ -1,0 +1,295 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use App\Models\Article;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        $article = Article::where('slug', 'literasi-keuangan-bukan-soal-jadi-kaya-raya-tapi-soal-tidur-nyenyak')->first();
+        if ($article) {
+            $article->update([
+                'content' => '### 📖 APA ITU LITERASI KEUANGAN? (Definisi Resmi)
+**Menurut OJK (Otoritas Jasa Keuangan):**
+> *"Literasi keuangan adalah pengetahuan, keterampilan, dan keyakinan yang mempengaruhi sikap dan perilaku untuk meningkatkan kualitas pengambilan keputusan dan pengelolaan keuangan dalam rangka mencapai kesejahteraan."*  
+> *(Sumber: Strategi Nasional Literasi Keuangan Indonesia / SNLK)*
+
+**Menurut Bank Indonesia:**
+> *"Kemampuan untuk memahami produk dan layanan keuangan, mengenali risiko dan manfaatnya, serta membuat keputusan finansial yang tepat."*
+
+**Menurut OECD/INFE (Standar Internasional):**
+> *"Kombinasi kesadaran, pengetahuan, keterampilan, sikap, dan perilaku yang diperlukan untuk membuat keputusan keuangan yang sehat dan mencapai kesejahteraan finansial individu."*
+
+---
+### 🎯 MENGAPA LITERASI KEUANGAN PENTING BAGI ANDA?
+
+| Manfaat | Dampak Nyata dalam Hidup |
+|---------|---------------------------|
+| ✅ **Menghindari Jebakan Utang** | Tidak terjebak pinjol ilegal, bunga tinggi, atau skema "gali lubang tutup lubang" |
+| ✅ **Mengambil Keputusan Cerdas** | Memilih produk keuangan yang sesuai kebutuhan, bukan sekadar iklan menarik |
+| ✅ **Mempersiapkan Masa Depan** | Dana darurat, pendidikan anak, pensiun — terencana, bukan dadakan |
+| ✅ **Melindungi Diri dari Penipuan** | Mengenali modus investasi bodong, phishing, dan praktik predator |
+| ✅ **Mengurangi Stres Finansial** | Uang dikelola, bukan menguasai. Ketenangan mental meningkat |
+
+> 💡 **Fakta OJK 2024**:  
+> - Hanya **49,68%** masyarakat Indonesia yang melek keuangan (literasi keuangan)  
+> - Sementara **89,71%** sudah mengakses layanan keuangan (inklusi keuangan)  
+> *Artinya: Banyak yang sudah pakai produk keuangan, tapi belum paham risikonya.*  
+> *(Sumber: Survei Nasional Literasi dan Inklusi Keuangan OJK 2024)*
+
+---
+### 🧭 4 PILAR LITERASI KEUANGAN (Kerangka OJK & OECD)
+
+#### 📌 PILAR 1: PENGETAHUAN DASAR KEUANGAN
+**Apa yang perlu dipahami:**
+- 💰 **Konsep Uang & Nilai Waktu**: Uang hari ini lebih berharga daripada uang besok (time value of money)
+- 📈 **Bunga Sederhana vs Bunga Majemuk**: Bagaimana bunga bekerja untuk Anda (investasi) atau melawan Anda (utang)
+- 📊 **Inflasi**: Mengapa harga naik dan bagaimana menjaga daya beli
+- 🔄 **Arus Kas**: Memahami pemasukan vs pengeluaran, bukan sekadar saldo rekening
+
+**Aksi Praktis:**
+```
+□ Hitung bunga efektif pinjaman: (Total Biaya / Pokok) × (365 / Jangka Hari) × 100%
+□ Catat 3 pengeluaran terbesar bulan ini — apakah sesuai prioritas?
+□ Pelajari perbedaan: tabungan, deposito, reksa dana, saham (risiko & imbal hasil)
+```
+
+#### 📌 PILAR 2: KETERAMPILAN PENGELOLAAN KEUANGAN
+**Apa yang perlu dikuasai:**
+- 📋 **Anggaran (Budgeting)**: Alokasi pendapatan terencana (50/30/20 atau envelope system)
+- 🎯 **Goal Setting**: Menetapkan target keuangan SMART (Specific, Measurable, Achievable, Relevant, Time-bound)
+- 🛡️ **Manajemen Risiko**: Asuransi, dana darurat, diversifikasi
+- 📉 **Strategi Pelunasan Utang**: Avalanche vs Snowball method
+
+**Aksi Praktis:**
+```
+□ Buat anggaran bulanan sederhana (template tersedia di /template-anggaran)
+□ Tetapkan 1 goal keuangan 3 bulan ke depan (misal: dana darurat 1× pengeluaran)
+□ Hitung rasio utang sehat: Total Cicilan / Penghasilan Bulanan ≤ 30%
+```
+
+#### 📌 PILAR 3: SIKAP & PERILAKU KEUANGAN SEHAT
+**Mindset yang perlu dibangun:**
+- 🧠 **Delayed Gratification**: Menunda kesenangan sesaat untuk tujuan jangka panjang
+- 🔍 **Critical Thinking**: Selalu verifikasi sebelum memutuskan (cek OJK, baca syarat & ketentuan)
+- 💪 **Financial Resilience**: Bangkit dari kesalahan finansial tanpa menyalahkan diri berlebihan
+- 🤝 **Komunikasi Keuangan Terbuka**: Berdiskusi tentang uang dengan pasangan/keluarga tanpa tabu
+
+**Aksi Praktis:**
+```
+□ Tunda pembelian non-esensial 24 jam sebelum checkout online
+□ Verifikasi legalitas produk keuangan di https://ojk.go.id atau https://slik.ojk.go.id
+□ Rayakan progress kecil: "Bulan ini berhasil menabung 10% — saya bangga!"
+```
+
+#### 📌 PILAR 4: AKSES & PEMANFAATAN LAYANAN KEUANGAN
+**Memahami ekosistem keuangan Indonesia:**
+- 🏦 **Lembaga Keuangan Formal**: Bank, BPR, multifinance, asuransi (diawasi OJK/BI)
+- 📱 **Fintech & Pinjol**: Platform terdaftar vs ilegal — cara membedakan
+- 📜 **Hak Konsumen**: Sesuai UU Perlindungan Konsumen & POJK
+- 🆘 **Mekanisme Pengaduan**: OJK (157), BI (131), Kominfo (159), LAPS SJK
+
+**Aksi Praktis:**
+```
+□ Cek daftar fintech/pinjol terdaftar di https://ojk.go.id/fintech
+□ Simpan kontak pengaduan resmi di HP: OJK 157, Kominfo 159, Polisi 110
+□ Pelajari cara baca SLIK OJK: https://slik.ojk.go.id
+```
+
+---
+### ⚠️ 7 JEBAKAN KEUANGAN YANG HARUS DIHINDARI
+*(Berdasarkan data pengaduan OJK & Kominfo)*
+
+| Jebakan | Ciri-Ciri | Cara Menghindari |
+|---------|-----------|------------------|
+| 🔴 **Pinjol Ilegal** | Tidak terdaftar OJK, bunga tidak transparan, teror DC | Cek di https://ojk.go.id, baca review independen, hindari aplikasi tidak resmi |
+| 🔴 **Investasi Bodong** | Janji return tinggi & pasti, rekrut member, tidak ada underlying asset | Verifikasi izin OJK/Bappebti, hindari FOMO, konsultasi dengan penasihat bersertifikat |
+| 🔴 **Bunga Tersembunyi** | Iklan "bunga 0,1%/hari" tapi ada admin fee, denda, asuransi wajib | Hitung bunga efektif tahunan, minta rincian biaya tertulis sebelum setuju |
+| 🔴 **Paylater Impulsif** | Checkout mudah, limit naik otomatis, minim peringatan risiko | Gunakan hanya untuk kebutuhan terencana, bayar penuh sebelum jatuh tempo |
+| 🔴 **Phishing & Scam** | Link mencurigakan, minta OTP/data pribadi, mengatasnamakan instansi resmi | Jangan klik link tidak dikenal, verifikasi via channel resmi, aktifkan 2FA |
+| 🔴 **Gali Lubang Tutup Lubang** | Pinjam baru untuk bayar lama, utang menumpuk, stres meningkat | Stop pinjaman baru, konsolidasi utang, negosiasi resmi dengan kreditur |
+| 🔴 **Financial Shame** | Malu mengakui kesulitan, menyembunyikan masalah, isolasi sosial | Ingat: kesulitan finansial bukan aib. Cari dukungan, laporkan jika ada pelanggaran |
+
+---
+### 🛠️ ALAT & SUMBER DAYA GRATIS (Referensi Resmi)
+
+#### 📊 Dari OJK (Otoritas Jasa Keuangan)
+| Sumber | Fungsi | Link |
+|--------|--------|------|
+| **SLIK OJK** | Cek riwayat kredit & data debitur | https://slik.ojk.go.id |
+| **Cek Legalitas Fintech** | Verifikasi pinjol/fintech terdaftar | https://ojk.go.id/fintech |
+| **Edukasi Konsumen** | Modul, webinar, infografis literasi | https://ojk.go.id/edukasi |
+| **Pengaduan Online** | Lapor masalah produk keuangan | https://konsumen.ojk.go.id |
+
+#### 🏦 Dari Bank Indonesia
+| Sumber | Fungsi | Link |
+|--------|--------|------|
+| **BI Corner** | Ruang edukasi & konsultasi keuangan | https://bicorner.bi.go.id |
+| **Sistem Pembayaran** | Panduan QRIS, transfer, e-money | https://sistem_pembayaran.bi.go.id |
+| **Inklusi Keuangan** | Program keuangan inklusif | https://inklusi.bi.go.id |
+
+#### 🌐 Sumber Internasional Terpercaya
+| Sumber | Fungsi | Link |
+|--------|--------|------|
+| **OECD/INFE Toolkit** | Kerangka literasi keuangan global | https://oecd.org/finance/financial-education |
+| **CFPB (AS)** | Tools & kalkulator keuangan | https://consumerfinance.gov |
+| **MoneySmart (Australia)** | Panduan praktis & kalkulator | https://moneysmart.gov.au |
+
+#### 📱 Aplikasi & Tools Lokal
+| Tools | Fungsi | Catatan |
+|-------|--------|---------|
+| **BukuWarung / Pencatat Keuangan** | Catat arus kas UMKM & pribadi | Gratis, offline-first |
+| **Bareksa / Bibit / Ajaib** | Investasi reksa dana pemula | Terdaftar OJK, mulai dari Rp10.000 |
+| **CekResi / CekTagihan** | Verifikasi tagihan & transaksi | Hindari phishing |
+
+---
+### ✅ CHECKLIST: SEBERAPA MELEK KEUANGAN ANDA?
+*(Self-Assessment berbasis OECD/INFE)*
+
+**Jawab Ya/Tidak untuk setiap poin:**
+
+#### 🧠 Pengetahuan Dasar
+- [ ] Saya paham perbedaan bunga sederhana dan bunga majemuk
+- [ ] Saya tahu cara menghitung bunga efektif pinjaman
+- [ ] Saya mengerti bahwa inflasi mengurangi daya beli uang
+
+#### 🛠️ Keterampilan Praktis
+- [ ] Saya memiliki anggaran bulanan tertulis/digital
+- [ ] Saya punya dana darurat minimal 1× pengeluaran bulanan
+- [ ] Saya membandingkan minimal 3 produk sebelum memilih layanan keuangan
+
+#### 🧭 Sikap & Perilaku
+- [ ] Saya menunda pembelian impulsif minimal 24 jam
+- [ ] Saya memverifikasi legalitas sebelum menggunakan produk keuangan
+- [ ] Saya terbuka mendiskusikan keuangan dengan pasangan/keluarga
+
+#### 🔐 Keamanan & Hak
+- [ ] Saya tahu cara cek legalitas fintech di website OJK
+- [ ] Saya simpan kontak pengaduan resmi (OJK 157, Kominfo 159)
+- [ ] Saya tidak pernah membagikan OTP/password ke siapa pun
+
+**Interpretasi:**
+- ✅ **10-12 Ya**: Literasi keuangan Anda kuat. Pertahankan & bagikan ilmu!
+- ✅ **7-9 Ya**: Cukup baik. Fokus perbaiki area yang masih "Tidak"
+- ✅ **4-6 Ya**: Perlu peningkatan. Mulai dari 1 aksi kecil minggu ini
+- ✅ **<4 Ya**: Jangan khawatir. Literasi adalah perjalanan. Mulai dari pilar 1.
+
+---
+### 📚 MODUL BELAJAR MANDIRI (Gratis & Terstruktur)
+
+#### 🎓 Level Pemula (0-3 Bulan)
+```
+Minggu 1: Pahami Arus Kas Pribadi
+  → Catat semua pemasukan & pengeluaran 7 hari
+  → Identifikasi 1 pengeluaran yang bisa dikurangi
+
+Minggu 2: Kenali Produk Keuangan Dasar
+  → Pelajari perbedaan: tabungan vs deposito vs reksa dana
+  → Cek 1 produk di website OJK: apakah terdaftar?
+
+Minggu 3: Bangun Dana Darurat Mini
+  → Target: tabung Rp50.000-100.000 minggu ini
+  → Simpan di rekening terpisah
+
+Minggu 4: Verifikasi & Lindungi Diri
+  → Cek legalitas 1 aplikasi keuangan yang Anda pakai
+  → Simpan kontak pengaduan OJK 157 di HP
+```
+
+#### 🎓 Level Menengah (3-6 Bulan)
+
+<div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6 my-10 not-prose">
+<div class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 border border-slate-200 dark:border-white/5 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-black shadow-lg">04</div>
+<h5 class="text-xl font-black text-slate-800 dark:text-white mb-6 uppercase tracking-tighter">Anggaran 50/30/20</h5>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Alokasikan pendapatan sesuai kerangka 50% kebutuhan, 30% keinginan, 20% tabungan.</p>
+</li>
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Review & evaluasi pengeluaran bulanan secara disiplin.</p>
+</li>
+</ul>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 border border-slate-200 dark:border-white/5 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-black shadow-lg">05</div>
+<h5 class="text-xl font-black text-slate-800 dark:text-white mb-6 uppercase tracking-tighter">Manajemen Utang</h5>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Hitung rasio utang sehat: total cicilan tidak melebihi 30% penghasilan.</p>
+</li>
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Pilih strategi pelunasan: Avalanche (bunga tertinggi) atau Snowball (saldo terkecil).</p>
+</li>
+</ul>
+</div>
+<div class="group relative bg-white dark:bg-slate-900 rounded-[2.5rem] p-8 border border-slate-200 dark:border-white/5 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+<div class="absolute -top-4 -right-4 w-12 h-12 bg-indigo-600 text-white rounded-2xl flex items-center justify-center font-black shadow-lg">06</div>
+<h5 class="text-xl font-black text-slate-800 dark:text-white mb-6 uppercase tracking-tighter">Investasi Dasar</h5>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Kenali profil risiko Anda: Konservatif, Moderat, atau Agresif.</p>
+</li>
+<li class="flex items-start gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">Mulai investasi mikro mulai dari Rp10.000 pada instrumen aman.</p>
+</li>
+</ul>
+</div>
+</div>
+
+#### 🎓 Level Lanjut (6-12 Bulan)
+```
+Bulan 7-9: Perencanaan Keuangan Jangka Menengah
+  → Tetapkan goal: dana pendidikan, nikah, usaha
+  → Hitung kebutuhan & buat timeline
+
+Bulan 10-12: Proteksi & Warisan
+  → Pelajari dasar asuransi (jiwa, kesehatan, properti)
+  → Pahami pentingnya surat wasiat & dokumen legal
+```
+
+> 📥 **Download Modul Lengkap**:  
+> `/modul-literasi-pemula.pdf` | `/modul-menengah.pdf` | `/modul-lanjut.pdf`
+
+---
+### 🤝 KOMUNITAS & DUKUNGAN BELAJAR
+
+#### 💬 Forum Diskusi Aman
+- **PinjolWatch Community**: Ruang berbagi pengalaman tanpa stigma  
+  → `/forum` (termoderasi, anonim opsional)
+
+#### 🎥 Webinar & Workshop Gratis
+- **OJK Financial Education**: Webinar bulanan terbuka untuk publik  
+  → https://ojk.go.id/event
+- **BI Corner Workshop**: Kelas offline/online di kota Anda  
+  → https://bicorner.bi.go.id
+
+#### 📞 Konsultasi Gratis
+- **Layanan Konsumen OJK**: 157 (Senin-Jumat, 08.00-16.00 WIB)
+- **BI Contact Center**: 131 (24 jam)
+- **PinjolWatch Helpdesk**: dpo@pinjolwatch.id (respon 2×24 jam)
+',
+            ]);
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};
