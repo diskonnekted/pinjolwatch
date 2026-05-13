@@ -73,13 +73,20 @@
                                 {{-- Task List --}}
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
                                     @foreach($stage->tasks as $task)
-                                        <div class="flex items-start gap-3 p-3 bg-white/50 rounded-2xl border border-slate-100 group/task transition-all">
-                                            <div class="w-5 h-5 rounded-md border-2 @if($isCompleted) border-emerald-500 bg-emerald-500 text-white @else border-slate-200 @endif flex items-center justify-center shrink-0 mt-0.5">
-                                                @if($isCompleted)
+                                        <div 
+                                            @if($isCurrent) wire:click="toggleTask('{{ addslashes($task) }}')" @endif
+                                            class="flex items-start gap-3 p-3 bg-white/50 rounded-2xl border border-slate-100 group/task transition-all @if($isCurrent) cursor-pointer hover:border-primary-500 hover:bg-primary-50 @endif">
+                                            
+                                            @php
+                                                $taskDone = $isCompleted || in_array($task, $currentStageTasks);
+                                            @endphp
+
+                                            <div class="w-5 h-5 rounded-md border-2 @if($taskDone) border-emerald-500 bg-emerald-500 text-white @else border-slate-200 group-hover/task:border-primary-500 @endif flex items-center justify-center shrink-0 mt-0.5 transition-colors">
+                                                @if($taskDone)
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3 h-3"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clip-rule="evenodd" /></svg>
                                                 @endif
                                             </div>
-                                            <span class="text-xs font-bold text-slate-700 @if($isCompleted) line-through opacity-50 @endif">{{ $task }}</span>
+                                            <span class="text-xs font-bold text-slate-700 @if($taskDone) line-through opacity-50 @endif transition-all">{{ $task }}</span>
                                         </div>
                                     @endforeach
                                 </div>

@@ -11,7 +11,7 @@ class RecoveryTracker extends Component
 {
     public $stages;
     public $userProgress = [];
-    public $currentStageIndex = 0;
+    public $currentStageTasks = [];
     public $selectedMood = null;
     public $note = '';
 
@@ -31,9 +31,35 @@ class RecoveryTracker extends Component
         foreach ($this->stages as $index => $stage) {
             if (!isset($this->userProgress[$stage->id])) {
                 $this->currentStageIndex = $index;
+                
+                // Load current stage tasks progress if any
+                $progress = UserRecoveryProgress::where('user_id', Auth::id())
+                    ->where('recovery_stage_id', $stage->id)
+                    ->first();
+                
+                if ($progress && $progress->completed_tasks) {
+                    $this->currentStageTasks = $progress->completed_tasks;
+                } else {
+                    $this->currentStageTasks = [];
+                }
                 break;
             }
         }
+    }
+
+    public function toggleTask($task)
+    {
+        if (in_array($task, $this->currentStageTasks)) {
+            $this->currentStageTasks = array_diff($this->currentStageTasks, [$task]);
+        } else {
+            $this->currentStageTasks[] = $task;
+        }
+
+        // Save progress partially even if stage not complete
+        UserRecoveryProgress::updateOrCreate(
+            ['user_id' => Auth::id(), 'recovery_stage_id' => $this->stages[$this->currentStageIndex]->id],
+            ['completed_tasks' => $this->currentStageTasks]
+        );
     }
 
     public function completeStage($stageId)
@@ -43,7 +69,8 @@ class RecoveryTracker extends Component
             [
                 'completed_at' => now(),
                 'mood_rating' => $this->selectedMood,
-                'user_notes' => $this->note
+                'user_notes' => $this->note,
+                'completed_tasks' => $this->stages[$this->currentStageIndex]->tasks // Mark all tasks as done
             ]
         );
 
