@@ -208,7 +208,12 @@
                     </div>
                 @elseif ($existing_image_path)
                     <div class="relative w-full h-40 rounded-xl overflow-hidden mb-3 border border-slate-200">
-                        <img src="{{ Storage::url($existing_image_path) }}" class="w-full h-full object-cover">
+                        @php
+                            $imageUrl = str_starts_with($existing_image_path, '/') 
+                                ? asset($existing_image_path) 
+                                : Storage::url($existing_image_path);
+                        @endphp
+                        <img src="{{ $imageUrl }}" class="w-full h-full object-cover">
                         <div class="absolute top-2 right-2 bg-white/90 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-slate-600">Terpasang</div>
                     </div>
                 @endif

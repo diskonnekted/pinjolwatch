@@ -69,7 +69,12 @@
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-xl bg-slate-200 overflow-hidden shrink-0 border border-slate-200">
                                         @if($article->image_path)
-                                            <img src="{{ Storage::url($article->image_path) }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
+                                            @php
+                                                $imageUrl = str_starts_with($article->image_path, '/') 
+                                                    ? asset($article->image_path) 
+                                                    : Storage::url($article->image_path);
+                                            @endphp
+                                            <img src="{{ $imageUrl }}" alt="{{ $article->title }}" class="w-full h-full object-cover">
                                         @else
                                             <div class="w-full h-full flex items-center justify-center text-slate-400 bg-slate-100">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd" /></svg>
