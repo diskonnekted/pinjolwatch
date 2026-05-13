@@ -210,6 +210,14 @@
                             <div style="font-size:.75rem;color:#64748b;">UU PDP & perlindungan data</div>
                         </div>
                     </a>
+                    <div class="pw-dropdown-divider"></div>
+                    <a href="{{ route('join') }}" class="pw-dropdown-item">
+                        <div class="icon">🤝</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Gabung Relawan</div>
+                            <div style="font-size:.75rem;color:#64748b;">Kontribusi untuk misi kami</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -259,6 +267,7 @@
     <a href="{{ route('about') }}" class="pw-mobile-link">🌐 Tentang Kami</a>
     <a href="{{ route('disclaimer') }}" class="pw-mobile-link">⚖️ Disclaimer</a>
     <a href="{{ route('privacy.policy') }}" class="pw-mobile-link">🔒 Kebijakan Privasi</a>
+    <a href="{{ route('join') }}" class="pw-mobile-link">🤝 Gabung Relawan</a>
     <div style="height:1px;background:rgba(255,255,255,.07);margin:12px 0;"></div>
     @auth
         <a href="{{ route('dashboard') }}" class="pw-mobile-link">Dashboard ({{ Auth::user()->nickname ?: Auth::user()->name }})</a>

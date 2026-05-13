@@ -20,6 +20,7 @@
                     <li><a href="{{ route('map') }}" style="color:#64748b;font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='#64748b'">Peta Sebaran</a></li>
                     <li><a href="{{ route('report') }}" style="color:#64748b;font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='#64748b'">Lapor Kasus</a></li>
                     <li><a href="{{ route('track') }}" style="color:#64748b;font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='#64748b'">Cek Tiket</a></li>
+                    <li><a href="{{ route('join') }}" style="color:#64748b;font-size:.875rem;text-decoration:none;" onmouseover="this.style.color='#e2e8f0'" onmouseout="this.style.color='#64748b'">Gabung Relawan</a></li>
                 </ul>
             </div>
             <div>
