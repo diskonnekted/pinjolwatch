@@ -1,7 +1,7 @@
 @section('title', $article->title . ' | PinjolWatch Stories')
 @section('meta_description', Str::limit(strip_tags($article->content), 160))
 @php
-    $ogImage = str_starts_with($article->image_path, '/') ? asset($article->image_path) : asset('storage/' . $article->image_path);
+    $ogImage = asset(ltrim($article->image_path, '/'));
 @endphp
 @section('og_image', $ogImage)
 
@@ -21,9 +21,7 @@
         {{-- HERO: Image or Header --}}
         @if($article->image_path)
             @php
-                $imageUrl = str_starts_with($article->image_path, '/') 
-                    ? asset($article->image_path) 
-                    : asset('storage/' . $article->image_path);
+                $imageUrl = asset(ltrim($article->image_path, '/'));
             @endphp
             <div class="relative h-[28rem] w-full rounded-[2rem] overflow-hidden mb-8 shadow-2xl">
                 <img src="{{ $imageUrl }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover">

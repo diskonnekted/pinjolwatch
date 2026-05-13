@@ -276,9 +276,7 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
                     <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 18px; overflow: hidden; margin-bottom: 24px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);">
                         @if($story->image_path)
                             @php
-                                $imageUrl = str_starts_with($story->image_path, '/') 
-                                    ? asset($story->image_path) 
-                                    : asset('storage/' . $story->image_path);
+                                $imageUrl = asset(ltrim($story->image_path, '/'));
                             @endphp
                             <img src="{{ $imageUrl }}" alt="{{ $story->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;">
                         @else

@@ -68,9 +68,12 @@ class AdminCmsForm extends Component
         if ($this->image) {
             // Delete old image if exists
             if ($this->existing_image_path) {
-                Storage::disk('public')->delete($this->existing_image_path);
+                $oldPath = ltrim($this->existing_image_path, '/');
+                if (Storage::disk('public_real')->exists($oldPath)) {
+                    Storage::disk('public_real')->delete($oldPath);
+                }
             }
-            $imagePath = $this->image->store('cms/images', 'public');
+            $imagePath = $this->image->store('images/articles', 'public_real');
         }
 
         $data = [
@@ -80,7 +83,7 @@ class AdminCmsForm extends Component
             'type' => $this->type,
             'status' => $this->status,
             'rejection_reason' => $this->status === 'rejected' ? $this->rejection_reason : null,
-            'image_path' => $imagePath,
+            'image_path' => '/' . $imagePath,
         ];
 
         if ($this->isEditMode) {

@@ -27,9 +27,7 @@
             <article class="bg-slate-900 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.3)] border border-slate-800 overflow-hidden flex flex-col hover:shadow-[0_8px_30px_rgba(13,148,136,0.15)] hover:border-primary-900 transition-all duration-300">
                 @if($article->image_path)
                     @php
-                        $imageUrl = str_starts_with($article->image_path, '/') 
-                            ? asset($article->image_path) 
-                            : asset('storage/' . $article->image_path);
+                        $imageUrl = asset(ltrim($article->image_path, '/'));
                     @endphp
                     <img src="{{ $imageUrl }}" alt="{{ $article->title }}" class="h-48 w-full object-cover">
                 @endif
