@@ -13,6 +13,11 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-4">
+            <button wire:click="openCreateModal" class="flex items-center gap-2 px-6 py-3 bg-teal-500 text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-teal-600 shadow-lg shadow-teal-500/20 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                Tambah Pengguna
+            </button>
+
             <div class="relative group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-teal-400 transition-colors">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607z" />
@@ -248,6 +253,58 @@
                     <div class="pt-4">
                         <button type="submit" class="w-full py-4 bg-amber-600 text-white rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-amber-700 shadow-xl shadow-amber-600/20 transition-all">
                             Konfirmasi Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{-- Create User Modal --}}
+    @if($isCreateModalOpen)
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-fade-in">
+        <div class="bg-slate-900 rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl border border-white/10">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase italic">Tambah Pengguna</h2>
+                    <button wire:click="$set('isCreateModalOpen', false)" class="text-slate-500 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <form wire:submit.prevent="createUser" class="space-y-6">
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
+                        <input wire:model="newName" type="text" placeholder="Masukkan nama lengkap" class="w-full px-5 py-4 bg-slate-950 border-white/5 rounded-2xl text-sm font-bold text-white focus:ring-teal-500 focus:border-teal-500 transition-all">
+                        @error('newName') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Alamat Email</label>
+                        <input wire:model="newEmail" type="email" placeholder="nama@email.com" class="w-full px-5 py-4 bg-slate-950 border-white/5 rounded-2xl text-sm font-bold text-white focus:ring-teal-500 focus:border-teal-500 transition-all">
+                        @error('newEmail') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Password</label>
+                        <input wire:model="newUserPassword" type="password" placeholder="Minimal 8 karakter" class="w-full px-5 py-4 bg-slate-950 border-white/5 rounded-2xl text-sm font-bold text-white focus:ring-teal-500 focus:border-teal-500 transition-all">
+                        @error('newUserPassword') <span class="text-xs text-rose-500 mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2 ml-1">Peran Akses</label>
+                        <div class="flex flex-wrap gap-2 p-3 bg-slate-950 rounded-2xl border border-white/5">
+                            @foreach($availableRoles as $role)
+                                <label class="flex items-center gap-2 px-3 py-2 rounded-xl cursor-pointer hover:bg-white/5 transition-all">
+                                    <input type="checkbox" wire:model="newUserRoles" value="{{ $role->name }}" class="rounded bg-slate-800 border-white/10 text-teal-500 focus:ring-teal-500">
+                                    <span class="text-[10px] font-black uppercase tracking-tight text-slate-400">{{ $role->name }}</span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="w-full py-4 bg-teal-600 text-white rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-teal-700 shadow-xl shadow-teal-600/20 transition-all">
+                            Buat Pengguna Baru
                         </button>
                     </div>
                 </form>

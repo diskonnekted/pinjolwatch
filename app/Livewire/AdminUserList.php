@@ -38,11 +38,48 @@ class AdminUserList extends Component
 
     public $isEditModalOpen = false;
     public $isResetModalOpen = false;
+    public $isCreateModalOpen = false;
     public $editingUserId;
     public $editingName;
     public $editingEmail;
     public $editingRoles = [];
     public $newPassword;
+
+    // Create User Fields
+    public $newName;
+    public $newEmail;
+    public $newUserPassword;
+    public $newUserRoles = ['user'];
+
+    public function openCreateModal()
+    {
+        $this->newName = '';
+        $this->newEmail = '';
+        $this->newUserPassword = '';
+        $this->newUserRoles = ['user'];
+        $this->isCreateModalOpen = true;
+    }
+
+    public function createUser()
+    {
+        $this->validate([
+            'newName' => 'required|string|max:255',
+            'newEmail' => 'required|email|unique:users,email',
+            'newUserPassword' => 'required|min:8',
+        ]);
+
+        $user = User::create([
+            'name' => $this->newName,
+            'email' => $this->newEmail,
+            'password' => \Illuminate\Support\Facades\Hash::make($this->newUserPassword),
+            'email_verified_at' => now(), // Auto verify if created by admin
+        ]);
+
+        $user->assignRole($this->newUserRoles);
+
+        $this->isCreateModalOpen = false;
+        session()->flash('message', 'User ' . $user->name . ' created successfully.');
+    }
 
     public function openEditModal($userId)
     {
@@ -123,7 +160,14 @@ class AdminUserList extends Component
             });
 
         if ($this->role) {
-            $query->role($this->role);
+            if ($this->role === 'user') {
+                $query->where(function($q) {
+                    $q->role('user')
+                      ->orWhereDoesntHave('roles');
+                });
+            } else {
+                $query->role($this->role);
+            }
         }
 
         if ($this->status === 'verified') {
