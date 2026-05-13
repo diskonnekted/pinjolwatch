@@ -4,7 +4,7 @@
         {{-- TOP HEADER BAR --}}
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
             <div>
-                <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic">
+                <h1 class="text-4xl font-black text-white tracking-tighter uppercase">
                     <span class="text-teal-500">Pusat</span> Kontrol
                 </h1>
                 <p class="text-slate-500 font-bold text-xs uppercase tracking-[0.3em] mt-1">Dashboard Penyintas & Pemulihan</p>
@@ -13,7 +13,7 @@
             <div class="flex items-center gap-3 bg-slate-900/40 border border-slate-800/50 p-2 rounded-2xl backdrop-blur-md">
                 <div class="px-4 py-2 bg-teal-500/10 border border-teal-500/20 rounded-xl">
                     <div class="text-[10px] text-slate-500 font-black uppercase tracking-widest leading-none mb-1">Status Akun</div>
-                    <div class="text-xs font-black text-teal-400 uppercase italic">Terverifikasi</div>
+                    <div class="text-xs font-black text-teal-400 uppercase">Terverifikasi</div>
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-800 to-slate-950 border border-slate-800 flex items-center justify-center text-xl shadow-2xl">
                     {{ substr($nickname ?: $name, 0, 1) }}
@@ -123,7 +123,7 @@
                                 <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
                                 <span class="text-[10px] font-black text-teal-400 uppercase tracking-widest">Sesi Aktif: Aman</span>
                             </div>
-                            <h2 class="text-5xl font-black text-white italic uppercase tracking-tighter leading-tight mb-4">
+                            <h2 class="text-5xl font-black text-white uppercase tracking-tighter leading-tight mb-4">
                                 Selamat Datang,<br/>
                                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-500">{{ $nickname ?: $name }}</span>
                             </h2>
@@ -138,14 +138,14 @@
                         <div class="md:col-span-2 grid grid-cols-2 gap-6">
                             <div class="bg-slate-900/50 border border-slate-800/50 rounded-[2rem] p-8 hover:border-teal-500/30 transition-all duration-300 group">
                                 <div class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2 group-hover:text-teal-400 transition-colors">Total Laporan</div>
-                                <div class="text-4xl font-black text-white italic tracking-tighter">{{ count($reports) }}</div>
+                                <div class="text-4xl font-black text-white tracking-tighter">{{ count($reports) }}</div>
                                 <div class="mt-4 h-1 bg-slate-800 rounded-full overflow-hidden">
                                     <div class="h-full bg-teal-500 w-1/3"></div>
                                 </div>
                             </div>
                             <div class="bg-slate-900/50 border border-slate-800/50 rounded-[2rem] p-8 hover:border-blue-500/30 transition-all duration-300 group">
                                 <div class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-2 group-hover:text-blue-400 transition-colors">Alat Keamanan</div>
-                                <div class="text-4xl font-black text-white italic tracking-tighter">12</div>
+                                <div class="text-4xl font-black text-white tracking-tighter">12</div>
                                 <div class="mt-4 h-1 bg-slate-800 rounded-full overflow-hidden">
                                     <div class="h-full bg-blue-500 w-2/3"></div>
                                 </div>
@@ -160,7 +160,7 @@
                                 <div class="space-y-8">
                                     <div>
                                         <div class="flex justify-between text-[10px] font-black mb-3 tracking-widest">
-                                            <span class="text-slate-500 uppercase italic">Kesehatan Mental</span>
+                                            <span class="text-slate-500 uppercase">Kesehatan Mental</span>
                                             <span class="text-teal-400">85% OPTIMAL</span>
                                         </div>
                                         <div class="h-1.5 bg-slate-800/50 rounded-full overflow-hidden">
@@ -169,7 +169,7 @@
                                     </div>
                                     <div>
                                         <div class="flex justify-between text-[10px] font-black mb-3 tracking-widest">
-                                            <span class="text-slate-500 uppercase italic">Stabilitas Ekonomi</span>
+                                            <span class="text-slate-500 uppercase">Stabilitas Ekonomi</span>
                                             <span class="text-blue-400">35% BERTAHAN</span>
                                         </div>
                                         <div class="h-1.5 bg-slate-800/50 rounded-full overflow-hidden">
@@ -182,7 +182,7 @@
 
                         {{-- SOS Action --}}
                         <div class="bg-gradient-to-br from-red-600 to-rose-700 rounded-[2.5rem] p-10 flex flex-col justify-between shadow-[0_20px_50px_rgba(225,29,72,0.3)] relative overflow-hidden group">
-                            <div class="absolute -right-4 -bottom-4 text-white/10 text-9xl font-black italic select-none group-hover:scale-110 transition-transform duration-700">SOS</div>
+                            <div class="absolute -right-4 -bottom-4 text-white/10 text-9xl font-black select-none group-hover:scale-110 transition-transform duration-700">SOS</div>
                             <div class="relative z-10">
                                 <h4 class="text-white font-black uppercase text-xs tracking-widest mb-2 opacity-80">Eskalasi Teror?</h4>
                                 <p class="text-white/80 text-sm font-bold leading-relaxed mb-8">
@@ -202,7 +202,7 @@
                 <div class="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div>
-                            <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Riwayat Tiket</h3>
+                            <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Riwayat Tiket</h3>
                             <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Laporan Anda yang sedang dalam proses</p>
                         </div>
                         <a href="{{ route('report') }}" class="inline-flex items-center justify-center px-8 py-4 bg-teal-600 text-white text-xs font-black rounded-2xl hover:bg-teal-500 transition-all tracking-widest shadow-[0_10px_30px_rgba(13,148,136,0.3)] group">
@@ -218,7 +218,7 @@
                                 <div class="flex items-center gap-6">
                                     <div class="w-16 h-16 rounded-2xl bg-slate-800 border border-slate-700 flex flex-col items-center justify-center group-hover:bg-teal-500/10 group-hover:border-teal-500/20 transition-colors">
                                         <div class="text-[10px] text-slate-500 font-black uppercase leading-none mb-1 group-hover:text-teal-400">{{ $report->created_at->format('M') }}</div>
-                                        <div class="text-xl font-black text-white italic leading-none group-hover:text-teal-400">{{ $report->created_at->format('d') }}</div>
+                                        <div class="text-xl font-black text-white leading-none group-hover:text-teal-400">{{ $report->created_at->format('d') }}</div>
                                     </div>
                                     <div>
                                         <div class="flex items-center gap-3 mb-1">
@@ -269,7 +269,7 @@
                 @if($activeTab === 'security')
                 <div class="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
                     <div>
-                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Perisai Digital</h3>
+                        <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Perisai Digital</h3>
                         <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Alat perlindungan privasi proaktif</p>
                     </div>
                     
@@ -328,7 +328,7 @@
                                         <span x-text="open ? '−' : '+'" class="text-2xl text-slate-600 font-bold self-start mt-1"></span>
                                     </button>
                                     <div x-show="open" x-collapse class="p-6 border-t border-slate-800 bg-slate-900/50">
-                                        <p class="text-xs text-slate-300 font-semibold italic mb-6 leading-relaxed whitespace-pre-line">"{{ $data['text'] }}"</p>
+                                        <p class="text-xs text-slate-300 font-semibold mb-6 leading-relaxed whitespace-pre-line">"{{ $data['text'] }}"</p>
                                         <button 
                                             x-data="{ copied: false }" 
                                             @click="navigator.clipboard.writeText('{{ addslashes($data['text']) }}'); copied = true; setTimeout(() => copied = false, 2000);"
@@ -383,7 +383,7 @@
                                         <span x-text="open ? '−' : '+'" class="text-2xl text-slate-600 font-bold self-start mt-1"></span>
                                     </button>
                                     <div x-show="open" x-collapse class="p-6 border-t border-slate-800 bg-slate-900/50">
-                                        <p class="text-xs text-slate-300 font-semibold italic mb-6 leading-relaxed whitespace-pre-line">"{{ $data['text'] }}"</p>
+                                        <p class="text-xs text-slate-300 font-semibold mb-6 leading-relaxed whitespace-pre-line">"{{ $data['text'] }}"</p>
                                         <button 
                                             x-data="{ copied: false }" 
                                             @click="navigator.clipboard.writeText('{{ addslashes($data['text']) }}'); copied = true; setTimeout(() => copied = false, 2000);"
@@ -416,7 +416,7 @@
                 @if($activeTab === 'finance')
                 <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                     <div>
-                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Peta Jalan Pemulihan Ekonomi</h3>
+                        <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Peta Jalan Pemulihan Ekonomi</h3>
                         <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Langkah-langkah strategis untuk kembali stabil</p>
                     </div>
 
@@ -507,7 +507,7 @@
                 @if($activeTab === 'documents')
                 <div class="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
                     <div>
-                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Dokumen & Bukti Resmi</h3>
+                        <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Dokumen & Bukti Resmi</h3>
                         <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Arsip dokumen yang telah diteruskan ke otoritas</p>
                     </div>
 
@@ -547,7 +547,7 @@
 
                     {{-- Evidence Section --}}
                     <div class="mt-12">
-                         <h3 class="text-xl font-black text-white italic uppercase tracking-tighter mb-6 flex items-center gap-4">
+                         <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-6 flex items-center gap-4">
                             <span class="w-8 h-px bg-teal-500"></span>
                             Bukti Digital Terunggah
                         </h3>
@@ -572,7 +572,7 @@
                 @if($activeTab === 'settings')
                 <div class="space-y-8 animate-in fade-in slide-in-from-right-4 duration-700">
                     <div>
-                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Konfigurasi Identitas</h3>
+                        <h3 class="text-3xl font-black text-white uppercase tracking-tighter">Konfigurasi Identitas</h3>
                         <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Kelola bagaimana sistem melihat Anda</p>
                     </div>
                     
@@ -594,7 +594,7 @@
                                     <label class="block text-[10px] font-black text-teal-500 uppercase tracking-[0.2em]">Nama Samaran (Online)</label>
                                     <input type="text" wire:model="nickname" class="w-full bg-slate-950 border-teal-500/20 text-white rounded-2xl px-6 py-4 focus:ring-teal-500 focus:border-teal-500 font-black text-sm" placeholder="Contoh: Survivor_X">
                                     @error('nickname') <p class="text-red-500 text-[10px] mt-2 font-black uppercase">{{ $message }}</p> @enderror
-                                    <p class="text-[9px] text-slate-600 font-bold italic mt-3">*Nickname ini digunakan untuk menjaga anonimitas Anda di fitur komunitas.</p>
+                                    <p class="text-[9px] text-slate-600 font-bold mt-3">*Nickname ini digunakan untuk menjaga anonimitas Anda di fitur komunitas.</p>
                                 </div>
                             </div>
 
@@ -610,7 +610,7 @@
                         <div class="flex items-center gap-4 mb-6">
                             <span class="w-12 h-12 bg-red-500/20 text-red-500 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">⚠️</span>
                             <div>
-                                <h4 class="text-red-500 font-black uppercase text-sm tracking-tighter italic">Zona Penghapusan Data (UU PDP)</h4>
+                                <h4 class="text-red-500 font-black uppercase text-sm tracking-tighter">Zona Penghapusan Data (UU PDP)</h4>
                                 <p class="text-[10px] text-slate-600 font-bold uppercase tracking-widest">Tindakan ini tidak dapat dibatalkan</p>
                             </div>
                         </div>
@@ -669,7 +669,7 @@
                     <div class="flex-1 overflow-y-auto p-10 bg-slate-200 custom-scrollbar">
                         <div class="bg-white shadow-2xl mx-auto p-12 min-h-[1000px] w-full max-w-[800px] border border-slate-300 text-black">
                             {{-- We'll use a hidden template or simple dynamic display here --}}
-                            <div class="text-center italic text-slate-400 py-20 font-bold uppercase tracking-widest text-xs">
+                            <div class="text-center text-slate-400 py-20 font-bold uppercase tracking-widest text-xs">
                                 Memuat Salinan Dokumen Resmi...
                                 <p class="mt-2 font-medium normal-case tracking-normal">Harap tunggu sebentar, sistem sedang menarik data dari arsip.</p>
                             </div>
