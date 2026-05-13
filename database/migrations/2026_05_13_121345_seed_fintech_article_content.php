@@ -54,6 +54,9 @@ Data & Alur Operasional
             return '<pre class="bg-slate-950 p-6 rounded-2xl border border-white/5 text-teal-300 text-sm font-mono overflow-x-auto shadow-inner"><code>' . htmlspecialchars(trim($block)) . '</code></pre>';
         }, $content);
 
+        // 2. Remove duplicate title (First H1)
+        $content = preg_replace('/^# .*\n+/', '', $content);
+
         $title = "🔍 Bedah Lengkap Bisnis Pinjol: Dari Sistem IT, Asuransi, hingga Keuntungan";
         $slug = Str::slug("Bedah Lengkap Bisnis Pinjol Dari Sistem IT Asuransi hingga Keuntungan");
 
