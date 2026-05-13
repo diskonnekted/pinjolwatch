@@ -529,7 +529,22 @@
                         backgroundColor: ['#0d9488', '#3b82f6', '#fbbf24', '#e11d48', '#8b5cf6'], borderColor: 'transparent', hoverOffset: 15
                     }]
                 },
-                options: { ...chartDefaults, cutout: '70%', plugins: { legend: { display: true, position: 'bottom', labels: { color: '#94a3b8', font: { size: 9, weight: 'bold' }, padding: 15 } } } }
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    cutout: '70%', 
+                    plugins: { 
+                        legend: { 
+                            display: true, 
+                            position: 'bottom', 
+                            labels: { 
+                                color: '#94a3b8', 
+                                font: { size: 9, weight: 'bold' }, 
+                                padding: 15 
+                            } 
+                        } 
+                    } 
+                }
             });
 
             new Chart(document.getElementById('mentalHealthRadar').getContext('2d'), {
