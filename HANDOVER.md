@@ -1,60 +1,49 @@
-# Ringkasan Serah Terima Proyek PinjolWatch
+# 🏁 Dokumen Handover: PinjolWatch v2.2.9 (Stable)
 
-**Tanggal:** 10 Mei 2026
-**Status:** Dijeda oleh pengguna.
+Dokumen ini merangkum status terakhir pengembangan aplikasi PinjolWatch untuk memastikan keberlanjutan operasional dan kemudahan pengelolaan di masa mendatang.
 
-Dokumen ini merangkum status pengembangan terakhir dari aplikasi PinjolWatch untuk memudahkan kelanjutan di waktu mendatang.
+## 1. Status Terakhir & Pencapaian Utama
+Aplikasi saat ini berada pada versi **v2.2.9** dengan fokus utama pada **Advokasi Data** dan **Optimasi Performa**.
 
----
+*   **Unified Statistics Dashboard (v2.2.3+):** Integrasi data industri OJK dengan dampak kemanusiaan (Tren bunuh diri, krisis kesehatan mental, kerugian ekonomi).
+*   **Literasi & CMS:** Penambahan konten edukasi kritis (Literasi Keuangan, Privasi Data) lengkap dengan ilustrasi orisinal.
+*   **Optimasi Gambar (Full WebP):** Seluruh aset visual telah dikonversi ke format WebP, mengurangi ukuran halaman hingga 85% untuk kecepatan akses maksimal.
+*   **Sistem Pelaporan interaktif:** Peta sebaran dampak nasional dan alur pelaporan terenkripsi.
 
-### 1. Status Proyek Saat Ini
+## 2. Detail Teknis (Tech Stack)
+*   **Back-end:** Laravel 12 (PHP 8.3+)
+*   **Front-end Reaktif:** Livewire 4 & Alpine.js
+*   **Desain:** Tailwind CSS (Custom Design System)
+*   **Visualisasi:** Chart.js (Grafik) & Leaflet.js (Peta)
+*   **Database:** MySQL / MariaDB
 
-- **Aplikasi Berjalan:** Aplikasi full-stack berbasis Laravel 11 telah berhasil dibangun dan saat ini **sedang berjalan** di server pengembangan lokal.
-  - **URL:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
-  - **Login Admin:** `admin@pinjolwatch.com`
-  - **Password Admin:** `password`
+## 3. Panduan Deployment (Server Produksi)
+Jika Anda melakukan instalasi ulang atau pemindahan server, ikuti urutan ini:
 
-- **Fitur yang Sudah Selesai:**
-  - **Backend Lengkap:** Seluruh backend (migrasi, model, *seeder*, *controller*, *service*, middleware) telah dibuat sesuai instruksi awal.
-  - **Sistem Consent V2:** Sistem persetujuan pengguna yang lebih detail (sesuai `docs/privacy.md`) telah diimplementasikan, termasuk tabel `consent_logs` dan halaman penarikan persetujuan.
-  - **Redesign Halaman Utama:** Halaman *landing* (`/`) telah dirombak total dengan gaya visual yang lebih modern, menggunakan palet warna *teal* (biru-hijau) dan ikon SVG profesional.
-  - **Fungsionalitas Peta:** Fitur peta (`/peta`) sudah **fungsional**. File GeoJSON yang benar telah ditempatkan di `public/assets/kabupaten.geojson` dan skrip peta telah diperbarui untuk menampilkan data choropleth secara interaktif.
+1.  **Clone & Pull:** `git pull origin main`.
+2.  **PHP Dependencies:** `composer install --no-dev -o`.
+3.  **Node/NPM (via NVM):** Instal NVM jika `npm` tidak ada, lalu jalankan `npm install && npm run build`.
+4.  **Database Sync:**
+    *   Gunakan file **`pinjolwatch_fix.sql`** di folder root.
+    *   **Wajib:** Hapus/Drop tabel lama di server sebelum melakukan Import ulang.
+5.  **Environment:** Pastikan `.env` memiliki kredensial DB yang benar dan `APP_DEBUG=false`.
+6.  **Storage Link:** `php artisan storage:link` (Meskipun aset utama sekarang ada di folder `/public`).
 
-### 2. Tugas yang Sedang Dikerjakan (Tertunda)
+## 4. Konvensi Aset & Data
+*   **Gambar Artikel:** Semua gambar baru harus disimpan di `public/images/articles/` dan didaftarkan di database dengan jalur diawali garis miring (contoh: `/images/articles/nama_file.webp`).
+*   **Format Gambar:** Gunakan **WebP** untuk performa terbaik.
+*   **Keamanan:** Jangan aktifkan `APP_DEBUG` di produksi untuk menghindari kebocoran informasi teknis kepada publik.
 
-Sebelum dijeda, saya sedang mengerjakan permintaan untuk **menyeragamkan gaya desain** di seluruh bagian aplikasi agar konsisten dengan halaman utama yang baru.
-
-- **Target Saat Ini:** Memperbarui halaman **Formulir Laporan** (`/lapor`).
-- **File yang akan diubah:** `resources/views/livewire/report-form.blade.php`.
-- **Tugas Spesifik:** Mengganti kelas warna Tailwind CSS (misalnya dari `bg-blue-600` menjadi `bg-primary-600`) pada tombol, *focus ring* input, dan elemen interaktif lainnya.
-
-### 3. Langkah Selanjutnya yang Direkomendasikan
-
-1.  **Lanjutkan Refactor Desain:**
-    - Buka file `resources/views/livewire/report-form.blade.php`.
-    - Ganti semua kelas `bg-blue-*`, `text-blue-*`, `focus:ring-blue-*` dengan varian `primary` yang sesuai (misal: `bg-primary-600`, `text-primary-700`, `focus:ring-primary-500`).
-    - Lakukan hal yang sama untuk halaman-halaman lain:
-      - `resources/views/map.blade.php` (tombol filter)
-      - Halaman-halaman otentikasi (seperti tombol di halaman login, register, dll jika ingin diubah).
-      - `resources/views/layouts/navigation.blade.php` (untuk *active link*).
-
-2.  **Kompilasi Aset:**
-    - Setelah melakukan perubahan pada file-file `.blade.php`, jalankan perintah `npm run build` untuk mengkompilasi ulang `app.css` agar perubahan gaya terlihat.
-
-3.  **Pengujian:**
-    - Lakukan pengujian menyeluruh pada setiap halaman yang telah diubah untuk memastikan tidak ada *layout* yang rusak.
-
-### 4. Catatan Teknis
-
-- **Menjalankan Aplikasi:**
-  - `php artisan serve` (untuk backend)
-  - `npm run dev` (untuk *hot-reloading* aset frontend jika ada perubahan pada CSS/JS)
-- **File Penting:**
-  - **Instruksi:** `1. instruction.md`, `2.md`, `3.md`
-  - **Instruksi Tambahan:** `docs/copywriting.md`, `docs/privacy.md`
-  - **File Peta:** `public/assets/kabupaten.geojson`
-  - **Konfigurasi Tailwind:** `tailwind.config.js` (di sini palet warna `primary` didefinisikan).
+## 5. Peta Jalan Pengembangan (Next Steps)
+*   [ ] **AI Chatbot:** Integrasi pendampingan otomatis bagi korban krisis.
+*   [ ] **PWA Support:** Membuat aplikasi dapat diinstal di smartphone tanpa melalui Play Store.
+*   [ ] **PDF Export:** Fitur unduh laporan statistik sebagai dokumen advokasi resmi.
+*   [ ] **API Integrasi:** Menghubungkan pelaporan langsung ke kanal resmi otoritas.
 
 ---
+**Catatan Penting:**  
+Aset besar seperti PNG/JPG lama telah dihapus dari repository untuk menjaga ukuran folder project tetap efisien. Selalu pastikan database Anda sinkron dengan file SQL terbaru agar tidak terjadi error 404 pada gambar.
 
-Proyek dalam kondisi baik dan siap untuk dilanjutkan. Semoga berhasil!
+**Dibuat Oleh:** Antigravity AI Coding Assistant  
+**Tanggal:** 13 Mei 2026  
+**Status:** Serah Terima Selesai (v2.2.9)
