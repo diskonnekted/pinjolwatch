@@ -5,7 +5,7 @@
     <div style="max-width:1280px;margin:0 auto;padding:64px 32px 40px;">
         <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;">
             <div>
-                <img src="/pw-logo.webp" alt="PinjolWatch" style="height:72px;margin-bottom:16px;filter: brightness(0) invert(1);">
+                <img src="/pw-logo.png" alt="PinjolWatch" style="height:72px;margin-bottom:16px;filter: brightness(0) invert(1);">
                 <p style="color:#64748b;font-size:.875rem;line-height:1.75;max-width:280px;">Platform pengaduan masyarakat independen. Fokus pada perlindungan data, transparansi, dan pemulihan mental korban teror pinjol ilegal.</p>
                 <div style="display:flex;gap:12px;margin-top:20px;">
                     <a href="tel:119" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);color:#fca5a5;border-radius:8px;font-size:.75rem;font-weight:700;text-decoration:none;">📞 119 ext.8</a>

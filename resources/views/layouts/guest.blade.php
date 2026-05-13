@@ -16,16 +16,16 @@
         <meta property="og:url" content="{{ url()->current() }}">
         <meta property="og:title" content="@yield('title', 'PinjolWatch | Lapor Teror Pinjol Ilegal & Pemulihan Mental')">
         <meta property="og:description" content="@yield('meta_description', 'Platform pengaduan anonim #1 untuk korban pinjol ilegal. Dapatkan bantuan hukum, dukungan psikologis, dan lapor teror DC secara aman & terenkripsi.')">
-        <meta property="og:image" content="@yield('og_image', asset('pw-logo.webp'))">
+        <meta property="og:image" content="@yield('og_image', asset('pw-logo.png'))">
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image">
         <meta property="twitter:url" content="{{ url()->current() }}">
         <meta property="twitter:title" content="@yield('title', 'PinjolWatch | Lapor Teror Pinjol Ilegal & Pemulihan Mental')">
         <meta property="twitter:description" content="@yield('meta_description', 'Platform pengaduan anonim #1 untuk korban pinjol ilegal. Dapatkan bantuan hukum, dukungan psikologis, dan lapor teror DC secara aman & terenkripsi.')">
-        <meta property="twitter:image" content="@yield('og_image', asset('pw-logo.webp'))">
+        <meta property="twitter:image" content="@yield('og_image', asset('pw-logo.png'))">
 
-        <link rel="icon" type="image/png" href="/pw-logo.webp">
+        <link rel="icon" type="image/png" href="/pw-logo.png">
         <link rel="manifest" href="/manifest.json">
         <meta name="theme-color" content="#0d9488">
 

@@ -11,14 +11,14 @@ $kernel->bootstrap();
 
 // Fix RSJ Article
 Article::where('slug', 'pintu-rsj-yang-terbuka')->update([
-    'image_path' => '/images/articles/rsj.png',
+    'image_path' => '/images/articles/rsj.webp',
     'author_name' => 'Tim PinjolWatch',
     'type' => 'experience'
 ]);
 
 // Fix Remeh Article
 Article::where('slug', 'jangan-remehkan-beban-orang-lain')->update([
-    'image_path' => '/images/articles/remeh.png',
+    'image_path' => '/images/articles/remeh.webp',
     'author_name' => 'Tim PinjolWatch',
     'type' => 'article'
 ]);

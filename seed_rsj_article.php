@@ -81,7 +81,7 @@ Article::updateOrCreate(
         'category' => 'Cerita Nyata',
         'summary' => 'Sebuah narasi trauma-informed tentang titik nadir Arya yang harus masuk RSJ akibat teror pinjol, dan bagaimana kejujuran di depan keluarga menjadi awal pemulihannya.',
         'content' => $content,
-        'image_url' => '/images/articles/rsj.png',
+        'image_url' => '/images/articles/rsj.webp',
         'author' => 'Tim PinjolWatch',
         'status' => 'published',
         'published_at' => now(),
