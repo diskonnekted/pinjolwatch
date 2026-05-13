@@ -58,9 +58,13 @@ Route::get('/cerita-kita', function () {
     return view('stories');
 })->name('stories');
 
-Route::get('/cerita-kita/{slug}', function ($slug) {
+Route::get('/stories/{slug}', function ($slug) {
     return view('stories-detail', ['slug' => $slug]);
 })->name('stories.show');
+
+Route::get('/berita-pinjol', function () {
+    return view('news-feed');
+})->name('news-feed');
 
 Route::get('/panduan-keluarga', function () {
     return view('panduan-keluarga');
@@ -109,6 +113,10 @@ Route::get('/offline', function () {
 Route::get('/unduh-materi', function () {
     return view('download');
 })->name('download');
+
+Route::get('/kalkulator-gltl', function () {
+    return view('kalkulator-gltl');
+})->name('kalkulator-gltl');
 
 Route::get('/panduan/negosiasi-utang', function () {
     return view('keuangan.template-negosiasi');
@@ -199,6 +207,7 @@ Route::middleware(['auth', 'role:super-admin|moderator', 'audit'])->prefix('admi
     Route::get('/broadcast', \App\Livewire\AdminBroadcast::class)->name('broadcast');
     Route::get('/comments', \App\Livewire\AdminCommentModeration::class)->name('comments.index');
     Route::get('/audit-log', \App\Livewire\AdminAuditLog::class)->name('audit-log');
+    Route::get('/news', \App\Livewire\AdminNewsManager::class)->name('news');
 
     Route::get('/reports/evidence/{id}/stream', function ($id) {
         $evidence = \App\Models\ReportEvidence::findOrFail($id);

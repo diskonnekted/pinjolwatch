@@ -94,7 +94,7 @@
 
             {{-- Laporan dropdown --}}
             <div class="pw-dropdown">
-                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') ? 'active' : '' }}">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') || request()->routeIs('news-feed') ? 'active' : '' }}">
                     Laporan
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
                 </span>
@@ -120,12 +120,19 @@
                             <div style="font-size:.75rem;color:#64748b;">Template jawaban DC</div>
                         </div>
                     </a>
+                    <a href="{{ route('news-feed') }}" class="pw-dropdown-item">
+                        <div class="icon">📰</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Feed Berita</div>
+                            <div style="font-size:.75rem;color:#64748b;">Update media terkini</div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
             {{-- Bantuan dropdown --}}
             <div class="pw-dropdown">
-                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('panduan-keluarga') || request()->routeIs('mental-health-directory') || request()->routeIs('panduan-dc') || request()->routeIs('anti-stigma') || request()->routeIs('panduan-keuangan') || request()->routeIs('bahaya-joki') ? 'active' : '' }}">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('panduan-keluarga') || request()->routeIs('mental-health-directory') || request()->routeIs('panduan-dc') || request()->routeIs('anti-stigma') || request()->routeIs('panduan-keuangan') || request()->routeIs('bahaya-joki') || request()->routeIs('kalkulator-gltl') ? 'active' : '' }}">
                     Bantuan
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
                 </span>
@@ -177,6 +184,13 @@
                         <div>
                             <div style="color:#e2e8f0;font-weight:700;">Bahaya Joki Palsu</div>
                             <div style="font-size:.75rem;color:#64748b;">Hindari jebakan penipu</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('kalkulator-gltl') }}" class="pw-dropdown-item">
+                        <div class="icon">🕳️</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Kalkulator GLTL</div>
+                            <div style="font-size:.75rem;color:#64748b;">Simulasi siklus hutang</div>
                         </div>
                     </a>
                 </div>
@@ -255,6 +269,7 @@
     <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Lapor Kasus</a>
     <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Cek Tiket</a>
     <a href="{{ route('dashboard.tools') }}" class="pw-mobile-link">🛠️ Pusat Alat & Bantuan</a>
+    <a href="{{ route('news-feed') }}" class="pw-mobile-link">📰 Feed Berita Pinjol</a>
     <div class="pw-mobile-section">Bantuan</div>
     <a href="{{ route('quiz') }}" class="pw-mobile-link">🧠 Cek Kesehatan Jiwa</a>
     <a href="{{ route('mental-health-directory') }}" class="pw-mobile-link">📋 Direktori Bantuan</a>
@@ -263,6 +278,7 @@
     <a href="{{ route('anti-stigma') }}" class="pw-mobile-link">🤝 Anti-Stigma</a>
     <a href="{{ route('panduan-keuangan') }}" class="pw-mobile-link">📈 Pemulihan Keuangan</a>
     <a href="{{ route('bahaya-joki') }}" class="pw-mobile-link">🛑 Bahaya Joki Palsu</a>
+    <a href="{{ route('kalkulator-gltl') }}" class="pw-mobile-link">🕳️ Kalkulator GLTL</a>
     <div class="pw-mobile-section">Info</div>
     <a href="{{ route('about') }}" class="pw-mobile-link">🌐 Tentang Kami</a>
     <a href="{{ route('disclaimer') }}" class="pw-mobile-link">⚖️ Disclaimer</a>
