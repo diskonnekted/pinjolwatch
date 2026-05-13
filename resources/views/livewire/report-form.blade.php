@@ -321,30 +321,129 @@
                             </div>
                         </div>
 
-                        <div class="border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative group">
-                            <input type="file" id="evidence" wire:model="evidence" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                            <div class="space-y-2">
+                        {{-- NEW: Encryption Password Section --}}
+                        <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-2xl shadow-sm space-y-4">
+                            <div class="flex items-center gap-3">
+                                <div class="p-2 bg-emerald-600 text-white rounded-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-emerald-900 text-sm">Enkripsi Sisi-Klien (Zero-Knowledge)</h4>
+                                    <p class="text-xs text-emerald-700">Bukti akan dienkripsi di browser Anda sebelum dikirim.</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label for="encryption_password" class="block text-xs font-bold text-emerald-800 mb-2 uppercase tracking-wide">Kata Sandi Enkripsi (Rahasia)</label>
+                                <input 
+                                    id="encryption_password" 
+                                    wire:model="encryption_password" 
+                                    type="password" 
+                                    placeholder="Masukkan minimal 4 karakter..."
+                                    class="w-full border-emerald-200 bg-white text-gray-900 rounded-xl shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-sm"
+                                >
+                                <p class="mt-2 text-[10px] text-emerald-600 italic">
+                                    <strong>Peringatan:</strong> PinjolWatch tidak menyimpan kata sandi ini. Jika Anda lupa, bukti tidak akan pernah bisa dibuka kembali oleh siapa pun.
+                                </p>
+                                @error('encryption_password') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
+                            </div>
+                        </div>
+
+                        <div 
+                            class="border-2 border-dashed border-gray-200 rounded-2xl p-12 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative group"
+                            x-data="{ 
+                                encrypting: false,
+                                async handleFiles(event) {
+                                    const password = $wire.encryption_password;
+                                    if (!password || password.length < 4) {
+                                        alert('Silakan masukkan kata sandi enkripsi (minimal 4 karakter) sebelum memilih file.');
+                                        event.target.value = '';
+                                        return;
+                                    }
+
+                                    this.encrypting = true;
+                                    const files = event.target.files;
+                                    const encryptedBlobs = [];
+                                    const metadata = [];
+
+                                    for (let i = 0; i < files.length; i++) {
+                                        const result = await this.encryptFile(files[i], password);
+                                        encryptedBlobs.push(new File([result.blob], files[i].name + '.enc', { type: 'application/octet-stream' }));
+                                        metadata.push(result.metadata);
+                                    }
+
+                                    @this.set('is_client_encrypted', true);
+                                    @this.set('encryption_metadata', metadata);
+                                    
+                                    @this.uploadMultiple('evidence', encryptedBlobs, 
+                                        (uploadedUrls) => { this.encrypting = false; },
+                                        () => { this.encrypting = false; alert('Gagal mengunggah file.'); }
+                                    );
+                                },
+                                async encryptFile(file, password) {
+                                    const salt = crypto.getRandomValues(new Uint8Array(16));
+                                    const iv = crypto.getRandomValues(new Uint8Array(12));
+                                    const encoder = new TextEncoder();
+                                    
+                                    const keyMaterial = await crypto.subtle.importKey(
+                                        'raw', encoder.encode(password), 'PBKDF2', false, ['deriveKey']
+                                    );
+                                    const key = await crypto.subtle.deriveKey(
+                                        { name: 'PBKDF2', salt: salt, iterations: 100000, hash: 'SHA-256' },
+                                        keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt']
+                                    );
+
+                                    const content = await file.arrayBuffer();
+                                    const encrypted = await crypto.subtle.encrypt(
+                                        { name: 'AES-GCM', iv: iv }, key, content
+                                    );
+
+                                    return {
+                                        blob: new Blob([encrypted]),
+                                        metadata: {
+                                            iv: Array.from(iv),
+                                            salt: Array.from(salt)
+                                        }
+                                    };
+                                }
+                            }"
+                        >
+                            <input type="file" id="evidence_input" @change="handleFiles" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" :disabled="encrypting">
+                            
+                            <div class="space-y-2" x-show="!encrypting">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto text-gray-400 group-hover:text-primary-500 transition-colors">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A4.5 4.5 0 0 1 18.75 19.5H6.75Z" />
                                 </svg>
                                 <div class="text-sm text-gray-600 font-semibold">Klik atau tarik file ke sini</div>
-                                <div class="text-xs text-gray-400 uppercase tracking-widest">JPG, PNG, PDF, MP4 (Maks 10MB)</div>
+                                <div class="text-xs text-gray-400 uppercase tracking-widest">Akan dienkripsi otomatis</div>
+                            </div>
+
+                            <div x-show="encrypting" class="flex flex-col items-center gap-2 animate-pulse">
+                                <svg class="animate-spin h-8 w-8 text-emerald-600" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <p class="text-sm font-bold text-emerald-700 uppercase tracking-widest">Sedang Mengenali & Mengenkripsi...</p>
                             </div>
                         </div>
 
                         <div wire:loading wire:target="evidence" class="text-sm text-primary-600 font-bold flex items-center gap-2">
                             <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                            Sedang mengunggah...
+                            Sedang mengunggah file terenkripsi...
                         </div>
                         
                         @if ($evidence)
                             <div class="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
-                                <p class="text-xs font-bold text-gray-400 uppercase mb-3 tracking-widest">Daftar file siap kirim:</p>
+                                <p class="text-xs font-bold text-gray-400 uppercase mb-3 tracking-widest">Daftar file terenkripsi:</p>
                                 <ul class="space-y-2">
                                     @foreach ($evidence as $file)
-                                        <li class="flex items-center justify-between text-sm p-2 bg-gray-50 rounded-lg">
-                                            <span class="truncate font-medium text-gray-700">{{ $file->getClientOriginalName() }}</span>
-                                            <span class="text-xs text-gray-400 ml-2 shrink-0">{{ round($file->getSize() / 1024, 1) }} KB</span>
+                                        <li class="flex items-center justify-between text-sm p-2 bg-emerald-50 rounded-lg">
+                                            <div class="flex items-center gap-2 truncate">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-emerald-600">
+                                                  <path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clip-rule="evenodd" />
+                                                </svg>
+                                                <span class="truncate font-medium text-gray-700">{{ $file->getClientOriginalName() }}</span>
+                                            </div>
+                                            <span class="text-xs text-emerald-600 font-bold ml-2 shrink-0">TERENKRIPSI</span>
                                         </li>
                                     @endforeach
                                 </ul>

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
+use App\Models\ChatSession;
 use App\Models\Message;
 use App\Models\User;
 use App\Notifications\AdminAlert;
@@ -10,38 +11,52 @@ use Illuminate\Support\Facades\Auth;
 
 class UserMessaging extends Component
 {
-    public $newMessage;
+    public $activeSessionId = null;
 
-    public function sendMessage()
+    protected $listeners = ['session-selected' => 'selectSession'];
+
+    public function selectSession($sessionId)
     {
-        $this->validate(['newMessage' => 'required|string|max:1000']);
+        $this->activeSessionId = $sessionId;
+    }
 
-        Message::create([
-            'user_id' => 6, // To Fiona (Admin Responder)
-            'sender_id' => Auth::id(),
-            'content' => $this->newMessage,
+    public function createSession()
+    {
+        // Check if there's already a waiting or active session
+        $existing = ChatSession::where('requester_id', Auth::id())
+            ->whereIn('status', ['waiting', 'active'])
+            ->first();
+
+        if ($existing) {
+            $this->activeSessionId = $existing->id;
+            return;
+        }
+
+        $session = ChatSession::create([
+            'requester_id' => Auth::id(),
+            'status' => 'waiting',
+            'expires_at' => now()->addHours(1),
         ]);
 
-        $this->newMessage = '';
-
         // Notify Admins
-        $admins = User::role(['super-admin', 'admin'])->get();
+        $admins = User::role(['super-admin', 'moderator'])->get();
         foreach ($admins as $admin) {
             $admin->notify(new AdminAlert(
-                "Pesan Konsultasi Baru",
-                Auth::user()->name . " mengirimkan pesan bantuan baru.",
-                'message'
+                "Permintaan Sesi Obrolan Baru",
+                Auth::user()->nickname ?: Auth::user()->name . " sedang menunggu bantuan di ruang obrolan.",
+                'chat'
             ));
         }
+
+        $this->activeSessionId = $session->id;
     }
 
     public function render()
     {
         return view('livewire.user-messaging', [
-            'messages' => Message::where('user_id', Auth::id())
-                                ->with('sender')
-                                ->latest()
-                                ->get()
+            'sessions' => ChatSession::where('requester_id', Auth::id())
+                ->orderBy('created_at', 'desc')
+                ->get()
         ]);
     }
 }

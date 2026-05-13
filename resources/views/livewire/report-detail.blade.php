@@ -239,8 +239,9 @@
                             {{-- Image Container --}}
                             <div class="w-full h-48 bg-slate-200 relative overflow-hidden flex items-center justify-center">
                                 @if($isRevealed && $isImage)
-                                    <img src="{{ route('admin.reports.stream-evidence', $evidence->id) }}" alt="Evidence" class="object-cover w-full h-full">
+                                    <img id="evidence-img-{{ $evidence->id }}" src="{{ route('admin.reports.stream-evidence', $evidence->id) }}" alt="Evidence" class="object-cover w-full h-full">
                                 @elseif($isImage)
+                                    <img id="evidence-img-{{ $evidence->id }}" src="" alt="Evidence" class="object-cover w-full h-full hidden" onload="this.classList.remove('hidden'); this.nextElementSibling.classList.add('hidden')">
                                     <div class="absolute inset-0 bg-slate-800 flex items-center justify-center">
                                         <div class="text-center p-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-slate-500 mx-auto mb-2 opacity-50"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
@@ -254,14 +255,65 @@
                                         <p class="text-xs font-bold text-slate-500">Dokumen PDF/Lainnya</p>
                                     </div>
                                 @endif
-
-                                {{-- Overlay Lock / Reveal Button --}}
                                 @if(!$isRevealed)
                                     <div class="absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <button x-on:click="$dispatch('open-reveal-modal', { id: {{ $evidence->id }} })" class="px-4 py-2 bg-white rounded-lg shadow-lg font-bold text-sm text-slate-900 hover:bg-primary-50 transition-colors flex items-center gap-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-rose-500"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" /></svg>
-                                            Buka Sensor
-                                        </button>
+                                        @if($evidence->is_client_encrypted)
+                                            <button 
+                                                x-data="{ 
+                                                    async decryptAndShow() {
+                                                        const password = prompt('Laporan ini dienkripsi oleh pengguna. Masukkan kata sandi dekripsi untuk melihat:');
+                                                        if (!password) return;
+
+                                                        try {
+                                                            const response = await fetch('{{ route('admin.reports.stream-evidence', $evidence->id) }}');
+                                                            const encryptedData = await response.arrayBuffer();
+                                                            const metadata = @js($evidence->encryption_metadata);
+                                                            
+                                                            const salt = new Uint8Array(metadata.salt);
+                                                            const iv = new Uint8Array(metadata.iv);
+                                                            const encoder = new TextEncoder();
+
+                                                            const keyMaterial = await crypto.subtle.importKey(
+                                                                'raw', encoder.encode(password), 'PBKDF2', false, ['deriveKey']
+                                                            );
+                                                            const key = await crypto.subtle.deriveKey(
+                                                                { name: 'PBKDF2', salt: salt, iterations: 100000, hash: 'SHA-256' },
+                                                                keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['decrypt']
+                                                            );
+
+                                                            const decrypted = await crypto.subtle.decrypt(
+                                                                { name: 'AES-GCM', iv: iv }, key, encryptedData
+                                                            );
+
+                                                            const blob = new Blob([decrypted], { type: '{{ $evidence->mime_type }}' });
+                                                            const url = URL.createObjectURL(blob);
+                                                            
+                                                            // Update the image src or open in new tab
+                                                            @if($isImage)
+                                                                const img = document.getElementById('evidence-img-{{ $evidence->id }}');
+                                                                if (img) img.src = url;
+                                                                $wire.revealEvidence({{ $evidence->id }}); // Still notify server for audit log
+                                                            @else
+                                                                window.open(url, '_blank');
+                                                            @endif
+                                                        } catch (e) {
+                                                            alert('Gagal dekripsi. Kata sandi mungkin salah.');
+                                                            console.error(e);
+                                                        }
+                                                    }
+                                                }"
+                                                @click="decryptAndShow()" 
+                                                class="px-4 py-2 bg-emerald-600 rounded-lg shadow-lg font-bold text-sm text-white hover:bg-emerald-500 transition-colors flex items-center gap-2"
+                                            >
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" /><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" /></svg>
+                                                Dekripsi & Lihat
+                                            </button>
+                                        @else
+                                            <button x-on:click="$dispatch('open-reveal-modal', { id: {{ $evidence->id }} })" class="px-4 py-2 bg-white rounded-lg shadow-lg font-bold text-sm text-slate-900 hover:bg-primary-50 transition-colors flex items-center gap-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4 text-rose-500"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" /></svg>
+                                                Buka Sensor
+                                            </button>
+                                        @endif
                                     </div>
                                 @endif
                             </div>

@@ -1,3 +1,10 @@
+@section('title', $article->title . ' | PinjolWatch Stories')
+@section('meta_description', Str::limit(strip_tags($article->content), 160))
+@php
+    $ogImage = str_starts_with($article->image_path, '/') ? asset($article->image_path) : asset('storage/' . $article->image_path);
+@endphp
+@section('og_image', $ogImage)
+
 <div class="max-w-4xl mx-auto py-12 px-4">
 
     {{-- BACK BUTTON --}}

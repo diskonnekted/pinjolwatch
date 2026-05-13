@@ -46,6 +46,11 @@ class ReportForm extends Component
     public $ticket_id = null;
     public $success = false;
 
+    // Client-side encryption properties
+    public $encryption_password = '';
+    public $is_client_encrypted = false;
+    public $encryption_metadata = []; // stores IV and salt per file
+
     public function nextStep()
     {
         $this->validateStep();
@@ -82,7 +87,8 @@ class ReportForm extends Component
             ]);
         } elseif ($this->step == 3) {
             $this->validate([
-                'evidence.*' => 'nullable|file|mimes:jpeg,png,pdf,mp3,mp4|max:10240',
+                'evidence.*' => 'nullable|file|mimes:jpeg,png,pdf,mp3,mp4,enc,bin|max:10240',
+                'encryption_password' => 'nullable|string|min:4',
             ]);
         }
     }
@@ -157,29 +163,38 @@ class ReportForm extends Component
         ]);
 
         if ($this->evidence) {
-            foreach ($this->evidence as $file) {
-                $fileName = Str::uuid().'.'.$file->getClientOriginalExtension().'.enc';
+            foreach ($this->evidence as $index => $file) {
+                $fileName = Str::uuid().'.'.$file->getClientOriginalExtension();
+                if ($this->is_client_encrypted) {
+                    $fileName .= '.enc';
+                }
+                
                 $path = 'private/evidence/'.$fileName;
 
-                // Stream the file and encrypt in chunks
-                $source = fopen($file->getRealPath(), 'rb');
-                $destination = Storage::disk('local')->path($path);
-
-                // Manually open a file handle and write encrypted chunks
-                $destHandle = fopen($destination, 'wb');
-                while (!feof($source)) {
-                    $chunk = fread($source, 1024 * 1024); // 1MB chunks
-                    $encryptedChunk = Crypt::encrypt($chunk);
-                    fwrite($destHandle, $encryptedChunk . PHP_EOL); // Add delimiter
+                if ($this->is_client_encrypted) {
+                    // Just store as is, it's already encrypted on client
+                    Storage::disk('local')->put($path, file_get_contents($file->getRealPath()));
+                } else {
+                    // Fallback to server-side encryption for non-client-encrypted files
+                    $source = fopen($file->getRealPath(), 'rb');
+                    $destination = Storage::disk('local')->path($path);
+                    $destHandle = fopen($destination, 'wb');
+                    while (!feof($source)) {
+                        $chunk = fread($source, 1024 * 1024);
+                        $encryptedChunk = Crypt::encrypt($chunk);
+                        fwrite($destHandle, $encryptedChunk . PHP_EOL);
+                    }
+                    fclose($source);
+                    fclose($destHandle);
                 }
-                fclose($source);
-                fclose($destHandle);
 
                 $report->evidence()->create([
                     'original_name' => $file->getClientOriginalName(),
                     'encrypted_path' => $path,
                     'mime_type' => $file->getMimeType(),
                     'file_size' => $file->getSize(),
+                    'is_client_encrypted' => $this->is_client_encrypted,
+                    'encryption_metadata' => $this->is_client_encrypted ? ($this->encryption_metadata[$index] ?? null) : null,
                 ]);
             }
         }

@@ -484,80 +484,10 @@
                 </div>
                 @endif
 
-                {{-- TAB: MENTAL --}}
+                {{-- TAB: MENTAL (Recovery Tracker) --}}
                 @if($activeTab === 'mental')
-                <div class="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                     <div>
-                        <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter">Ruang Tenang & Pemulihan Jiwa</h3>
-                        <p class="text-slate-500 font-bold text-[10px] uppercase tracking-widest mt-1">Alat bantu untuk mengelola stres dan kecemasan</p>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                        {{-- Main Content --}}
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-8 shadow-xl">
-                                <h4 class="font-black text-white mb-6 uppercase text-xs tracking-widest flex items-center gap-4">
-                                    <span class="w-10 h-10 bg-cyan-500/10 text-cyan-400 rounded-xl flex items-center justify-center text-xl">🧘</span>
-                                    Pertolongan Pertama Mental
-                                </h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div class="bg-slate-800/50 p-6 rounded-2xl">
-                                        <h5 class="font-bold text-cyan-400 mb-2">Teknik Grounding 5-4-3-2-1</h5>
-                                        <p class="text-xs text-slate-400 leading-relaxed">Saat panik menyerang, paksa pikiran kembali ke saat ini. Sebutkan dalam hati: <br>• <strong>5</strong> benda yang Anda lihat <br>• <strong>4</strong> suara yang Anda dengar <br>• <strong>3</strong> benda yang bisa Anda sentuh <br>• <strong>2</strong> bau yang bisa Anda cium <br>• <strong>1</strong> hal yang bisa Anda rasakan.</p>
-                                    </div>
-                                    <div class="bg-slate-800/50 p-6 rounded-2xl">
-                                        <h5 class="font-bold text-cyan-400 mb-2">Pernapasan Kotak (Box Breathing)</h5>
-                                        <p class="text-xs text-slate-400 leading-relaxed">Untuk meredakan detak jantung dan menenangkan sistem saraf: <br>• Tarik napas perlahan selama <strong>4</strong> detik <br>• Tahan napas selama <strong>4</strong> detik <br>• Hembuskan napas perlahan selama <strong>4</strong> detik <br>• Tahan lagi selama <strong>4</strong> detik. Ulangi.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-8 shadow-xl">
-                                 <h4 class="font-black text-white mb-6 uppercase text-xs tracking-widest flex items-center gap-4">
-                                    <span class="w-10 h-10 bg-violet-500/10 text-violet-400 rounded-xl flex items-center justify-center text-xl">✨</span>
-                                    Mengubah Pola Pikir (Cognitive Reframing)
-                                </h4>
-                                 <div class="space-y-4">
-                                    <div class="p-4 bg-slate-800/50 rounded-lg">
-                                        <p class="text-sm font-bold text-slate-300">Ganti pikiran: <span class="text-red-400">"Saya aib keluarga."</span></p>
-                                        <p class="text-sm font-semibold text-slate-300">Menjadi: <span class="text-green-400">"Saya adalah korban kejahatan finansial, dan saya sedang berjuang untuk bangkit."</span></p>
-                                    </div>
-                                    <div class="p-4 bg-slate-800/50 rounded-lg">
-                                        <p class="text-sm font-bold text-slate-300">Ganti pikiran: <span class="text-red-400">"Hidup saya sudah hancur."</span></p>
-                                        <p class="text-sm font-semibold text-slate-300">Menjadi: <span class="text-green-400">"Saya sedang berada di titik terendah, tapi ini adalah kesempatan untuk membangun kembali hidup yang lebih kuat."</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Sidebar --}}
-                        <div class="space-y-6">
-                             <div class="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-[2.5rem] p-8 text-center shadow-[0_20px_50px_rgba(16,185,129,0.2)]">
-                                <div class="text-4xl mb-4">❤️‍🩹</div>
-                                <h4 class="text-white font-black text-lg mb-2">Anda Tidak Sendiri</h4>
-                                <p class="text-white/70 text-xs mb-6">Merasa cemas atau putus asa adalah hal wajar. Lakukan tes singkat untuk memahami kondisi Anda, atau temukan bantuan profesional sekarang.</p>
-                                <a href="{{ route('quiz') }}" class="w-full block py-3 bg-white text-cyan-700 font-black rounded-xl text-xs uppercase tracking-widest hover:bg-slate-100 transition-all mb-3">Cek Kesehatan Mental</a>
-                                <a href="{{ route('mental-health-directory') }}" class="w-full block py-3 bg-white/10 text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-white/20 transition-all">Direktori Bantuan</a>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 rounded-[2.5rem] p-8 shadow-xl">
-                                <h4 class="font-black text-white mb-6 uppercase text-xs tracking-widest">Checklist Perawatan Diri</h4>
-                                <div class="space-y-3">
-                                    <label class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl has-[:checked]:bg-green-500/10">
-                                        <input type="checkbox" class="w-4 h-4 text-green-600 bg-slate-700 border-slate-600 rounded focus:ring-green-500">
-                                        <span class="text-xs font-bold text-slate-300">Jalan kaki 15 menit tanpa gadget</span>
-                                    </label>
-                                     <label class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl has-[:checked]:bg-green-500/10">
-                                        <input type="checkbox" class="w-4 h-4 text-green-600 bg-slate-700 border-slate-600 rounded focus:ring-green-500">
-                                        <span class="text-xs font-bold text-slate-300">Dengarkan 3 lagu favorit</span>
-                                    </label>
-                                     <label class="flex items-center gap-3 p-3 bg-slate-800/50 rounded-xl has-[:checked]:bg-green-500/10">
-                                        <input type="checkbox" class="w-4 h-4 text-green-600 bg-slate-700 border-slate-600 rounded focus:ring-green-500">
-                                        <span class="text-xs font-bold text-slate-300">Tulis 1 hal yang Anda syukuri hari ini</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    <livewire:recovery-tracker />
                 </div>
                 @endif
 

@@ -94,9 +94,17 @@ Route::get('/tentang-kami', function () {
     return view('about');
 })->name('about');
 
+Route::get('/gabung-relawan', function () {
+    return view('join');
+})->name('join');
+
 Route::get('/cek-kesehatan', function () {
     return view('quiz');
 })->name('quiz');
+
+Route::get('/offline', function () {
+    return view('offline');
+})->name('offline');
 
 Route::get('/unduh-materi', function () {
     return view('download');
@@ -186,6 +194,8 @@ Route::middleware(['auth', 'role:super-admin|moderator', 'audit'])->prefix('admi
     Route::get('/users', \App\Livewire\AdminUserList::class)->name('users');
     Route::get('/settings', \App\Livewire\AdminSettings::class)->name('settings');
     Route::get('/messages', \App\Livewire\AdminMessaging::class)->name('messages');
+    Route::get('/chat-queue', \App\Livewire\AdminChatQueue::class)->name('chat-queue');
+    Route::get('/volunteers', \App\Livewire\AdminVolunteerList::class)->name('volunteers');
     Route::get('/broadcast', \App\Livewire\AdminBroadcast::class)->name('broadcast');
     Route::get('/comments', \App\Livewire\AdminCommentModeration::class)->name('comments.index');
     Route::get('/audit-log', \App\Livewire\AdminAuditLog::class)->name('audit-log');

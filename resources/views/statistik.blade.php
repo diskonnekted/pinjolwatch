@@ -1,5 +1,6 @@
 <x-guest-layout>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 :root { --teal: #0d9488; --teal-l: #2dd4bf; --dark: #020617; --dark2: #0f172a; }
@@ -38,14 +39,6 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
 
 /* Divider */
 .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(45,212,191,.3), transparent); margin: 0; }
-
-/* Custom Table Styles inside Glass */
-.glass-table { width: 100%; text-align: left; border-collapse: collapse; }
-.glass-table th { padding: 12px 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--teal-l); border-bottom: 1px solid rgba(255,255,255,0.1); }
-.glass-table td { padding: 16px; font-size: 0.95rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #e2e8f0; }
-.glass-table tr:last-child td { border-bottom: none; }
-
-.chart-container { position: relative; height: 300px; width: 100%; margin-top: 24px; }
 </style>
 
 <main>
@@ -55,117 +48,7 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <div style="max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; text-align: center;">
-        <div class="badge" style="margin-bottom: 24px;">
-            Per Maret 2026
-        </div>
-        <h1 style="font-size: clamp(2.5rem, 4vw, 4.5rem); font-weight: 900; line-height: 1.1; margin-bottom: 24px;">
-            <span class="grad">Visualisasi Statistik</span><br>
-            <span style="color: #f1f5f9;">Ekosistem Pinjol.</span>
-        </h1>
-        <p style="font-size: 1.1rem; color: #94a3b8; line-height: 1.8; max-width: 700px; margin: 0 auto 48px;">
-            Analisis data interaktif berdasarkan laporan resmi OJK, AFPI, dan data internal pelaporan PinjolWatch.
-        </p>
-
-        {{-- Top 4 Big Stats --}}
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-            <div class="glass" style="padding: 32px 24px;">
-                <div class="stat-num grad" style="font-size: 2.5rem;">Rp101T</div>
-                <div class="stat-label">Outstanding Pinjaman</div>
-            </div>
-            <div class="glass" style="padding: 32px 24px;">
-                <div class="stat-num grad" style="font-size: 2.5rem;">146,5M</div>
-                <div class="stat-label">Akun Terdaftar</div>
-            </div>
-            <div class="glass" style="padding: 32px 24px;">
-                <div class="stat-num grad" style="font-size: 2.5rem;">9.081</div>
-                <div class="stat-label">Entitas Ilegal Diblokir</div>
-            </div>
-            <div class="glass" style="padding: 32px 24px;">
-                <div class="stat-num grad" style="font-size: 2.5rem;">95</div>
-                <div class="stat-label">Platform Legal OJK</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="divider"></div>
-
-{{-- BENTO GRID SECTIONS --}}
-<section style="background: var(--dark2); padding: 96px 32px;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-        
-        <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px;">
-            
-            {{-- Outstanding & Pertumbuhan --}}
-            <div class="glass" style="grid-column: span 12; padding: 40px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
-                    <div>
-                        <div class="badge" style="margin-bottom: 12px; background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #fbbf24;">Tren Utama</div>
-                        <h3 style="font-size: 1.75rem; font-weight: 900;">Pertumbuhan Outstanding</h3>
-                    </div>
-                    <p style="color: #94a3b8; font-size: .9rem; max-width: 400px; margin: 0;">Fintech lending tumbuh konsisten >25% YoY. Grafik menunjukkan tren kenaikan sejak Desember 2025.</p>
-                </div>
-                
-                <div class="chart-container" style="height: 350px;">
-                    <canvas id="outstandingChart"></canvas>
-                </div>
-            </div>
-
-            {{-- Pinjol Ilegal --}}
-            <div class="glass" style="grid-column: span 7; padding: 40px; position: relative; overflow: hidden;">
-                <div class="badge" style="margin-bottom: 16px; background: rgba(225,29,72,.1); border-color: rgba(225,29,72,.3); color: #fb7185;">Skala Masalah</div>
-                <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 24px;">Evolusi Entitas Ilegal</h3>
-                
-                <div class="chart-container">
-                    <canvas id="ilegalChart"></canvas>
-                </div>
-            </div>
-
-            {{-- Komposisi Pembiayaan --}}
-            <div class="glass" style="grid-column: span 5; padding: 40px; display: flex; flex-direction: column;">
-                <div class="badge" style="margin-bottom: 16px; background: rgba(59,130,246,.1); border-color: rgba(59,130,246,.3); color: #60a5fa;">Komposisi</div>
-                <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 24px;">Produktif vs Konsumtif</h3>
-                
-                <div class="chart-container" style="flex-grow: 1;">
-                    <canvas id="compositionChart"></canvas>
-                </div>
-            </div>
-
-            {{-- Kualitas Kredit --}}
-            <div class="glass" style="grid-column: span 12; padding: 40px;">
-                <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
-                    <div style="flex-grow: 1;">
-                        <div class="badge" style="margin-bottom: 16px; background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: #fbbf24;">Risk Monitoring</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 16px;">Tingkat Wanprestasi (TWP90)</h3>
-                        <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin-bottom: 24px;">
-                            TWP90 mengukur tingkat kegagalan pembayaran di atas 90 hari. Ambang batas aman OJK adalah 5%. Saat ini di angka <strong>4,54%</strong>.
-                        </p>
-                        <div style="height: 12px; background: rgba(255,255,255,0.1); border-radius: 99px; overflow: hidden;">
-                            <div style="width: 90.8%; height: 100%; background: linear-gradient(90deg, var(--teal) 0%, #fbbf24 100%);"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: .75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: .1em;">
-                            <span>Aman (0%)</span>
-                            <span style="color: #fbbf24;">4,54% (Saat Ini)</span>
-                            <span>Warning (5%)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            {{-- Pengaduan Masyarakat --}}
-            <div class="glass" style="grid-column: span 12; padding: 40px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
-                <div style="flex-shrink: 0; width: 80px; height: 80px; background: linear-gradient(135deg, #e11d48, #be123c); border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">📣</div>
-                <div>
-                    <h3 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 12px;">Pengaduan Masyarakat (2025)</h3>
-                    <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.6; margin-bottom: 0;">
-                        Terdapat <strong>14.634 total pengaduan</strong> terkait entitas ilegal. Mayoritas didominasi oleh <strong>Pinjol Ilegal (11.653 laporan / 79,6%)</strong>.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
+        <livewire:public-stats />
 </section>
 
 <div class="divider"></div>
@@ -185,8 +68,6 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
 </section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 <script>
 // Particles
 (function(){
@@ -199,131 +80,5 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
         c.appendChild(p);
     }
 })();
-
-// Charts Initialization
-document.addEventListener('DOMContentLoaded', function() {
-    // Register the datalabels plugin
-    Chart.register(ChartDataLabels);
-
-    const teal = '#0d9488';
-    const tealL = '#2dd4bf';
-    const blue = '#3b82f6';
-    const rose = '#e11d48';
-
-    // 1. Outstanding Chart (Line)
-    new Chart(document.getElementById('outstandingChart'), {
-        type: 'line',
-        data: {
-            labels: ['Des 2025', 'Jan 2026', 'Feb 2026', 'Mar 2026'],
-            datasets: [{
-                label: 'Outstanding (Triliun Rp)',
-                data: [94.85, 98.54, 100.69, 101.03],
-                borderColor: tealL,
-                backgroundColor: 'rgba(45, 212, 191, 0.1)',
-                borderWidth: 4,
-                fill: true,
-                tension: 0.4,
-                pointBackgroundColor: tealL,
-                pointBorderColor: '#fff',
-                pointHoverRadius: 8
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { display: false },
-                datalabels: {
-                    color: '#fff',
-                    align: 'top',
-                    offset: 8,
-                    font: { weight: '900', size: 12 },
-                    formatter: function(value) {
-                        return 'Rp' + value + 'T';
-                    }
-                }
-            },
-            layout: {
-                padding: { top: 30 }
-            },
-            scales: {
-                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-                x: { grid: { display: false }, ticks: { color: '#94a3b8' } }
-            }
-        }
-    });
-
-    // 2. Ilegal Chart (Bar/Doughnut mix logic)
-    new Chart(document.getElementById('ilegalChart'), {
-        type: 'bar',
-        data: {
-            labels: ['2023', '2024', '2025*'],
-            datasets: [
-                {
-                    label: 'Pinjol Ilegal',
-                    data: [2248, 2930, 1556],
-                    backgroundColor: rose,
-                    borderRadius: 8
-                },
-                {
-                    label: 'Investasi Ilegal',
-                    data: [40, 310, 284],
-                    backgroundColor: 'rgba(255,255,255,0.2)',
-                    borderRadius: 8
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: { labels: { color: '#94a3b8', font: { weight: 'bold' } } },
-                datalabels: { display: false }
-            },
-            scales: {
-                y: { stacked: true, grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
-                x: { stacked: true, grid: { display: false }, ticks: { color: '#94a3b8' } }
-            }
-        }
-    });
-
-    // 3. Composition Chart (Pie)
-    new Chart(document.getElementById('compositionChart'), {
-        type: 'doughnut',
-        data: {
-            labels: ['Konsumtif', 'Produktif (UMKM)'],
-            datasets: [{
-                data: [65.69, 34.31],
-                backgroundColor: [tealL, blue],
-                borderColor: 'transparent',
-                hoverOffset: 20
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            cutout: '70%',
-            plugins: {
-                legend: { position: 'bottom', labels: { color: '#94a3b8', padding: 20, font: { weight: 'bold' } } },
-                datalabels: {
-                    color: '#fff',
-                    font: { weight: '900', size: 11 },
-                    formatter: (value) => value + '%'
-                }
-            }
-        }
-    });
-});
-
-// Responsive bento grid fix
-function fixBento(){
-    const cards = document.querySelectorAll('[style*="grid-column: span 7"], [style*="grid-column: span 5"]');
-    if(window.innerWidth < 768) cards.forEach(c=>c.style.gridColumn='span 12');
-    else cards.forEach(c=>{
-        c.style.gridColumn = c.style.cssText.includes('span 7') ? 'span 7' : 'span 5';
-    });
-}
-window.addEventListener('resize', fixBento);
-fixBento();
 </script>
 </x-guest-layout>

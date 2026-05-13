@@ -10,6 +10,7 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'chat_session_id',
         'user_id',
         'sender_id',
         'content',
@@ -19,6 +20,11 @@ class Message extends Model
     protected $casts = [
         'read_at' => 'datetime',
     ];
+
+    public function session()
+    {
+        return $this->belongsTo(ChatSession::class, 'chat_session_id');
+    }
 
     public function user()
     {

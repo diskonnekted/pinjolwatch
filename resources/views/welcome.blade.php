@@ -1,4 +1,7 @@
 <x-guest-layout>
+@section('title', 'PinjolWatch | Platform Pengaduan Anonim & Pemulihan Mental Korban Pinjol')
+@section('meta_description', 'Lapor teror debt collector pinjol ilegal secara 100% anonim. Dapatkan pendampingan hukum, cek kesehatan jiwa K10, dan panduan pemulihan keuangan gratis.')
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
 :root { --teal: #0d9488; --teal-l: #2dd4bf; --dark: #020617; --dark2: #0f172a; }

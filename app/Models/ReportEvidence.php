@@ -17,6 +17,13 @@ class ReportEvidence extends Model
         'encrypted_path',
         'mime_type',
         'file_size',
+        'is_client_encrypted',
+        'encryption_metadata',
+    ];
+
+    protected $casts = [
+        'is_client_encrypted' => 'boolean',
+        'encryption_metadata' => 'array',
     ];
 
     protected $hidden = [
