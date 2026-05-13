@@ -64,7 +64,7 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
             <div class="hero-img-col" style="position: relative;">
                 <div style="position: absolute; inset: -30px; background: radial-gradient(circle, rgba(13,148,136,0.2) 0%, transparent 70%); filter: blur(20px);"></div>
                 <div class="glass" style="padding: 12px; border-radius: 32px; transform: rotate(2deg); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); aspect-ratio: 1/1;">
-                    <img src="/Ketenangan & Pemulihan Mental.png" alt="Ilustrasi Ketenangan & Pemulihan Mental" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block;">
+                    <img src="/Ketenangan & Pemulihan Mental.webp" alt="Ilustrasi Ketenangan & Pemulihan Mental" style="width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block;">
                 </div>
             </div>
         </div>

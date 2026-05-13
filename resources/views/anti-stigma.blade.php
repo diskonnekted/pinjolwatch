@@ -33,7 +33,7 @@
                         <div class="hidden lg:block relative">
                             <div class="absolute inset-0 bg-teal-500/20 blur-3xl rounded-full"></div>
                             <div class="relative z-10 aspect-square overflow-hidden rounded-3xl transform -rotate-2 hover:rotate-0 transition-all duration-500 shadow-2xl">
-                                <img src="/Kekuatan Komunitas.png" alt="Ilustrasi Kekuatan Komunitas" class="w-full h-full object-cover">
+                                <img src="/Kekuatan Komunitas.webp" alt="Ilustrasi Kekuatan Komunitas" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>

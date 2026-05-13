@@ -13,7 +13,7 @@
                     <div class="bg-slate-900 border border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.3)] sm:rounded-3xl overflow-hidden mb-8">
                         <div class="relative h-48 bg-teal-900/30 overflow-hidden">
                             <div class="absolute inset-0 bg-gradient-to-r from-teal-900/50 to-transparent z-10"></div>
-                            <img src="/Pelaporan Aman & Terlindungi.png" alt="Header Pelaporan" class="absolute right-0 top-0 h-full w-auto object-cover opacity-60">
+                            <img src="/Pelaporan Aman & Terlindungi.webp" alt="Header Pelaporan" class="absolute right-0 top-0 h-full w-auto object-cover opacity-60">
                             <div class="relative z-20 p-8 h-full flex flex-col justify-center">
                                 <h1 class="text-3xl font-black text-white mb-2">Sampaikan Laporan Anda</h1>
                                 <p class="text-teal-100/70 max-w-md">Data Anda dienkripsi dan diproses secara anonim untuk keamanan maksimal.</p>
@@ -30,7 +30,7 @@
                     <div class="bg-slate-900 border border-slate-800 shadow-[0_4px_20px_rgba(0,0,0,0.3)] rounded-3xl p-8 sticky top-24">
                         <div class="mb-8 relative aspect-square overflow-hidden rounded-2xl">
                             <div class="absolute -inset-4 bg-teal-500/10 blur-2xl rounded-full"></div>
-                            <img src="/Perlindungan & Keamanan.png" alt="Ilustrasi Perlindungan" class="relative z-10 w-full h-full object-cover">
+                            <img src="/Perlindungan & Keamanan.webp" alt="Ilustrasi Perlindungan" class="relative z-10 w-full h-full object-cover">
                         </div>
                         <h3 class="text-xl font-bold text-white mb-4">Jaminan Keamanan</h3>
                         <ul class="space-y-4">

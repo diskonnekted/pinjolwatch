@@ -137,7 +137,7 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
 
                 {{-- Image with glass frame - 1:1 square crop --}}
                 <div style="position: relative; width: 100%; max-width: 480px; aspect-ratio: 1/1; border-radius: 32px; overflow: hidden; box-shadow: 0 0 80px rgba(13,148,136,.4), 0 0 0 1px rgba(45,212,191,.2); animation: float-img 6s ease-in-out infinite;">
-                    <img src="/anda tidak sendiri.png"
+                    <img src="/anda tidak sendiri.webp"
                          alt="Anda Tidak Sendirian - Ilustrasi dukungan komunitas"
                          style="width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block;">
                     {{-- Teal overlay shimmer --}}
@@ -343,7 +343,7 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
             </div>
             <div class="hero-img-col">
                 <div style="position: relative; aspect-ratio: 1/1; border-radius: 40px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05);">
-                    <img src="/Pembebasan dari Beban.png" alt="Ilustrasi Pembebasan dari Beban" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <img src="/Pembebasan dari Beban.webp" alt="Ilustrasi Pembebasan dari Beban" style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 </div>
             </div>
         </div>

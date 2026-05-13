@@ -69,7 +69,7 @@ nav { background: rgba(2,6,23,.95) !important; backdrop-filter: blur(20px); bord
             </div>
             <div style="position:relative;">
                 <div style="position:absolute;inset:-20px;background:radial-gradient(ellipse,rgba(13,148,136,.3),transparent 70%);border-radius:50%;"></div>
-                <img src="/anda tidak sendiri.png" alt="Anda Tidak Sendirian" class="hero-img">
+                <img src="/anda tidak sendiri.webp" alt="Anda Tidak Sendirian" class="hero-img">
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@ nav { background: rgba(2,6,23,.95) !important; backdrop-filter: blur(20px); bord
     <div class="container">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
             <div>
-                <img src="/Kekuatan Komunitas.png" alt="Kekuatan Komunitas" class="section-img">
+                <img src="/Kekuatan Komunitas.webp" alt="Kekuatan Komunitas" class="section-img">
             </div>
             <div>
                 <div class="badge" style="background:rgba(13,148,136,.1);border-color:rgba(13,148,136,.3);color:var(--teal);margin-bottom:20px;">Mengapa Pendekatan Anda Berdampak Besar?</div>
@@ -150,7 +150,7 @@ nav { background: rgba(2,6,23,.95) !important; backdrop-filter: blur(20px); bord
                 @endforeach
             </div>
             <div style="position:sticky;top:100px;">
-                <img src="/Perlindungan &amp; Keamanan.png" alt="Perlindungan dan Keamanan" class="section-img" style="aspect-ratio:4/3;object-fit:cover;">
+                <img src="/Perlindungan & Keamanan.webp" alt="Perlindungan dan Keamanan" class="section-img" style="aspect-ratio:4/3;object-fit:cover;">
             </div>
         </div>
     </div>
