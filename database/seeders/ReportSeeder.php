@@ -10,20 +10,63 @@ class ReportSeeder extends Seeder
 {
     public function run(): void
     {
-        $kabIds = DB::table('kabupaten')->pluck('id');
         $threatIds = DB::table('threat_types')->pluck('id');
         $statuses = ['received', 'verified', 'forwarded', 'resolved'];
         $consents = ['internal_only', 'share_to_authorities'];
 
-        if ($kabIds->isEmpty() || $threatIds->isEmpty()) {
-            $this->command->warn('Kabupaten or ThreatType seeders must be run first. Skipping ReportSeeder.');
+        if ($threatIds->isEmpty()) {
+            $this->command->warn('ThreatType seeder must be run first. Skipping ReportSeeder.');
             return;
         }
 
-        for ($i = 0; $i < 50; $i++) {
+        // Fetch Kabupaten IDs grouped by Province
+        $provinces = DB::table('kabupaten')
+            ->select('provinsi', DB::raw('id'))
+            ->get()
+            ->groupBy('provinsi')
+            ->map(function($items) {
+                return $items->pluck('id')->toArray();
+            })
+            ->toArray();
+
+        // OJK-style weighted probability distribution
+        $weights = [
+            'JAWA BARAT' => 28,
+            'DKI JAKARTA' => 26,
+            'JAWA TIMUR' => 14,
+            'BANTEN' => 9,
+            'JAWA TENGAH' => 8,
+            'SUMATERA UTARA' => 4,
+        ];
+
+        // Fill remaining weight for other provinces
+        $otherProvinces = array_diff(array_keys($provinces), array_keys($weights));
+        $otherWeight = 11;
+        $weightPerOther = count($otherProvinces) > 0 ? $otherWeight / count($otherProvinces) : 0;
+        
+        foreach ($otherProvinces as $op) {
+            $weights[$op] = $weightPerOther;
+        }
+
+        for ($i = 0; $i < 200; $i++) {
+            // Weighted random selection of province
+            $rand = mt_rand(1, 10000) / 100;
+            $currentWeight = 0;
+            $selectedProvince = 'DKI JAKARTA'; // Default
+
+            foreach ($weights as $prov => $w) {
+                $currentWeight += $w;
+                if ($rand <= $currentWeight) {
+                    $selectedProvince = $prov;
+                    break;
+                }
+            }
+
+            $kabupatenId = $provinces[$selectedProvince][array_rand($provinces[$selectedProvince])];
+
             DB::table('reports')->insert([
                 'ticket_id' => 'PW-' . strtoupper(Str::random(6)) . '-' . date('Ymd'),
-                'kabupaten_id' => $kabIds->random(),
+                'kabupaten_id' => $kabupatenId,
                 'threat_type_id' => $threatIds->random(),
                 'app_name' => 'Pinjol_' . strtoupper(Str::random(4)),
                 'chronology' => 'Laporan dummy: Debt collector menghubungi via WhatsApp dan mengancam akan menyebarkan foto KTP ke kontak darurat.',
