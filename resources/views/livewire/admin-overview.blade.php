@@ -15,7 +15,7 @@
                         System Analytics v2.4
                     </span>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter leading-none">
+                <h1 class="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none">
                     Dashboard <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-indigo-500">Overview</span>
                 </h1>
                 <p class="text-slate-400 font-medium text-sm mt-4">Pantau performa dan statistik operasional harian PinjolWatch dalam waktu nyata.</p>
@@ -23,7 +23,7 @@
 
             <div class="flex items-center gap-6">
                 <div class="hidden lg:flex flex-col items-end">
-                    <div id="digitalClock" class="text-3xl font-black text-white tracking-tighter tabular-nums leading-none italic">00:00:00</div>
+                    <div id="digitalClock" class="text-3xl font-black text-white tracking-tighter tabular-nums leading-none">00:00:00</div>
                     <div class="text-[10px] text-teal-500 font-black uppercase tracking-widest mt-2 flex items-center gap-2">
                         <span class="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
                         {{ now()->format('l, d F Y') }}
@@ -64,7 +64,7 @@
                             </div>
                             <div class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">{{ $item['label'] }}</div>
                         </div>
-                        <div class="text-5xl font-black text-white tracking-tighter italic">{{ number_format($item['val']) }}</div>
+                        <div class="text-6xl font-black text-white tracking-tighter">{{ number_format($item['val']) }}</div>
                     </div>
                 </div>
             @endforeach
@@ -77,7 +77,7 @@
                 <div class="relative glass rounded-[2.5rem] p-10 border-white/5 transition-all duration-500 hover:bg-slate-900/40">
                     <div class="flex items-center justify-between mb-10">
                         <div>
-                            <h3 class="text-xl font-black text-white uppercase italic tracking-tighter">{{ $info['label'] }}</h3>
+                            <h3 class="text-xl font-black text-white uppercase tracking-tighter">{{ $info['label'] }}</h3>
                             <p class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] mt-2">{{ $info['sub'] }}</p>
                         </div>
                         <div class="px-3 py-1 bg-white/5 text-teal-400 text-[10px] font-black rounded-lg border border-white/10 uppercase tracking-widest">{{ $info['tag'] }}</div>
@@ -93,7 +93,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {{-- Distribution --}}
             <div class="glass rounded-[2.5rem] p-10 border-white/5">
-                <h3 class="text-sm font-black text-white uppercase italic tracking-widest mb-8">Status Moderasi</h3>
+                <h3 class="text-sm font-black text-white uppercase tracking-widest mb-8">Status Moderasi</h3>
                 <div class="space-y-8">
                     @php
                         $statusRows = [
@@ -121,7 +121,7 @@
             {{-- Audit Logs --}}
             <div class="lg:col-span-2 glass rounded-[2.5rem] p-10 border-white/5 flex flex-col">
                 <div class="flex items-center justify-between mb-8">
-                    <h3 class="text-sm font-black text-white uppercase italic tracking-widest">Aktivitas Sistem</h3>
+                    <h3 class="text-sm font-black text-white uppercase tracking-widest">Aktivitas Sistem</h3>
                     <a href="{{ route('admin.audit-log') }}" class="group flex items-center gap-2 text-[10px] font-black text-teal-400 hover:text-teal-300 uppercase tracking-widest transition-all">
                         Lihat Log Lengkap
                         <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
@@ -139,7 +139,7 @@
                                 @endif
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="text-sm text-white font-black italic truncate leading-none mb-1">
+                                <p class="text-sm text-white font-black truncate leading-none mb-1">
                                     {{ $log->user->name ?? 'System Process' }}
                                 </p>
                                 <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest truncate">
@@ -226,7 +226,12 @@
                             tension: 0.45,
                         }]
                     },
-                    options: commonOptions
+                    options: {
+                        ...commonOptions,
+                        layout: {
+                            padding: { top: 20 }
+                        }
+                    }
                 });
 
                 // Chart 2: Visitors
@@ -245,7 +250,8 @@
                             backgroundColor: g2,
                             borderRadius: 12,
                             borderSkipped: false,
-                            maxBarThickness: 15
+                            maxBarThickness: 40,
+                            barPercentage: 0.8
                         }]
                     },
                     options: {
