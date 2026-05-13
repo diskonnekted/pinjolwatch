@@ -32,7 +32,7 @@ class ArticleSystem extends Component
                 });
             })
             ->latest()
-            ->paginate(6);
+            ->paginate(9);
 
         return view('livewire.article-system', compact('articles'));
     }
