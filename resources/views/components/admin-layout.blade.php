@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="flex items-center gap-8">
-                    <a href="{{ route('dashboard') }}" class="group flex items-center gap-2 text-[10px] font-black text-slate-500 hover:text-teal-400 transition-all uppercase tracking-[0.2em]">
+                    <a href="{{ url('/') }}" class="group flex items-center gap-2 text-[10px] font-black text-slate-500 hover:text-teal-400 transition-all uppercase tracking-[0.2em]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3 h-3 group-hover:-translate-x-1 transition-transform"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
                         Kembali ke Web Publik
                     </a>
