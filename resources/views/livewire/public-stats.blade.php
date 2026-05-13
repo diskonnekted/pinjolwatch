@@ -26,6 +26,59 @@
                 class="px-10 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300">
                 Analisis Dampak
             </button>
+            <button @click="activeTab = 'findings'" 
+                :class="activeTab === 'findings' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-200'"
+                class="px-10 py-3 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300">
+                Temuan & Solusi
+            </button>
+        </div>
+    </div>
+
+    {{-- TAB 1: DATA INDUSTRI (Existing) --}}
+    ...
+    
+    {{-- TAB 4: TEMUAN KUNCI --}}
+    <div x-show="activeTab === 'findings'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+        <div class="max-w-5xl mx-auto space-y-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-white italic uppercase tracking-tighter mb-4 grad">🎯 Temuan Kritis & Rekomendasi</h2>
+                <p class="text-slate-500 text-sm font-bold uppercase tracking-widest">Ringkasan eksekutif laporan dampak PinjolWatch</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                @foreach($stats['humanImpact']['keyFindings'] as $finding)
+                <div class="glass p-8 group hover:bg-white/5 border-slate-800 transition-all">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xs font-black text-slate-500 uppercase tracking-widest">{{ $finding['title'] }}</h4>
+                        <span class="text-2xl font-black text-indigo-500">{{ $finding['stat'] }}</span>
+                    </div>
+                    <p class="text-sm text-slate-300 leading-relaxed">{{ $finding['desc'] }}</p>
+                </div>
+                @endforeach
+            </div>
+
+            <div class="divider pt-10"></div>
+
+            <div class="glass p-12 bg-indigo-500/5 border-indigo-500/20">
+                <h3 class="text-2xl font-black text-white uppercase italic tracking-tight mb-8">Rekomendasi Kebijakan</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="space-y-4">
+                        <div class="text-2xl">⚖️</div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest">Regulasi Ketat</h5>
+                        <p class="text-[11px] text-slate-400 leading-relaxed">Pembatasan bunga harian maksimal 0.1% dan moratorium izin pinjol baru hingga audit menyeluruh dilakukan.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="text-2xl">🧠</div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest">Layanan Krisis</h5>
+                        <p class="text-[11px] text-slate-400 leading-relaxed">Penyediaan layanan konseling kesehatan jiwa gratis bagi korban jeratan utang dan perlindungan saksi/korban.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="text-2xl">🚫</div>
+                        <h5 class="text-xs font-black text-white uppercase tracking-widest">Sanksi Pidana DC</h5>
+                        <p class="text-[11px] text-slate-400 leading-relaxed">Penegakan hukum pidana bagi debt collector yang melakukan teror psikis, penyebaran data, dan kekerasan verbal.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

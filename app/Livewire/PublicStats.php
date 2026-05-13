@@ -123,6 +123,13 @@ class PublicStats extends Component
                     'affected_lives' => '188.25', // Juta Jiwa
                     'economic_loss' => '1,054', // Triliun/Tahun
                     'health_burden' => '116.64', // Triliun/Tahun
+                ],
+                'keyFindings' => [
+                    ['title' => 'Lonjakan Bunuh Diri', 'stat' => '2.700%', 'desc' => 'Kenaikan kasus terverifikasi dari 2018 ke 2023 [12]'],
+                    ['title' => 'Krisis Kesehatan Mental', 'stat' => '30%', 'desc' => '84 Juta Jiwa mengalami gangguan mental, depresi & ansietas tertinggi [21]'],
+                    ['title' => 'Underreporting Masif', 'stat' => '20,28%', 'desc' => 'Hanya 1 dari 5 kejahatan dilaporkan. Teror riil jauh lebih tinggi [1]'],
+                    ['title' => 'Korelasi Utang-Depresi', 'stat' => 'Kuat', 'desc' => 'Riset internasional mengonfirmasi utang sebagai faktor utama depresi [21][47]'],
+                    ['title' => 'Dampak Lintas Generasi', 'stat' => '188 Juta', 'desc' => '70% populasi terdampak psikologis melalui efek domino keluarga [12]'],
                 ]
             ],
             'sources' => [
