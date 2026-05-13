@@ -34,9 +34,7 @@
         </div>
     </div>
 
-    {{-- TAB 1: DATA INDUSTRI (Existing) --}}
-    ...
-    
+
     {{-- TAB 4: TEMUAN KUNCI --}}
     <div x-show="activeTab === 'findings'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
         <div class="max-w-5xl mx-auto space-y-8">
