@@ -14,7 +14,7 @@
                 @forelse($waitingSessions as $session)
                     <button wire:click="selectSession('{{ $session->id }}')" class="w-full p-4 bg-slate-800/50 border border-slate-700/50 rounded-2xl text-left hover:border-amber-500/50 transition-all group">
                         <p class="text-xs font-black text-white uppercase tracking-tight mb-1">{{ $session->requester->nickname ?: $session->requester->name }}</p>
-                        <p class="text-[10px] text-slate-500 font-medium italic">Menunggu {{ $session->created_at->diffForHumans() }}</p>
+                        <p class="text-[10px] text-slate-500 font-medium ">Menunggu {{ $session->created_at->diffForHumans() }}</p>
                     </button>
                 @empty
                     <div class="h-full flex flex-col items-center justify-center text-center p-6 opacity-20">
@@ -38,7 +38,7 @@
                 @foreach($myActiveSessions as $session)
                     <button wire:click="selectSession('{{ $session->id }}')" class="w-full p-4 {{ $activeSessionId === $session->id ? 'bg-primary-600 border-primary-500' : 'bg-slate-800/50 border-slate-700/50' }} border rounded-2xl text-left hover:border-primary-500 transition-all group">
                         <p class="text-xs font-black {{ $activeSessionId === $session->id ? 'text-white' : 'text-slate-200' }} uppercase tracking-tight mb-1">{{ $session->requester->nickname ?: $session->requester->name }}</p>
-                        <p class="text-[10px] {{ $activeSessionId === $session->id ? 'text-primary-200' : 'text-slate-500' }} font-medium italic">Aktif {{ $session->updated_at->diffForHumans() }}</p>
+                        <p class="text-[10px] {{ $activeSessionId === $session->id ? 'text-primary-200' : 'text-slate-500' }} font-medium ">Aktif {{ $session->updated_at->diffForHumans() }}</p>
                     </button>
                 @endforeach
             </div>
@@ -108,7 +108,7 @@
                 <div class="w-32 h-32 bg-slate-800 rounded-[2.5rem] flex items-center justify-center text-5xl mb-8 shadow-2xl animate-bounce duration-[3000ms]">
                     📩
                 </div>
-                <h3 class="text-2xl font-black text-white uppercase italic tracking-tighter mb-4">Pilih Sesi Obrolan</h3>
+                <h3 class="text-2xl font-black text-white uppercase  tracking-tighter mb-4">Pilih Sesi Obrolan</h3>
                 <p class="text-slate-500 text-sm max-w-sm font-medium leading-relaxed">
                     Klik pada antrean menunggu atau sesi aktif Anda untuk mulai memberikan dukungan kepada penyintas.
                 </p>

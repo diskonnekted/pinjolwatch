@@ -63,7 +63,7 @@
                 </div>
             </div>
         @empty
-            <div class="text-center py-12 text-slate-600 italic">
+            <div class="text-center py-12 text-slate-600 ">
                 Belum ada komentar. Jadilah yang pertama memberikan suara.
             </div>
         @endforelse

@@ -48,7 +48,7 @@
                             </li>
                         </ul>
                         <div class="mt-8 pt-8 border-t border-slate-800">
-                            <p class="text-xs text-slate-500 italic">"Ketenangan Anda adalah prioritas utama kami. Jangan biarkan teror menghancurkan hari Anda."</p>
+                            <p class="text-xs text-slate-500 ">"Ketenangan Anda adalah prioritas utama kami. Jangan biarkan teror menghancurkan hari Anda."</p>
                         </div>
                     </div>
                 </div>

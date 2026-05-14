@@ -2,7 +2,7 @@
     {{-- Main Header --}}
     <div class="text-center space-y-6 mb-24">
         <div class="badge">Laporan Dampak Nasional v2.2</div>
-        <h1 class="text-7xl font-black text-white italic uppercase tracking-tighter grad leading-none">Public Impact<br>Dashboard.</h1>
+        <h1 class="text-7xl font-black text-white uppercase tracking-tighter grad leading-none">Public Impact<br>Dashboard.</h1>
         <p class="text-slate-500 text-lg font-bold uppercase tracking-[0.2em] max-w-2xl mx-auto">
             Analisis data interaktif berdasarkan laporan masyarakat dan statistik resmi otoritas.
         </p>
@@ -39,7 +39,7 @@
     <div x-show="activeTab === 'findings'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
         <div class="max-w-5xl mx-auto space-y-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-white italic uppercase tracking-tighter mb-4 grad">🎯 Temuan Kritis & Rekomendasi</h2>
+                <h2 class="text-4xl font-black text-white uppercase tracking-tighter mb-4 grad">🎯 Temuan Kritis & Rekomendasi</h2>
                 <p class="text-slate-500 text-sm font-bold uppercase tracking-widest">Ringkasan eksekutif laporan dampak PinjolWatch</p>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="divider pt-10"></div>
 
             <div class="glass p-12 bg-indigo-500/5 border-indigo-500/20">
-                <h3 class="text-2xl font-black text-white uppercase italic tracking-tight mb-8">Rekomendasi Kebijakan</h3>
+                <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-8">Rekomendasi Kebijakan</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="space-y-4">
                         <div class="text-2xl">⚖️</div>
@@ -109,7 +109,7 @@
             {{-- Blocking History Chart --}}
             <div class="glass col-span-12 md:col-span-8 p-10" wire:ignore>
                 <div class="flex justify-between items-center mb-10">
-                    <h3 class="text-xl font-black text-white uppercase italic tracking-tight">Tren Pemblokiran Pinjol Ilegal</h3>
+                    <h3 class="text-xl font-black text-white uppercase tracking-tight">Tren Pemblokiran Pinjol Ilegal</h3>
                     <div class="px-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-[10px] font-black text-slate-500 uppercase tracking-widest">Total: 8.243+ (2021-2025)</div>
                 </div>
                 <div class="h-[350px]"><canvas id="blockingHistoryChart"></canvas></div>
@@ -117,7 +117,7 @@
             
             {{-- Extra Industry Stats --}}
             <div class="glass col-span-12 md:col-span-4 p-10 space-y-8">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight">Statistik Tambahan</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight">Statistik Tambahan</h3>
                 <div class="p-6 bg-slate-950 rounded-2xl border border-slate-800">
                     <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Pinjol + Paylater (Feb 2026)</div>
                     <div class="text-3xl font-black text-amber-500">Rp157 <span class="text-sm">Trilyun</span></div>
@@ -136,11 +136,11 @@
         {{-- Internal Trend --}}
         <div class="grid grid-cols-12 gap-8">
             <div class="glass col-span-12 md:col-span-7 p-10" wire:ignore>
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-10">Laporan Masuk PinjolWatch</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-10">Laporan Masuk PinjolWatch</h3>
                 <div class="h-[350px]"><canvas id="dynamicTrendChart"></canvas></div>
             </div>
             <div class="glass col-span-12 md:col-span-5 p-10" wire:ignore>
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-10">Kategori Teror Dominan</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-10">Kategori Teror Dominan</h3>
                 <div class="h-[350px]"><canvas id="dynamicThreatChart"></canvas></div>
             </div>
         </div>
@@ -152,7 +152,7 @@
             {{-- Suicide Trend --}}
             <div class="glass col-span-12 md:col-span-7 p-10 flex flex-col">
                 <div class="mb-10">
-                    <h3 class="text-3xl font-black text-rose-500 uppercase italic tracking-tight mb-2">Tragedi Bunuh Diri</h3>
+                    <h3 class="text-3xl font-black text-rose-500 uppercase tracking-tight mb-2">Tragedi Bunuh Diri</h3>
                     <p class="text-slate-500 text-[10px] font-black uppercase tracking-[0.3em]">Kenaikan 2.700% Kasus Terverifikasi (2018-2023)</p>
                 </div>
                 <div class="h-[250px] mb-10" wire:ignore><canvas id="suicideTrendChart"></canvas></div>
@@ -188,7 +188,7 @@
             {{-- Suicide Details Table --}}
             <div class="glass col-span-12 md:col-span-5 p-10 flex flex-col justify-between">
                 <div>
-                    <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-10">Profil Korban Terpadu</h3>
+                    <h3 class="text-xl font-black text-white uppercase tracking-tight mb-10">Profil Korban Terpadu</h3>
                     <div class="space-y-6">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="p-5 bg-rose-500/10 border border-rose-500/20 rounded-2xl">
@@ -243,7 +243,7 @@
                     <div class="p-6 bg-rose-500/5 rounded-3xl border border-rose-500/10 relative overflow-hidden group">
                         <div class="absolute -right-6 -bottom-6 text-6xl opacity-[0.05] group-hover:scale-110 transition-transform">📌</div>
                         <h4 class="text-[10px] font-black text-white uppercase tracking-[0.3em] mb-3">Kasus Nyata</h4>
-                        <p class="text-[11px] text-slate-400 leading-relaxed italic relative z-10">
+                        <p class="text-[11px] text-slate-400 leading-relaxed relative z-10">
                             "Seorang karyawan honorer di Baturaja, Sumatera Selatan, diberhentikan dari pekerjaannya setelah debt collector menghubungi rekan kerjanya. Kehilangan pekerjaan membuatnya semakin sulit bayar utang, dan akhirnya bunuh diri." <sup class="text-[8px] text-slate-600">[12]</sup>
                         </p>
                     </div>
@@ -254,7 +254,7 @@
         <div class="grid grid-cols-12 gap-8 mb-16">
             {{-- National Suicide Table --}}
             <div class="glass col-span-12 md:col-span-8 p-10">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-4">Data Bunuh Diri Nasional (Umum)</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-4">Data Bunuh Diri Nasional (Umum)</h3>
                 <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-10">Sumber: Kementerian Kesehatan & POLRI</p>
                 <table class="w-full text-left">
                     <thead>
@@ -299,7 +299,7 @@
         <div class="grid grid-cols-12 gap-8 mb-16">
             {{-- Mental Health Indicators --}}
             <div class="glass col-span-12 md:col-span-8 p-10">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-8">Prevalensi Nasional (Mental Health)</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-8">Prevalensi Nasional (Mental Health)</h3>
                 <table class="w-full text-left">
                     <thead>
                         <tr class="border-b border-slate-800 text-slate-500">
@@ -322,7 +322,7 @@
 
             {{-- Undiagnosed Table --}}
             <div class="glass col-span-12 md:col-span-4 p-10 bg-rose-500/5 border-rose-500/10">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-8">Tidak Terdiagnosis</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-8">Tidak Terdiagnosis</h3>
                 <table class="w-full text-left text-[11px]">
                     <tbody class="divide-y divide-slate-800/50">
                         @foreach($stats['humanImpact']['undiagnosed'] as $item)
@@ -342,7 +342,7 @@
         {{-- Vulnerable Groups & Correlation --}}
         <div class="grid grid-cols-12 gap-8 mb-16">
             <div class="glass col-span-12 md:col-span-5 p-10">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-8">Kelompok Paling Rentan</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-8">Kelompok Paling Rentan</h3>
                 <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-8">Menurut BPS (2025):</p>
                 <div class="grid grid-cols-1 gap-3">
                     @foreach(['Perempuan', 'Pendidikan Rendah', 'Ekonomi Lemah', 'Pekerja Sektor Informal', 'Tinggal di Perdesaan'] as $v)
@@ -352,11 +352,11 @@
                     </div>
                     @endforeach
                 </div>
-                <p class="text-[9px] text-slate-600 italic mt-6">*Dipicu ketimpangan fasilitas kesehatan jiwa [23]</p>
+                <p class="text-[9px] text-slate-600 mt-6">*Dipicu ketimpangan fasilitas kesehatan jiwa [23]</p>
             </div>
 
             <div class="glass col-span-12 md:col-span-7 p-10 bg-amber-500/5 border-amber-500/10">
-                <h3 class="text-xl font-black text-white uppercase italic tracking-tight mb-8">🔗 Korelasi Utang & Mental</h3>
+                <h3 class="text-xl font-black text-white uppercase tracking-tight mb-8">🔗 Korelasi Utang & Mental</h3>
                 <div class="space-y-6">
                     <div>
                         <h4 class="text-[10px] font-black text-amber-500 uppercase tracking-[0.2em] mb-4">Faktor Penyebab Depresi (Kemenkes)</h4>
@@ -374,7 +374,7 @@
                     <div class="divider opacity-20"></div>
                     <div>
                         <h4 class="text-[10px] font-black text-teal-500 uppercase tracking-[0.2em] mb-4">Bukti Riset Internasional (PMC)</h4>
-                        <blockquote class="text-sm text-slate-300 italic border-l-4 border-teal-500 pl-6 leading-relaxed">
+                        <blockquote class="text-sm text-slate-300 border-l-4 border-teal-500 pl-6 leading-relaxed">
                             "The findings of the studies show that there is evidence to support that being in debt is related to Asian participants experiencing depression, anxiety, stress." [47]
                         </blockquote>
                         <p class="text-[10px] font-black text-white uppercase tracking-widest mt-4">
@@ -404,7 +404,7 @@
         </div>
 
         <div class="glass p-12 rounded-[3rem] border-slate-800">
-            <h3 class="text-2xl font-black text-white uppercase italic tracking-tight mb-12 text-center">Breakdown Proyeksi Sosial</h3>
+            <h3 class="text-2xl font-black text-white uppercase tracking-tight mb-12 text-center">Breakdown Proyeksi Sosial</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-10">
                 <div class="space-y-8">
                     <div class="group">

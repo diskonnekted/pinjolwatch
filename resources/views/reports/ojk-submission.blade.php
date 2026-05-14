@@ -89,7 +89,7 @@
             text-align: center; 
             font-size: 8pt; 
             color: #666666 !important; 
-            font-style: italic; 
+            font-style: ; 
             border-top: 1px solid #eeeeee;
             padding-top: 5px;
         }

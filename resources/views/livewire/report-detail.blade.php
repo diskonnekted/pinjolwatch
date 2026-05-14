@@ -122,7 +122,7 @@
                             <span class="px-3 py-1.5 rounded-lg bg-rose-50 border border-rose-100 text-xs font-bold text-rose-700">{{ $action }}</span>
                         @endforeach
                     @else
-                        <span class="text-sm text-slate-500 italic">Tidak ada taktik spesifik yang dilaporkan.</span>
+                        <span class="text-sm text-slate-500 ">Tidak ada taktik spesifik yang dilaporkan.</span>
                     @endif
                 </div>
             </div>

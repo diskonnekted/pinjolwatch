@@ -79,7 +79,7 @@
                                     <span class="text-sm text-slate-300">Pemberi Pinjaman (Fintech/Bank)</span>
                                 </div>
                             </div>
-                            <div class="p-6 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl text-sm text-indigo-300/80 italic leading-relaxed">
+                            <div class="p-6 bg-indigo-500/5 border border-indigo-500/10 rounded-2xl text-sm text-indigo-300/80  leading-relaxed">
                                 Kami bertindak sebagai perantara (intermediary) sesuai regulasi yang berlaku, memfasilitasi suara masyarakat secara anonim dan aman.
                             </div>
                         </div>
@@ -193,7 +193,7 @@
             {{-- FOOTER NOTE --}}
             <div class="bg-slate-950 border border-slate-800 shadow-2xl rounded-[2.5rem] p-10 md:p-14 text-center">
                 <div class="max-w-3xl mx-auto">
-                    <p class="text-slate-400 leading-relaxed italic text-lg mb-8">
+                    <p class="text-slate-400 leading-relaxed  text-lg mb-8">
                         "Disclaimer ini adalah bentuk transparansi kami agar PinjolWatch dapat terus melayani sebagai suara rakyat tanpa mengorbankan integritas operasional dan keamanan komunitas."
                     </p>
                     <div class="w-16 h-1 bg-slate-800 mx-auto rounded-full mb-8"></div>

@@ -58,7 +58,7 @@
             </article>
         @empty
             <div class="col-span-full py-20 text-center bg-slate-900/50 rounded-3xl border-2 border-dashed border-slate-700">
-                <p class="text-slate-500 italic">Belum ada cerita atau berita yang dipublikasikan.</p>
+                <p class="text-slate-500 ">Belum ada cerita atau berita yang dipublikasikan.</p>
             </div>
         @endforelse
     </div>

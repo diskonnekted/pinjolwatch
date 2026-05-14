@@ -113,7 +113,7 @@
                     </ul>
                     <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
                         <p class="text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">💬 Script Komunikasi</p>
-                        <p class="text-sm text-teal-300 italic">"Selamat siang. Saya bersedia berbicara, tapi saya perlu verifikasi identitas. Bisa tunjukkan kartu identitas dan surat tugas? Saya juga merekam ini."</p>
+                        <p class="text-sm text-teal-300 ">"Selamat siang. Saya bersedia berbicara, tapi saya perlu verifikasi identitas. Bisa tunjukkan kartu identitas dan surat tugas? Saya juga merekam ini."</p>
                     </div>
                 </div>
 
@@ -141,7 +141,7 @@
                     </ul>
                     <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
                         <p class="text-xs text-slate-400 uppercase tracking-wider mb-2 font-bold">💬 Script Terancam</p>
-                        <p class="text-sm text-red-300 italic">"JANGAN MASUK! Ini pelanggaran hukum! Saya sudah merekam dan menghubungi polisi!"</p>
+                        <p class="text-sm text-red-300 ">"JANGAN MASUK! Ini pelanggaran hukum! Saya sudah merekam dan menghubungi polisi!"</p>
                     </div>
                 </div>
             </div>

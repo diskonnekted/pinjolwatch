@@ -12,7 +12,7 @@
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-6">
                 <div>
                     <p class="text-[10px] font-black text-teal-400 uppercase tracking-[0.3em] mb-2">Detail Laporan</p>
-                    <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter leading-tight">
+                    <h1 class="text-4xl font-black text-white  uppercase tracking-tighter leading-tight">
                         Tiket <span class="text-teal-500 font-mono">#{{ substr($report->ticket_id, 0, 8) }}</span>
                     </h1>
                     <p class="text-slate-500 text-sm mt-2">

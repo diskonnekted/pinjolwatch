@@ -14,7 +14,7 @@
                         Administration
                     </span>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-black text-white uppercase italic tracking-tighter leading-none">
+                <h1 class="text-4xl md:text-5xl font-black text-white uppercase  tracking-tighter leading-none">
                     Manajemen <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-500">Relawan</span>
                 </h1>
                 <p class="text-slate-400 text-sm font-medium mt-4 max-w-xl">
@@ -51,15 +51,15 @@
             @endphp
             <div class="glass p-6 rounded-3xl border-white/5 group hover:border-teal-500/30 transition-all duration-500">
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Total Aplikasi</div>
-                <div class="text-3xl font-black text-white italic tracking-tighter">{{ $allCount }}</div>
+                <div class="text-3xl font-black text-white  tracking-tighter">{{ $allCount }}</div>
             </div>
             <div class="glass p-6 rounded-3xl border-white/5 group hover:border-amber-500/30 transition-all duration-500">
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Menunggu Review</div>
-                <div class="text-3xl font-black text-amber-400 italic tracking-tighter">{{ $pendingCount }}</div>
+                <div class="text-3xl font-black text-amber-400  tracking-tighter">{{ $pendingCount }}</div>
             </div>
             <div class="glass p-6 rounded-3xl border-white/5 group hover:border-teal-500/30 transition-all duration-500">
                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Sudah Disetujui</div>
-                <div class="text-3xl font-black text-teal-400 italic tracking-tighter">{{ $approvedCount }}</div>
+                <div class="text-3xl font-black text-teal-400  tracking-tighter">{{ $approvedCount }}</div>
             </div>
             <div class="glass p-6 rounded-3xl border-white/5 group hover:border-indigo-500/30 transition-all duration-500 text-center flex items-center justify-center">
                 <div class="text-[10px] font-black text-teal-500 uppercase tracking-widest animate-pulse">Live Update Active</div>
@@ -89,7 +89,7 @@
                                     {{ substr($app->full_name, 0, 1) }}
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-black text-white italic tracking-tight">{{ $app->full_name }}</h3>
+                                    <h3 class="text-xl font-black text-white  tracking-tight">{{ $app->full_name }}</h3>
                                     <div class="flex flex-wrap items-center gap-x-4 gap-y-1 mt-1">
                                         <span class="text-xs text-slate-400 font-medium flex items-center gap-1">
                                             <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -106,7 +106,7 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                                 <div>
                                     <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Keahlian & Pengalaman</div>
-                                    <p class="text-sm text-slate-300 italic font-medium leading-relaxed">
+                                    <p class="text-sm text-slate-300  font-medium leading-relaxed">
                                         "{{ $app->skills }}"
                                     </p>
                                 </div>
@@ -129,7 +129,7 @@
                             </div>
                             <div class="text-right lg:text-left">
                                 <div class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Komitmen</div>
-                                <div class="text-lg font-black text-white italic tracking-tighter">{{ $app->commitment_hours }} Jam<span class="text-xs text-slate-500 font-bold ml-1 uppercase">/Minggu</span></div>
+                                <div class="text-lg font-black text-white  tracking-tighter">{{ $app->commitment_hours }} Jam<span class="text-xs text-slate-500 font-bold ml-1 uppercase">/Minggu</span></div>
                             </div>
                         </div>
 
@@ -176,7 +176,7 @@
                     <div class="w-20 h-20 bg-slate-900 rounded-3xl flex items-center justify-center mx-auto mb-6">
                         <svg class="w-10 h-10 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
                     </div>
-                    <h3 class="text-xl font-black text-white uppercase italic tracking-tighter">Tidak ada aplikasi ditemukan</h3>
+                    <h3 class="text-xl font-black text-white uppercase  tracking-tighter">Tidak ada aplikasi ditemukan</h3>
                     <p class="text-slate-500 text-sm mt-2 font-bold uppercase tracking-widest">Coba ubah filter atau kata kunci pencarian Anda</p>
                 </div>
             @endforelse

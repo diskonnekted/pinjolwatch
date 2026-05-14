@@ -3,7 +3,7 @@
     <div class="w-32 h-32 bg-slate-900 rounded-[2.5rem] flex items-center justify-center text-5xl mb-8 shadow-2xl border border-slate-800 animate-pulse">
         📡
     </div>
-    <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter mb-4 grad">Anda Sedang Offline</h1>
+    <h1 class="text-4xl font-black text-white  uppercase tracking-tighter mb-4 grad">Anda Sedang Offline</h1>
     <p class="text-slate-400 text-lg max-w-md leading-relaxed mb-10">
         Maaf, koneksi internet Anda terputus. Namun, Anda tetap bisa mengakses panduan darurat yang telah tersimpan di ponsel Anda.
     </p>

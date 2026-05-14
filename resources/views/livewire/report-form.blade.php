@@ -125,13 +125,13 @@
                                         <div class="w-full border-t border-gray-100"></div>
                                     </div>
                                     <div class="relative flex justify-center">
-                                        <span class="bg-white px-2 text-xs text-gray-400 font-medium italic uppercase">Atau ketik manual</span>
+                                        <span class="bg-white px-2 text-xs text-gray-400 font-medium  uppercase">Atau ketik manual</span>
                                     </div>
                                 </div>
 
                                 <div>
                                     <input id="app_name" wire:model.live.debounce.500ms="app_name" type="text" class="w-full border-gray-300 text-gray-900 rounded-xl shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm" placeholder="Ketik nama aplikasi di sini jika tidak ada di daftar">
-                                    <p class="mt-1 text-[10px] text-gray-400 italic">Pilih dari daftar di atas atau ketik manual jika aplikasi tidak terdaftar/ilegal.</p>
+                                    <p class="mt-1 text-[10px] text-gray-400 ">Pilih dari daftar di atas atau ketik manual jika aplikasi tidak terdaftar/ilegal.</p>
                                     
                                     @if($app_legal_status)
                                         <div class="mt-2 text-sm font-semibold flex items-center gap-1.5">
@@ -344,7 +344,7 @@
                                     placeholder="Masukkan minimal 4 karakter..."
                                     class="w-full border-emerald-200 bg-white text-gray-900 rounded-xl shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-sm"
                                 >
-                                <p class="mt-2 text-[10px] text-emerald-600 italic">
+                                <p class="mt-2 text-[10px] text-emerald-600 ">
                                     <strong>Peringatan:</strong> PinjolWatch tidak menyimpan kata sandi ini. Jika Anda lupa, bukti tidak akan pernah bisa dibuka kembali oleh siapa pun.
                                 </p>
                                 @error('encryption_password') <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p> @enderror
@@ -492,7 +492,7 @@
                         </div>
 
                         <div class="p-4 bg-amber-50 border border-amber-100 rounded-xl">
-                            <p class="text-xs text-amber-800 leading-relaxed italic">
+                            <p class="text-xs text-amber-800 leading-relaxed ">
                                 <strong>Catatan UU PDP:</strong> Anda berhak menarik persetujuan ini kapan saja melalui fitur lacak tiket.
                             </p>
                         </div>

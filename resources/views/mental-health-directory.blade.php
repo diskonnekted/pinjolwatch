@@ -180,7 +180,7 @@ body { font-family: 'Inter', sans-serif; background: var(--dark); color: #f1f5f9
                         <div>
                             <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; margin-bottom: 16px;">Layanan bantuan hukum gratis yang juga menyediakan rujukan pendampingan psikologis bagi korban pinjol.</p>
                             <div style="background: rgba(45, 212, 191, 0.1); border-left: 4px solid var(--teal-l); padding: 16px; border-radius: 0 12px 12px 0;">
-                                <p style="color: var(--teal-l); font-style: italic; font-size: 0.9rem; margin: 0;">"LBH Jakarta mencatat 1.944 korban pinjol mengadu, dengan mayoritas perempuan, dan beberapa berujung bunuh diri."</p>
+                                <p style="color: var(--teal-l); font-style: ; font-size: 0.9rem; margin: 0;">"LBH Jakarta mencatat 1.944 korban pinjol mengadu, dengan mayoritas perempuan, dan beberapa berujung bunuh diri."</p>
                             </div>
                         </div>
                         <div style="display: flex; flex-direction: column; justify-content: center; gap: 16px;">

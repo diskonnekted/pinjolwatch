@@ -166,8 +166,8 @@ nav { background: rgba(2,6,23,.95) !important; backdrop-filter: blur(20px); bord
         </div>
         <div class="script-box" style="max-width:780px;margin:0 auto;">
             <div style="position:absolute;top:-1px;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--teal-l),transparent);border-radius:2px;"></div>
-            <div style="font-size:4rem;color:var(--teal);line-height:0;margin-bottom:24px;font-style:italic;">"</div>
-            <p id="script-text" style="color:#e2e8f0;font-size:1.15rem;line-height:1.9;font-style:italic;margin-bottom:32px;">
+            <div style="font-size:4rem;color:var(--teal);line-height:0;margin-bottom:24px;font-style:;">"</div>
+            <p id="script-text" style="color:#e2e8f0;font-size:1.15rem;line-height:1.9;font-style:;margin-bottom:32px;">
                 "Ini berat, dan tidak apa-apa jika kamu merasa takut sekarang. Tapi ingat, ancaman mereka adalah pelanggaran hukum, bukan cerminan diri kamu. Kami ada di sini. Data kamu aman, kami akan bantu laporkan. Tarik napas pelan-pelan, kita selesaikan langkah demi langkah."
             </p>
             <button onclick="copyScript()" id="copy-btn" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.4);color:var(--teal-l);font-weight:700;border-radius:10px;cursor:pointer;font-size:.875rem;letter-spacing:.05em;text-transform:uppercase;">

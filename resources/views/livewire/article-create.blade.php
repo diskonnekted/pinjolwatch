@@ -9,19 +9,19 @@
         <div class="mb-4">
             <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Judul:</label>
             <input type="text" id="title" wire:model="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            @error('title') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+            @error('title') <span class="text-red-500 text-xs ">{{ $message }}</span> @enderror
         </div>
 
         <div class="mb-4">
             <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Isi Cerita:</label>
             <textarea id="content" wire:model="content" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-            @error('content') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+            @error('content') <span class="text-red-500 text-xs ">{{ $message }}</span> @enderror
         </div>
 
         <div class="mb-4">
             <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Gambar (Opsional):</label>
             <input type="file" id="image" wire:model="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            @error('image') <span class="text-red-500 text-xs italic">{{ $message }}</span> @enderror
+            @error('image') <span class="text-red-500 text-xs ">{{ $message }}</span> @enderror
 
             @if ($image)
                 <div class="mt-4">

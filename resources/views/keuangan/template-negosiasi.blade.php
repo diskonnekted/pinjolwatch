@@ -6,7 +6,7 @@
                 
                 <div class="text-center mb-12">
                     <span class="text-5xl mb-4 block">📄</span>
-                    <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter">Template Negosiasi Utang</h1>
+                    <h1 class="text-4xl font-black text-white  uppercase tracking-tighter">Template Negosiasi Utang</h1>
                     <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Untuk Kreditor Legal & Kooperatif</p>
                 </div>
 

@@ -63,7 +63,7 @@
         <div class="space-y-8">
             <div class="flex items-center justify-between px-4">
                 <div>
-                    <h3 class="text-xl font-black text-slate-900 uppercase tracking-tighter italic">Ranking Wilayah Terdampak</h3>
+                    <h3 class="text-xl font-black text-slate-900 uppercase tracking-tighter ">Ranking Wilayah Terdampak</h3>
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Distribusi sebaran laporan terbanyak berdasarkan kabupaten/kota</p>
                 </div>
                 <div class="flex gap-2">
@@ -110,7 +110,7 @@
             <div class="bg-slate-900 rounded-[2.5rem] p-8 shadow-2xl border border-slate-800 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
                 <div class="absolute -right-8 -top-8 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl"></div>
                 <div>
-                    <h3 class="text-lg font-black text-white uppercase tracking-tighter italic">Laporan Intelijen Geospasial</h3>
+                    <h3 class="text-lg font-black text-white uppercase tracking-tighter ">Laporan Intelijen Geospasial</h3>
                     <p class="text-slate-400 text-xs mt-1">Unduh ringkasan data statistik wilayah dalam format PDF atau CSV untuk keperluan pelaporan resmi ke otoritas.</p>
                 </div>
                 <div class="flex gap-4 shrink-0">

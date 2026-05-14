@@ -108,11 +108,11 @@
             <div class="
                 prose prose-lg prose-invert max-w-none
                 prose-headings:font-black prose-headings:tracking-tight prose-headings:text-white prose-headings:mt-12 prose-headings:mb-4
-                prose-h2:text-2xl prose-h2:border-l-4 prose-h2:border-teal-500 prose-h2:pl-4 prose-h2:not-italic
+                prose-h2:text-2xl prose-h2:border-l-4 prose-h2:border-teal-500 prose-h2:pl-4 prose-h2:not-
                 prose-p:text-slate-300 prose-p:leading-[1.9] prose-p:mb-5
                 prose-strong:text-teal-300 prose-strong:font-black
                 prose-em:text-slate-300
-                prose-blockquote:border-l-4 prose-blockquote:border-teal-500/60 prose-blockquote:bg-teal-500/5 prose-blockquote:rounded-r-2xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:text-slate-300 prose-blockquote:not-italic prose-blockquote:my-8
+                prose-blockquote:border-l-4 prose-blockquote:border-teal-500/60 prose-blockquote:bg-teal-500/5 prose-blockquote:rounded-r-2xl prose-blockquote:px-6 prose-blockquote:py-4 prose-blockquote:text-slate-300 prose-blockquote:not- prose-blockquote:my-8
                 prose-ul:text-slate-300 prose-ul:space-y-2
                 prose-li:marker:text-teal-500
                 prose-code:bg-slate-800 prose-code:text-teal-300 prose-code:px-2 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:before:content-[''] prose-code:after:content-['']

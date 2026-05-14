@@ -6,7 +6,7 @@
                 <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
                 User Management System
             </div>
-            <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic">
+            <h1 class="text-4xl font-black text-white tracking-tighter uppercase ">
                 Pengguna & <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-indigo-400">Akses</span>
             </h1>
             <p class="text-slate-500 font-bold text-sm mt-1">Kelola hak akses, peran, dan identitas pengguna PinjolWatch secara terukur.</p>
@@ -183,7 +183,7 @@
         <div class="bg-slate-900 rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl border border-white/10">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase italic">Edit Pengguna</h2>
+                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase ">Edit Pengguna</h2>
                     <button wire:click="$set('isEditModalOpen', false)" class="text-slate-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -198,7 +198,7 @@
                                 @elseif($editingAvatarUrl)
                                     <img src="{{ $editingAvatarUrl }}" class="w-full h-full object-cover">
                                 @else
-                                    <div class="text-3xl font-black text-slate-800 uppercase italic">{{ substr($editingName, 0, 1) }}</div>
+                                    <div class="text-3xl font-black text-slate-800 uppercase ">{{ substr($editingName, 0, 1) }}</div>
                                 @endif
                                 
                                 <div class="absolute inset-0 bg-slate-950/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
@@ -257,7 +257,7 @@
         <div class="bg-slate-900 rounded-[2.5rem] w-full max-w-sm overflow-hidden shadow-2xl border border-white/10">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase italic">Reset Password</h2>
+                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase ">Reset Password</h2>
                     <button wire:click="$set('isResetModalOpen', false)" class="text-slate-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>
@@ -293,7 +293,7 @@
         <div class="bg-slate-900 rounded-[2.5rem] w-full max-w-md overflow-hidden shadow-2xl border border-white/10">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase italic">Tambah Pengguna</h2>
+                    <h2 class="text-2xl font-black text-white tracking-tighter uppercase ">Tambah Pengguna</h2>
                     <button wire:click="$set('isCreateModalOpen', false)" class="text-slate-500 hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
                     </button>

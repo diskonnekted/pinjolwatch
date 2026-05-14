@@ -20,7 +20,7 @@
                     <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-[2rem]">
                         <h4 class="font-bold text-slate-100 mb-2">WhatsApp</h4>
                         <p class="text-xs text-slate-500 mb-6 leading-relaxed">Gunakan jika DC mengancam akan menghubungi kontak atau menyebar data pribadi.</p>
-                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300 italic mb-6 leading-relaxed">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300  mb-6 leading-relaxed">
                             "Selamat siang. Saya sadar memiliki kewajiban, namun tindakan Anda mengancam menyebarkan data pribadi saya melanggar UU ITE dan UU PDP. Saya telah merekam percakapan ini sebagai bukti untuk pelaporan ke @PinjolWatch dan pihak berwajib. Mari bicara profesional sesuai aturan OJK."
                         </div>
                         <button onclick="copyToClipboard(this)" class="w-full py-3 bg-indigo-600 text-white text-xs font-bold rounded-xl hover:bg-indigo-500 hover:-translate-y-0.5 transition-all">Salin Template</button>
@@ -30,7 +30,7 @@
                     <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-[2rem]">
                         <h4 class="font-bold text-slate-100 mb-2">SMS</h4>
                         <p class="text-xs text-slate-500 mb-6 leading-relaxed">Respon singkat untuk menegaskan bahwa Anda mengetahui prosedur hukum.</p>
-                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300 italic mb-6 leading-relaxed">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300  mb-6 leading-relaxed">
                             "Saya mencatat penagihan Anda. Harap lampirkan rincian utang resmi dan surat tugas penagihan sesuai aturan AFPI/OJK melalui email resmi perusahaan. Penagihan di luar prosedur akan saya laporkan ke Satgas Pasti OJK."
                         </div>
                         <button onclick="copyToClipboard(this)" class="w-full py-3 bg-indigo-600 text-white text-xs font-bold rounded-xl hover:bg-indigo-500 hover:-translate-y-0.5 transition-all">Salin Template</button>
@@ -40,7 +40,7 @@
                     <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-[2rem]">
                         <h4 class="font-bold text-slate-100 mb-2">Telepon</h4>
                         <p class="text-xs text-slate-500 mb-6 leading-relaxed">Gunakan script ini saat menerima telepon dari nomor tidak dikenal yang mengaku DC.</p>
-                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300 italic mb-6 leading-relaxed">
+                        <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 text-sm text-slate-300  mb-6 leading-relaxed">
                             "Maaf, sebelum lanjut, boleh saya tahu nama lengkap Anda dan dari perusahaan mana? Saya informasikan bahwa percakapan ini sedang saya rekam untuk dokumentasi hukum. Jika ada ancaman, rekaman ini akan langsung saya kirim ke OJK."
                         </div>
                         <button onclick="copyToClipboard(this)" class="w-full py-3 bg-indigo-600 text-white text-xs font-bold rounded-xl hover:bg-indigo-500 hover:-translate-y-0.5 transition-all">Salin Script</button>

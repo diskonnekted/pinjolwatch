@@ -95,7 +95,7 @@
                         {{-- Toolbar --}}
                         <div class="flex flex-wrap items-center gap-1 p-2 bg-slate-50 border border-slate-200 border-b-0 rounded-t-xl">
                             <button type="button" @mousedown.prevent="execCmd('bold')"      title="Bold"          class="wysiwyg-btn font-black">B</button>
-                            <button type="button" @mousedown.prevent="execCmd('italic')"    title="Italic"        class="wysiwyg-btn italic">I</button>
+                            <button type="button" @mousedown.prevent="execCmd('')"    title=""        class="wysiwyg-btn ">I</button>
                             <button type="button" @mousedown.prevent="execCmd('underline')" title="Underline"     class="wysiwyg-btn underline">U</button>
                             <div class="w-px h-5 bg-slate-300 mx-1"></div>
                             <button type="button" @mousedown.prevent="execCmd('h2')"        title="Heading 2"     class="wysiwyg-btn text-xs font-black">H2</button>
@@ -254,11 +254,11 @@
         .wysiwyg-editor h3{font-size:1.2rem;font-weight:800;color:#1e293b;margin:1.25rem 0 .5rem;}
         .wysiwyg-editor p{margin:0 0 1rem;line-height:1.85;color:#334155;}
         .wysiwyg-editor strong{font-weight:800;color:#0d9488;}
-        .wysiwyg-editor em{font-style:italic;color:#475569;}
+        .wysiwyg-editor em{font-style:;color:#475569;}
         .wysiwyg-editor ul{list-style:disc;padding-left:1.5rem;margin:.75rem 0 1rem;color:#334155;}
         .wysiwyg-editor ol{list-style:decimal;padding-left:1.5rem;margin:.75rem 0 1rem;color:#334155;}
         .wysiwyg-editor li{margin:.25rem 0;}
-        .wysiwyg-editor blockquote{border-left:4px solid #5eead4;background:#f0fdfa;padding:1rem 1.25rem;margin:1.25rem 0;border-radius:0 .75rem .75rem 0;color:#0f766e;font-style:italic;}
+        .wysiwyg-editor blockquote{border-left:4px solid #5eead4;background:#f0fdfa;padding:1rem 1.25rem;margin:1.25rem 0;border-radius:0 .75rem .75rem 0;color:#0f766e;font-style:;}
         .wysiwyg-editor a{color:#0d9488;text-decoration:underline;}
         .wysiwyg-editor hr{border:none;border-top:2px solid #e2e8f0;margin:1.5rem 0;}
         .wysiwyg-editor code{background:#f1f5f9;padding:.1rem .4rem;border-radius:.25rem;font-family:monospace;font-size:.875em;color:#0d9488;}

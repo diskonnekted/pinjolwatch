@@ -93,7 +93,7 @@
                     <div class="text-3xl">💡</div>
                     <div>
                         <h4 class="font-bold text-slate-200 mb-1">Peringatan Resmi OJK</h4>
-                        <p class="text-sm text-slate-400 italic">OJK secara resmi menyatakan bahwa <strong>tidak ada lembaga atau individu berizin</strong> yang menawarkan jasa "pelunasan pinjol ilegal" atau "penghapusan data debtor". Semua klaim tersebut adalah tidak berdasar dan berpotensi penipuan.</p>
+                        <p class="text-sm text-slate-400 ">OJK secara resmi menyatakan bahwa <strong>tidak ada lembaga atau individu berizin</strong> yang menawarkan jasa "pelunasan pinjol ilegal" atau "penghapusan data debtor". Semua klaim tersebut adalah tidak berdasar dan berpotensi penipuan.</p>
                     </div>
                 </div>
             </div>
@@ -246,7 +246,7 @@
                         </ul>
 
                         <div class="bg-blue-950/50 p-4 rounded-xl border border-blue-900/50">
-                            <p class="text-sm text-blue-300 italic font-medium">"Saya sudah melakukan yang terbaik dengan informasi yang saya punya saat itu. Sekarang saya tahu, saya punya hak untuk dilindungi."</p>
+                            <p class="text-sm text-blue-300  font-medium">"Saya sudah melakukan yang terbaik dengan informasi yang saya punya saat itu. Sekarang saya tahu, saya punya hak untuk dilindungi."</p>
                         </div>
                     </div>
                 </div>

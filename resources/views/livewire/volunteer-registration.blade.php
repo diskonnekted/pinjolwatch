@@ -4,7 +4,7 @@
             <div class="w-24 h-24 bg-teal-500/10 rounded-full flex items-center justify-center text-5xl mx-auto mb-8 shadow-lg shadow-teal-500/10 border border-teal-500/20">
                 ✨
             </div>
-            <h2 class="text-4xl font-black text-white italic uppercase tracking-tighter mb-4 grad">Terima Kasih, Calon Pejuang!</h2>
+            <h2 class="text-4xl font-black text-white  uppercase tracking-tighter mb-4 grad">Terima Kasih, Calon Pejuang!</h2>
             <p class="text-slate-400 text-lg leading-relaxed max-w-xl mx-auto mb-10">
                 Aplikasi Anda telah kami terima. Tim inti PinjolWatch akan meninjau profil Anda dan menghubungi Anda melalui WhatsApp dalam waktu 3-5 hari kerja.
             </p>
@@ -15,7 +15,7 @@
     @else
         <div class="mb-12 text-center">
             <div class="badge mb-4">Relawan PinjolWatch</div>
-            <h2 class="text-5xl font-black text-white italic uppercase tracking-tighter mb-4 grad">Jadilah Bagian dari Solusi.</h2>
+            <h2 class="text-5xl font-black text-white  uppercase tracking-tighter mb-4 grad">Jadilah Bagian dari Solusi.</h2>
             <p class="text-slate-400 text-lg max-w-2xl mx-auto">
                 Bantu kami memberdayakan pejuang pemulihan dan melawan praktik pinjol ilegal. Kami membutuhkan keterampilan, empati, dan dedikasi Anda.
             </p>

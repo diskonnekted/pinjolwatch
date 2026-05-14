@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="bg-indigo-900/20 border-l-4 border-indigo-500 p-6 rounded-r-xl">
-                    <p class="text-indigo-200 italic font-medium leading-relaxed">
+                    <p class="text-indigo-200  font-medium leading-relaxed">
                         "Kesulitan ekonomi bukan aib. Teror pinjol ilegal adalah pelanggaran hukum. Dan setiap korban berhak mendapatkan perlindungan tanpa penghakiman."
                     </p>
                 </div>

@@ -6,7 +6,7 @@
                 
                 <div class="text-center mb-12">
                     <span class="text-5xl mb-4 block">🏦</span>
-                    <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter">Mulai Bangun Dana Darurat</h1>
+                    <h1 class="text-4xl font-black text-white  uppercase tracking-tighter">Mulai Bangun Dana Darurat</h1>
                     <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Benteng Pertahanan Finansial Anda</p>
                 </div>
 
@@ -37,7 +37,7 @@
                             <p class="text-red-200/80 text-xs font-bold">Pengeluaran Bulanan<br>Jika pekerjaan Anda tidak menentu (freelancer) atau memiliki tanggungan banyak.</p>
                         </div>
                     </div>
-                    <p class="text-center italic text-sm">Jangan terintimidasi oleh jumlahnya. Memulai dengan target Rp 1.000.000 jauh lebih baik daripada tidak memulai sama sekali.</p>
+                    <p class="text-center  text-sm">Jangan terintimidasi oleh jumlahnya. Memulai dengan target Rp 1.000.000 jauh lebih baik daripada tidak memulai sama sekali.</p>
 
                     <h2 class="mt-12">Cara Praktis Memulai Dana Darurat Hari Ini</h2>
                     <p>Kuncinya adalah konsistensi, bukan jumlah. Berikut beberapa cara untuk memulai:</p>

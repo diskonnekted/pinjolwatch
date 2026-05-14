@@ -7,7 +7,7 @@
                 <div class="w-20 h-20 bg-teal-500/10 rounded-3xl flex items-center justify-center text-4xl mx-auto mb-6 border border-teal-500/20">
                     💬
                 </div>
-                <h3 class="text-3xl font-black text-white italic uppercase tracking-tighter mb-4">Butuh Teman Bicara?</h3>
+                <h3 class="text-3xl font-black text-white  uppercase tracking-tighter mb-4">Butuh Teman Bicara?</h3>
                 <p class="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed mb-10">
                     Mulai sesi obrolan anonim dengan relawan kami. Semua percakapan dienkripsi dan akan dihapus secara otomatis demi privasi Anda.
                 </p>

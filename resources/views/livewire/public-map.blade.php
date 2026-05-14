@@ -156,7 +156,7 @@
         
         {{-- Map Legend Overlay --}}
         <div class="absolute bottom-10 right-10 z-[100] bg-slate-950/90 backdrop-blur-xl p-6 rounded-[2rem] border border-slate-800 shadow-2xl hidden lg:block border-l-4 border-l-primary-500">
-            <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4 italic">Kepadatan Wilayah</h4>
+            <h4 class="text-xs font-black text-white uppercase tracking-widest mb-4 ">Kepadatan Wilayah</h4>
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
                     <span class="w-8 h-4 rounded bg-rose-600 border border-white/20"></span>
@@ -179,7 +179,7 @@
         <div class="md:col-span-2 space-y-8">
             <div class="bg-slate-900 rounded-[2.5rem] p-10 border border-slate-800 relative overflow-hidden">
                 <div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-500/5 rounded-full blur-3xl"></div>
-                <h3 class="text-2xl font-black text-white uppercase tracking-tighter italic mb-6">Membaca Data Geospasial PinjolWatch</h3>
+                <h3 class="text-2xl font-black text-white uppercase tracking-tighter  mb-6">Membaca Data Geospasial PinjolWatch</h3>
                 <div class="prose prose-invert max-w-none text-slate-400 text-sm leading-relaxed space-y-4">
                     <p>
                         Peta di atas merupakan visualisasi transparansi nasional mengenai dampak Pinjaman Online di Indonesia. Data dikumpulkan dari dua sumber utama untuk memberikan perspektif yang berimbang:
@@ -198,7 +198,7 @@
         <div class="space-y-6">
             <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-[2.5rem] p-8 border border-slate-700 shadow-xl">
                 <div class="w-12 h-12 rounded-2xl bg-primary-500/20 flex items-center justify-center text-2xl mb-6">⚠️</div>
-                <h4 class="text-lg font-black text-white uppercase tracking-tighter italic mb-4">Catatan Keamanan</h4>
+                <h4 class="text-lg font-black text-white uppercase tracking-tighter  mb-4">Catatan Keamanan</h4>
                 <p class="text-slate-400 text-xs leading-relaxed">
                     Lokasi yang ditampilkan adalah tingkat Provinsi. Kami tidak pernah menampilkan alamat detail atau identitas korban di peta publik untuk menjamin keamanan dan privasi pelapor sesuai dengan standar perlindungan data kami.
                 </p>
@@ -206,7 +206,7 @@
 
             <div class="bg-primary-600 rounded-[2.5rem] p-8 shadow-2xl shadow-primary-900/40 relative overflow-hidden group">
                 <div class="absolute -right-4 -bottom-4 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
-                <h4 class="text-lg font-black text-white uppercase tracking-tighter italic mb-2">Ingin Melapor?</h4>
+                <h4 class="text-lg font-black text-white uppercase tracking-tighter  mb-2">Ingin Melapor?</h4>
                 <p class="text-primary-100 text-xs mb-6">Bantu kami memperbarui peta ini dengan melaporkan pengalaman Anda secara aman.</p>
                 <a href="{{ route('report') }}" class="block w-full py-3 bg-white text-primary-600 rounded-xl font-black text-[10px] uppercase tracking-widest text-center shadow-xl hover:scale-105 transition-all">Mulai Laporan Sekarang</a>
             </div>

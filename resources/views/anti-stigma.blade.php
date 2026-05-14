@@ -111,7 +111,7 @@
                     </ul>
                     
                     <div class="mt-8 p-4 bg-slate-800 rounded-xl border border-slate-700">
-                        <p class="text-teal-400 font-bold italic text-center text-sm">Stigma tidak menyelesaikan masalah. Stigma hanya membuat korban tenggelam dalam diam. Empati membuka jalan. Dukungan mempercepat pemulihan.</p>
+                        <p class="text-teal-400 font-bold  text-center text-sm">Stigma tidak menyelesaikan masalah. Stigma hanya membuat korban tenggelam dalam diam. Empati membuka jalan. Dukungan mempercepat pemulihan.</p>
                     </div>
                 </div>
 
@@ -154,7 +154,7 @@
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 via-teal-900/10 to-blue-900/10 z-0"></div>
                 <div class="relative z-10">
                     <h2 class="text-2xl font-black text-blue-400 uppercase tracking-widest mb-6">Saya Berjanji Tidak Akan Menambah Luka dengan Stigma</h2>
-                    <p class="text-xl md:text-2xl text-blue-100 font-serif italic leading-relaxed mb-10 max-w-3xl mx-auto">
+                    <p class="text-xl md:text-2xl text-blue-100 font-serif  leading-relaxed mb-10 max-w-3xl mx-auto">
                         "Saya memahami bahwa kesulitan finansial adalah kondisi, bukan aib. Saya berjanji untuk mendengarkan tanpa menghakimi, mendukung tanpa mempermalukan, dan memilih empati atas gosip."
                     </p>
                     

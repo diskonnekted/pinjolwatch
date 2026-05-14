@@ -6,7 +6,7 @@
                 
                 <div class="text-center mb-12">
                     <span class="text-5xl mb-4 block">💡</span>
-                    <h1 class="text-4xl font-black text-white italic uppercase tracking-tighter">Panduan Perencanaan Keuangan</h1>
+                    <h1 class="text-4xl font-black text-white  uppercase tracking-tighter">Panduan Perencanaan Keuangan</h1>
                     <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Membangun Kembali Fondasi Finansial Anda</p>
                 </div>
 
@@ -55,7 +55,7 @@
                             <p class="text-emerald-200/80 text-sm">Ini adalah porsi untuk masa depan Anda. Prioritaskan untuk membangun dana darurat terlebih dahulu, baru kemudian untuk investasi atau tujuan keuangan jangka panjang lainnya.</p>
                         </div>
                     </div>
-                    <p class="text-center italic text-sm">Metode ini hanyalah panduan. Anda bisa menyesuaikannya. Misalnya, saat dalam proses pelunasan utang, Anda bisa mengubahnya menjadi 60/10/30 (60% Kebutuhan+Utang, 10% Keinginan, 30% Tabungan).</p>
+                    <p class="text-center  text-sm">Metode ini hanyalah panduan. Anda bisa menyesuaikannya. Misalnya, saat dalam proses pelunasan utang, Anda bisa mengubahnya menjadi 60/10/30 (60% Kebutuhan+Utang, 10% Keinginan, 30% Tabungan).</p>
 
                     <h2 class="mt-12">Langkah 3: Tetapkan Tujuan Keuangan yang Jelas (SMART Goals)</h2>
                     <p>Tujuan yang tidak jelas hanya akan menjadi angan-angan. Gunakan metode SMART untuk membuat tujuan Anda lebih nyata:</p>

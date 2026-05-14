@@ -139,7 +139,7 @@
     {{-- Motivational Footer --}}
     <div class="bg-primary-50 rounded-[2.5rem] p-10 border border-primary-100 text-center relative overflow-hidden">
         <div class="relative z-10">
-            <h3 class="text-2xl font-black text-primary-900 mb-2 italic">"Setiap langkah kecil adalah kemenangan besar."</h3>
+            <h3 class="text-2xl font-black text-primary-900 mb-2 ">"Setiap langkah kecil adalah kemenangan besar."</h3>
             <p class="text-primary-700 text-sm font-medium">Teruslah melangkah, masa depan Anda lebih berharga daripada tagihan yang menumpuk.</p>
         </div>
     </div>
