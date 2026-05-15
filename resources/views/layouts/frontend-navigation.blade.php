@@ -63,11 +63,13 @@
 .pw-bottom-link span { font-size: 0.65rem; font-weight: 600; }
 
 @media (max-width: 768px) {
+    .pw-nav { display: none !important; }
     .pw-bottom-nav { display: block; }
-    body { padding-bottom: calc(60px + env(safe-area-inset-bottom)); }
+    body { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
 }
 </style>
 
+@if(!$is_mobile)
 <nav class="pw-nav" id="pw-nav">
     <div class="pw-nav-inner">
         {{-- Logo --}}
@@ -77,24 +79,143 @@
 
         {{-- Desktop Links --}}
         <div class="pw-links">
-            {{-- Artikel --}}
-            <a href="{{ route('stories') }}" class="pw-link {{ request()->routeIs('stories*') ? 'active' : '' }}">Artikel</a>
+            {{-- Home --}}
+            <a href="{{ url('/') }}" class="pw-link {{ request()->is('/') ? 'active' : '' }}">Beranda</a>
 
-            {{-- Info Pinjol --}}
-            <a href="{{ route('info-pinjol') }}" class="pw-link {{ request()->routeIs('info-pinjol') ? 'active' : '' }}">Info Pinjol</a>
+            {{-- Berita & Data dropdown --}}
+            <div class="pw-dropdown">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('stories*') || request()->routeIs('info-pinjol') || request()->routeIs('map') || request()->routeIs('statistik') || request()->routeIs('news-feed') ? 'active' : '' }}">
+                    Berita & Data
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </span>
+                <div class="pw-dropdown-menu">
+                    <a href="{{ route('stories') }}" class="pw-dropdown-item">
+                        <div class="icon">📰</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Cerita Kita</div>
+                            <div style="font-size:.75rem;color:#64748b;">Pengalaman korban pinjol</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('news-feed') }}" class="pw-dropdown-item">
+                        <div class="icon">📻</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Update Berita</div>
+                            <div style="font-size:.75rem;color:#64748b;">Kabar industri & regulasi</div>
+                        </div>
+                    </a>
+                    <div class="pw-dropdown-divider"></div>
+                    <a href="{{ route('info-pinjol') }}" class="pw-dropdown-item">
+                        <div class="icon">📋</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Direktori Pinjol</div>
+                            <div style="font-size:.75rem;color:#64748b;">Daftar platform legal OJK</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('map') }}" class="pw-dropdown-item">
+                        <div class="icon">🗺️</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Peta Sebaran</div>
+                            <div style="font-size:.75rem;color:#64748b;">Titik aduan nasional</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('statistik') }}" class="pw-dropdown-item">
+                        <div class="icon">📊</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Statistik</div>
+                            <div style="font-size:.75rem;color:#64748b;">Data & tren pinjol</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-            {{-- Peta Sebaran --}}
-            <a href="{{ route('map') }}" class="pw-link {{ request()->routeIs('map') ? 'active' : '' }}">Peta Sebaran</a>
+            {{-- Literasi dropdown --}}
+            <div class="pw-dropdown">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('panduan-dc') || request()->routeIs('bahaya-joki') || request()->routeIs('panduan-keuangan') || request()->routeIs('kalkulator-gltl') || request()->routeIs('download') ? 'active' : '' }}">
+                    Literasi
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </span>
+                <div class="pw-dropdown-menu">
+                    <a href="{{ route('panduan-dc') }}" class="pw-dropdown-item">
+                        <div class="icon">🚨</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Menghadapi DC</div>
+                            <div style="font-size:.75rem;color:#64748b;">Protokol hukum & darurat</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('bahaya-joki') }}" class="pw-dropdown-item">
+                        <div class="icon">🛑</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Bahaya Joki</div>
+                            <div style="font-size:.75rem;color:#64748b;">Waspada penipuan joki</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('kalkulator-gltl') }}" class="pw-dropdown-item">
+                        <div class="icon">🕳️</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Simulasi GLTL</div>
+                            <div style="font-size:.75rem;color:#64748b;">Gali Lobang Tutup Lobang</div>
+                        </div>
+                    </a>
+                    <div class="pw-dropdown-divider"></div>
+                    <a href="{{ route('panduan-keuangan') }}" class="pw-dropdown-item">
+                        <div class="icon">📈</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Pemulihan Ekonomi</div>
+                            <div style="font-size:.75rem;color:#64748b;">Langkah bebas hutang</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('download') }}" class="pw-dropdown-item">
+                        <div class="icon">📥</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Materi Literasi</div>
+                            <div style="font-size:.75rem;color:#64748b;">Unduh PDF & template</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
-            {{-- Statistik --}}
-            <a href="{{ route('statistik') }}" class="pw-link {{ request()->routeIs('statistik') ? 'active' : '' }}">Statistik</a>
-
-            {{-- Unduh --}}
-            <a href="{{ route('download') }}" class="pw-link {{ request()->routeIs('download') ? 'active' : '' }}">Unduh</a>
+            {{-- Pemulihan Mental dropdown --}}
+            <div class="pw-dropdown">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('mental-health-directory') || request()->routeIs('panduan-keluarga') || request()->routeIs('anti-stigma') ? 'active' : '' }}">
+                    Kesehatan Mental
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
+                </span>
+                <div class="pw-dropdown-menu">
+                    <a href="{{ route('quiz') }}" class="pw-dropdown-item">
+                        <div class="icon">🧠</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Cek Psikologi</div>
+                            <div style="font-size:.75rem;color:#64748b;">Tes kesehatan mental gratis</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('mental-health-directory') }}" class="pw-dropdown-item">
+                        <div class="icon">📋</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Direktori Bantuan</div>
+                            <div style="font-size:.75rem;color:#64748b;">Layanan profesional mental</div>
+                        </div>
+                    </a>
+                    <div class="pw-dropdown-divider"></div>
+                    <a href="{{ route('panduan-keluarga') }}" class="pw-dropdown-item">
+                        <div class="icon">💚</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Panduan Keluarga</div>
+                            <div style="font-size:.75rem;color:#64748b;">Cara dukung orang terkasih</div>
+                        </div>
+                    </a>
+                    <a href="{{ route('anti-stigma') }}" class="pw-dropdown-item">
+                        <div class="icon">🤝</div>
+                        <div>
+                            <div style="color:#e2e8f0;font-weight:700;">Anti-Stigma</div>
+                            <div style="font-size:.75rem;color:#64748b;">Menghapus rasa malu</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
 
             {{-- Laporan dropdown --}}
             <div class="pw-dropdown">
-                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') || request()->routeIs('news-feed') ? 'active' : '' }}">
+                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('report') || request()->routeIs('track') || request()->routeIs('dashboard.tools') ? 'active' : '' }}">
                     Laporan
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
                 </span>
@@ -102,95 +223,22 @@
                     <a href="{{ route('report') }}" class="pw-dropdown-item">
                         <div class="icon">🛡️</div>
                         <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Lapor Kasus</div>
-                            <div style="font-size:.75rem;color:#64748b;">Buat pengaduan anonim</div>
+                            <div style="color:#e2e8f0;font-weight:700;">Buat Laporan</div>
+                            <div style="font-size:.75rem;color:#64748b;">Aduan anonim & aman</div>
                         </div>
                     </a>
                     <a href="{{ route('track') }}" class="pw-dropdown-item">
                         <div class="icon">🎫</div>
                         <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Cek Tiket</div>
-                            <div style="font-size:.75rem;color:#64748b;">Pantau status laporan</div>
+                            <div style="color:#e2e8f0;font-weight:700;">Lacak Tiket</div>
+                            <div style="font-size:.75rem;color:#64748b;">Pantau progres aduan</div>
                         </div>
                     </a>
                     <a href="{{ route('dashboard.tools') }}" class="pw-dropdown-item">
                         <div class="icon">🛠️</div>
                         <div>
                             <div style="color:#e2e8f0;font-weight:700;">Pusat Alat</div>
-                            <div style="font-size:.75rem;color:#64748b;">Template jawaban DC</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('news-feed') }}" class="pw-dropdown-item">
-                        <div class="icon">📰</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Feed Berita</div>
-                            <div style="font-size:.75rem;color:#64748b;">Update media terkini</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            {{-- Bantuan dropdown --}}
-            <div class="pw-dropdown">
-                <span class="pw-link pw-dropdown-trigger {{ request()->routeIs('quiz') || request()->routeIs('panduan-keluarga') || request()->routeIs('mental-health-directory') || request()->routeIs('panduan-dc') || request()->routeIs('anti-stigma') || request()->routeIs('panduan-keuangan') || request()->routeIs('bahaya-joki') || request()->routeIs('kalkulator-gltl') ? 'active' : '' }}">
-                    Bantuan
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/></svg>
-                </span>
-                <div class="pw-dropdown-menu">
-                    <a href="{{ route('quiz') }}" class="pw-dropdown-item">
-                        <div class="icon">🧠</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Cek Kesehatan Jiwa</div>
-                            <div style="font-size:.75rem;color:#64748b;">Tes psikologis gratis K10</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('mental-health-directory') }}" class="pw-dropdown-item">
-                        <div class="icon">📋</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Direktori Bantuan</div>
-                            <div style="font-size:.75rem;color:#64748b;">Daftar layanan kesehatan mental</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('panduan-keluarga') }}" class="pw-dropdown-item">
-                        <div class="icon">💚</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Panduan Keluarga</div>
-                            <div style="font-size:.75rem;color:#64748b;">Cara mendukung korban</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('panduan-dc') }}" class="pw-dropdown-item">
-                        <div class="icon">🚨</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Menghadapi DC</div>
-                            <div style="font-size:.75rem;color:#64748b;">Protokol darurat & hukum</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('anti-stigma') }}" class="pw-dropdown-item">
-                        <div class="icon">🤝</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Anti-Stigma</div>
-                            <div style="font-size:.75rem;color:#64748b;">Pahami realita korban pinjol</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('panduan-keuangan') }}" class="pw-dropdown-item">
-                        <div class="icon">📈</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Pemulihan Keuangan</div>
-                            <div style="font-size:.75rem;color:#64748b;">Langkah stabilisasi ekonomi</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('bahaya-joki') }}" class="pw-dropdown-item">
-                        <div class="icon">🛑</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Bahaya Joki Palsu</div>
-                            <div style="font-size:.75rem;color:#64748b;">Hindari jebakan penipu</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('kalkulator-gltl') }}" class="pw-dropdown-item">
-                        <div class="icon">🕳️</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Kalkulator GLTL</div>
-                            <div style="font-size:.75rem;color:#64748b;">Simulasi siklus hutang</div>
+                            <div style="font-size:.75rem;color:#64748b;">Bantuan teknis korban</div>
                         </div>
                     </a>
                 </div>
@@ -207,29 +255,21 @@
                         <div class="icon">🌐</div>
                         <div>
                             <div style="color:#e2e8f0;font-weight:700;">Tentang Kami</div>
-                            <div style="font-size:.75rem;color:#64748b;">Misi & Visi PinjolWatch</div>
-                        </div>
-                    </a>
-                    <a href="{{ route('disclaimer') }}" class="pw-dropdown-item">
-                        <div class="icon">⚖️</div>
-                        <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Disclaimer</div>
-                            <div style="font-size:.75rem;color:#64748b;">Batasan tanggung jawab</div>
+                            <div style="font-size:.75rem;color:#64748b;">Misi PinjolWatch</div>
                         </div>
                     </a>
                     <a href="{{ route('privacy.policy') }}" class="pw-dropdown-item">
                         <div class="icon">🔒</div>
                         <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Kebijakan Privasi</div>
-                            <div style="font-size:.75rem;color:#64748b;">UU PDP & perlindungan data</div>
+                            <div style="color:#e2e8f0;font-weight:700;">Privasi Data</div>
+                            <div style="font-size:.75rem;color:#64748b;">Sesuai UU PDP</div>
                         </div>
                     </a>
-                    <div class="pw-dropdown-divider"></div>
                     <a href="{{ route('join') }}" class="pw-dropdown-item">
                         <div class="icon">🤝</div>
                         <div>
-                            <div style="color:#e2e8f0;font-weight:700;">Gabung Relawan</div>
-                            <div style="font-size:.75rem;color:#64748b;">Kontribusi untuk misi kami</div>
+                            <div style="color:#e2e8f0;font-weight:700;">Jadi Relawan</div>
+                            <div style="font-size:.75rem;color:#64748b;">Bantu sesama korban</div>
                         </div>
                     </a>
                 </div>
@@ -240,7 +280,7 @@
         <div style="display:flex;align-items:center;gap:16px;">
             <div class="pw-auth">
                 @auth
-                    <a href="{{ route('dashboard') }}" style="color:#94a3b8;font-size:.85rem;font-weight:600;text-decoration:none;">{{ Auth::user()->nickname ?: Auth::user()->name }}</a>
+                    <a href="{{ route('dashboard') }}" style="color:#94a3b8;font-size:.85rem;font-weight:600;text-decoration:none;">Dasbor</a>
                     <form method="POST" action="{{ route('logout') }}" style="display:inline;">
                         @csrf
                         <button type="submit" style="background:none;border:none;color:#64748b;font-size:.85rem;font-weight:600;cursor:pointer;">Keluar</button>
@@ -249,53 +289,59 @@
                     <a href="{{ route('login') }}" style="color:#94a3b8;font-size:.85rem;font-weight:600;text-decoration:none;">Masuk</a>
                 @endauth
             </div>
-            <a href="{{ route('report') }}" class="pw-cta">🛡️ Lapor Sekarang</a>
+            <a href="{{ route('report') }}" class="pw-cta">🛡️ Lapor</a>
             <button class="pw-hamburger" id="pw-hamburger" onclick="toggleMobileMenu()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
             </button>
         </div>
     </div>
 </nav>
+@endif
 
 {{-- Mobile menu --}}
 <div class="pw-mobile-menu" id="pw-mobile-menu">
-    <div class="pw-mobile-section">Konten</div>
-    <a href="{{ route('stories') }}" class="pw-mobile-link">📰 Artikel</a>
-    <a href="{{ route('info-pinjol') }}" class="pw-mobile-link">📋 Info Pinjol</a>
+    <div class="pw-mobile-section">Berita & Data</div>
+    <a href="{{ route('stories') }}" class="pw-mobile-link">📰 Cerita Kita</a>
+    <a href="{{ route('news-feed') }}" class="pw-mobile-link">📻 Update Berita</a>
+    <a href="{{ route('info-pinjol') }}" class="pw-mobile-link">📋 Direktori Pinjol</a>
     <a href="{{ route('map') }}" class="pw-mobile-link">🗺️ Peta Sebaran</a>
     <a href="{{ route('statistik') }}" class="pw-mobile-link">📊 Statistik</a>
-    <a href="{{ route('download') }}" class="pw-mobile-link">📥 Unduh Materi</a>
-    <div class="pw-mobile-section">Laporan</div>
-    <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Lapor Kasus</a>
-    <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Cek Tiket</a>
-    <a href="{{ route('dashboard.tools') }}" class="pw-mobile-link">🛠️ Pusat Alat & Bantuan</a>
-    <a href="{{ route('news-feed') }}" class="pw-mobile-link">📰 Feed Berita Pinjol</a>
-    <div class="pw-mobile-section">Bantuan</div>
-    <a href="{{ route('quiz') }}" class="pw-mobile-link">🧠 Cek Kesehatan Jiwa</a>
+    
+    <div class="pw-mobile-section">Literasi & Edukasi</div>
+    <a href="{{ route('panduan-dc') }}" class="pw-mobile-link">🚨 Menghadapi DC</a>
+    <a href="{{ route('bahaya-joki') }}" class="pw-mobile-link">🛑 Bahaya Joki</a>
+    <a href="{{ route('kalkulator-gltl') }}" class="pw-mobile-link">🕳️ Simulasi GLTL</a>
+    <a href="{{ route('panduan-keuangan') }}" class="pw-mobile-link">📈 Pemulihan Ekonomi</a>
+    <a href="{{ route('download') }}" class="pw-mobile-link">📥 Materi Literasi</a>
+
+    <div class="pw-mobile-section">Kesehatan Mental</div>
+    <a href="{{ route('quiz') }}" class="pw-mobile-link">🧠 Cek Psikologi</a>
     <a href="{{ route('mental-health-directory') }}" class="pw-mobile-link">📋 Direktori Bantuan</a>
     <a href="{{ route('panduan-keluarga') }}" class="pw-mobile-link">💚 Panduan Keluarga</a>
-    <a href="{{ route('panduan-dc') }}" class="pw-mobile-link">🚨 Menghadapi DC</a>
     <a href="{{ route('anti-stigma') }}" class="pw-mobile-link">🤝 Anti-Stigma</a>
-    <a href="{{ route('panduan-keuangan') }}" class="pw-mobile-link">📈 Pemulihan Keuangan</a>
-    <a href="{{ route('bahaya-joki') }}" class="pw-mobile-link">🛑 Bahaya Joki Palsu</a>
-    <a href="{{ route('kalkulator-gltl') }}" class="pw-mobile-link">🕳️ Kalkulator GLTL</a>
-    <div class="pw-mobile-section">Info</div>
+    
+    <div class="pw-mobile-section">Layanan & Info</div>
+    <a href="{{ route('report') }}" class="pw-mobile-link">🛡️ Buat Laporan</a>
+    <a href="{{ route('track') }}" class="pw-mobile-link">🎫 Lacak Tiket</a>
+    <a href="{{ route('dashboard.tools') }}" class="pw-mobile-link">🛠️ Pusat Alat</a>
     <a href="{{ route('about') }}" class="pw-mobile-link">🌐 Tentang Kami</a>
-    <a href="{{ route('disclaimer') }}" class="pw-mobile-link">⚖️ Disclaimer</a>
-    <a href="{{ route('privacy.policy') }}" class="pw-mobile-link">🔒 Kebijakan Privasi</a>
-    <a href="{{ route('join') }}" class="pw-mobile-link">🤝 Gabung Relawan</a>
+    
     <div style="height:1px;background:rgba(255,255,255,.07);margin:12px 0;"></div>
     @auth
-        <a href="{{ route('dashboard') }}" class="pw-mobile-link">Dashboard ({{ Auth::user()->nickname ?: Auth::user()->name }})</a>
+        <a href="{{ route('dashboard') }}" class="pw-mobile-link">Dasbor ({{ Auth::user()->nickname ?: Auth::user()->name }})</a>
+        <form method="POST" action="{{ route('logout') }}" style="display:block;">
+            @csrf
+            <button type="submit" class="pw-mobile-link" style="width:100%;text-align:left;background:none;border:none;">🚪 Keluar</button>
+        </form>
     @else
-        <a href="{{ route('login') }}" class="pw-mobile-link">Masuk</a>
-        <a href="{{ route('register') }}" class="pw-mobile-link">Daftar</a>
+        <a href="{{ route('login') }}" class="pw-mobile-link">🔑 Masuk</a>
+        <a href="{{ route('register') }}" class="pw-mobile-link">📝 Daftar</a>
     @endauth
 </div>
 
 {{-- Bottom Navigation (Mobile) --}}
 <nav class="pw-bottom-nav">
-    <div class="pw-bottom-nav-inner">
+    <div class="pw-bottom-nav-inner" style="height: 70px;">
         <a href="{{ url('/') }}" class="pw-bottom-link {{ request()->is('/') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -308,11 +354,22 @@
             </svg>
             <span>Peta</span>
         </a>
-        <a href="{{ route('report') }}" class="pw-bottom-link {{ request()->routeIs('report') ? 'active' : '' }}">
+
+        {{-- Main CTA: Lapor --}}
+        <div style="position: relative; width: 64px; height: 100%; display: flex; align-items: center; justify-content: center;">
+            <a href="{{ route('report') }}" style="position: absolute; top: -24px; width: 56px; height: 56px; background: linear-gradient(135deg, var(--teal), #0891b2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 8px 20px rgba(13,148,136,0.4); border: 4px solid var(--dark); transition: transform 0.2s;">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" style="width: 28px; height: 28px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </a>
+            <span style="font-size: 0.65rem; font-weight: 800; color: var(--primary-l); margin-top: 40px;">LAPOR</span>
+        </div>
+
+        <a href="{{ route('statistik') }}" class="pw-bottom-link {{ request()->routeIs('statistik') ? 'active' : '' }}">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1-3m8.5 3 1-3m0 0a2.25 2.25 0 1 0-4.5 0 2.25 2.25 0 1 0 4.5 0Z" />
             </svg>
-            <span>Lapor</span>
+            <span>Statistik</span>
         </a>
         <button onclick="toggleMobileMenu()" class="pw-bottom-link" style="background:none;border:none;">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

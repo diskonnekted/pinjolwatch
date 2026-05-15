@@ -47,7 +47,9 @@
 
         <livewire:panic-button />
 
-        @include('layouts.dark-footer')
+        @if(!$is_mobile)
+            @include('layouts.dark-footer')
+        @endif
         @livewireScripts
 
         <script>

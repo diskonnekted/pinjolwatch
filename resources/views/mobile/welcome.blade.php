@@ -45,21 +45,15 @@
         <div class="absolute top-[20%] right-[-20%] w-[250px] h-[250px] rounded-full bg-cyan-600/20 blur-[60px] pointer-events-none"></div>
 
         {{-- Top Navigation / Header --}}
-        <div class="px-6 pt-12 pb-6 relative z-10 flex justify-between items-center">
+        <div class="px-6 pt-16 pb-6 relative z-10 flex justify-between items-center">
             <div>
-                <p class="text-xs font-bold tracking-widest text-teal-400 uppercase mb-1 flex items-center gap-2">
+                <p class="text-[10px] font-black tracking-[0.2em] text-teal-400 uppercase mb-2 flex items-center gap-2">
                     <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse"></span>
-                    Sistem Aktif
+                    Sistem Monitoring Aktif
                 </p>
-                <h1 class="text-3xl font-black tracking-tight leading-none text-white drop-shadow-md">
+                <h1 class="text-4xl font-black tracking-tight leading-none text-white drop-shadow-2xl">
                     Pinjol<span class="text-gradient">Watch</span>
                 </h1>
-            </div>
-            <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center shadow-xl border-white/20">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-teal-400" style="animation: float-y 4s ease-in-out infinite;">
-                    <path fill-rule="evenodd" d="M11.484 2.17a.75.75 0 0 1 1.032 0 11.209 11.209 0 0 0 7.877 3.08.75.75 0 0 1 .722.515 12.74 12.74 0 0 1 .436 4.464c-.389 4.298-2.607 7.973-5.918 10.378a1.75 1.75 0 0 1-1.905 0C10.155 18.2 7.747 14.526 7.41 10.23a12.744 12.744 0 0 1 .436-4.463.75.75 0 0 1 .721-.516 11.21 11.21 0 0 0 7.878-3.08ZM12 11.25a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" clip-rule="evenodd" />
-                    <path d="M12 12.75a3 3 0 0 0-3 3v.75a.75.75 0 0 0 1.5 0v-.75a1.5 1.5 0 0 1 3 0v.75a.75.75 0 0 0 1.5 0v-.75a3 3 0 0 0-3-3Z" />
-                </svg>
             </div>
         </div>
 

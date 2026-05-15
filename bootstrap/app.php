@@ -12,6 +12,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            \App\Http\Middleware\MobileViewMiddleware::class,
+        ]);
         $middleware->alias([
             'audit' => \App\Http\Middleware\AuditLogMiddleware::class,
             'consent' => \App\Http\Middleware\RequireConsentMiddleware::class,

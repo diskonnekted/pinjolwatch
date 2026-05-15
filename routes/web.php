@@ -4,8 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $agent = new \Jenssegers\Agent\Agent();
-    
     // Fetch specific experience articles for the landing page
     $featuredTitles = [
         'Di Balik Langit Cerahmu: Undangan untuk Berempat',
@@ -28,9 +26,6 @@ Route::get('/', function () {
         $featuredStories = $featuredStories->concat($extraStories);
     }
 
-    if ($agent->isMobile() || $agent->isTablet()) {
-        return view('mobile.home', ['featuredStories' => $featuredStories]);
-    }
     return view('welcome', ['featuredStories' => $featuredStories]);
 });
 

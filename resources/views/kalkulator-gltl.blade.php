@@ -6,6 +6,6 @@
     </x-slot>
 
     <div class="py-12 bg-slate-950 min-h-screen">
-        <livewire:gltl-calculator />
+        <livewire:gltl-simulator />
     </div>
 </x-frontend-layout>

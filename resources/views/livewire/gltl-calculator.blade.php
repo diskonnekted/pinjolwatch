@@ -1,169 +1,352 @@
-<div class="max-w-6xl mx-auto py-12 px-6">
-    {{-- Header Section --}}
-    <div class="mb-12 text-center">
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-500 text-[10px] font-black uppercase tracking-[0.2em] mb-6">
-            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-            Simulasi Gali Lobang Tutup Lobang
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@endpush
+
+<script>
+    function gltlChart() {
+        return {
+            chart: null,
+            initChart(data) {
+                // Wait for Chart.js to be available (max 5 seconds)
+                let attempts = 0;
+                const checkChart = setInterval(() => {
+                    attempts++;
+                    if (typeof Chart !== 'undefined') {
+                        clearInterval(checkChart);
+                        this.renderChart(data);
+                    } else if (attempts > 50) {
+                        clearInterval(checkChart);
+                        console.error('Chart.js failed to load after 5 seconds');
+                    }
+                }, 100);
+            },
+            renderChart(data) {
+                const ctx = document.getElementById('debtChart').getContext('2d');
+                if (this.chart) {
+                    this.chart.destroy();
+                }
+                this.chart = new Chart(ctx, {
+                    type: 'line',
+                    data: data,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: {
+                                    color: '#64748b',
+                                    font: { family: 'Inter', weight: 'bold' },
+                                    callback: function(value) {
+                                        return 'Rp ' + value.toLocaleString('id-ID');
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: {
+                                    color: '#64748b',
+                                    font: { family: 'Inter', weight: 'bold' }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                backgroundColor: '#0f172a',
+                                titleFont: { weight: 'bold' },
+                                padding: 12,
+                                borderColor: '#1e293b',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: function(context) {
+                                        return ' ' + context.dataset.label + ': Rp ' + context.raw.toLocaleString('id-ID');
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                window.addEventListener('cycles-updated', event => {
+                    if (this.chart) {
+                        // Livewire 3 dispatches event detail directly or as an array
+                        const newData = Array.isArray(event.detail) ? event.detail[0] : (event.detail.data || event.detail);
+                        this.chart.data = newData;
+                        this.chart.update();
+                    }
+                });
+            }
+        }
+    }
+</script>
+
+<div class="min-h-screen bg-[#060a14] pb-20" x-data="gltlChart()" x-init="initChart(@js($this->getChartData()))">
+
+    {{-- Hero Section --}}
+    <div class="relative overflow-hidden border-b border-slate-900">
+        {{-- Background grid --}}
+        <div class="absolute inset-0 opacity-[0.03]"
+            style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;">
         </div>
-        <h2 class="text-5xl font-black text-white uppercase tracking-tighter mb-4 grad">Visualisasi Siklus Hutang.</h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-            Gunakan kalkulator ini untuk melihat bagaimana hutang Anda membengkak saat mencoba menutup lubang lama dengan lubang baru.
-        </p>
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/20 via-transparent to-transparent"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-8 py-16 md:py-20">
+            <div class="max-w-3xl">
+                <span class="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.35em] text-rose-400 mb-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                    </span>
+                    Simulasi Visual · Gali Lobang Tutup Lobang
+                </span>
+                <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter text-white leading-[0.9] mb-6">
+                    Gali Lobang<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-orange-500">Tutup Lobang.</span>
+                </h1>
+                <p class="text-slate-400 text-base md:text-xl max-w-2xl leading-relaxed">
+                    Seringkali kita merasa aman karena "berhasil" membayar hutang lama dengan hutang baru. 
+                    Gunakan simulasi ini untuk melihat bagaimana <strong class="text-rose-400">bunga & biaya</strong> 
+                    perlahan memakan uang Anda hingga tak tersisa.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {{-- Input Section --}}
-        <div class="lg:col-span-2 space-y-6">
-            {{-- Existing Debt Input --}}
-            <div class="glass p-8 rounded-[2.5rem] border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-10 h-10 bg-rose-500/10 rounded-xl flex items-center justify-center text-rose-500 border border-rose-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="text-lg font-black text-white uppercase tracking-tighter">Total Hutang Saat Ini</h3>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Hutang yang sudah ada sebelum Gali Lobang dimulai</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-6 flex items-center pointer-events-none text-slate-500 font-black text-sm">Rp</div>
-                    <input wire:model.live="existingDebt" type="number" class="w-full bg-slate-950 border-slate-800 rounded-2xl pl-14 pr-6 py-5 text-xl font-black text-rose-400 focus:ring-rose-500 focus:border-rose-500 transition-all" placeholder="0">
-                </div>
-            </div>
-
-            <div class="glass p-8 rounded-[2.5rem] border-slate-800">
-                <div class="flex items-center justify-between mb-8">
-                    <h3 class="text-xl font-black text-white uppercase tracking-tighter">Daftar Pinjol Baru</h3>
-                    <button wire:click="addLoan" class="p-3 bg-teal-500/10 hover:bg-teal-500/20 text-teal-500 rounded-2xl transition-all border border-teal-500/20 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 group-hover:rotate-90 transition-transform">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                    </button>
-                </div>
-
-                <div class="space-y-6">
-                    @foreach($loans as $index => $loan)
-                        <div class="relative group p-6 bg-slate-950/50 border border-slate-800 rounded-3xl hover:border-slate-700 transition-all">
-                            <div class="absolute -top-3 -left-3 w-8 h-8 bg-slate-800 text-white rounded-xl flex items-center justify-center text-xs font-black border border-slate-700 shadow-xl">
-                                {{ $index + 1 }}
-                            </div>
-                            
-                            @if(count($loans) > 1)
-                                <button wire:click="removeLoan({{ $index }})" class="absolute -top-3 -right-3 w-8 h-8 bg-rose-500/10 hover:bg-rose-500 text-rose-500 hover:text-white rounded-xl flex items-center justify-center transition-all border border-rose-500/20 shadow-xl opacity-0 group-hover:opacity-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            @endif
-
-                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                                <div class="md:col-span-1">
-                                    <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-2 ml-1">Nama Pinjol</label>
-                                    <input wire:model.live="loans.{{ $index }}.name" type="text" class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:ring-teal-500 focus:border-teal-500">
-                                </div>
-                                <div>
-                                    <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-2 ml-1">Tagihan (Plafond)</label>
-                                    <input wire:model.live="loans.{{ $index }}.plafond" type="number" class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-2 ml-1">Dana Diterima</label>
-                                    <input wire:model.live="loans.{{ $index }}.dana_cair" type="number" class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0">
-                                </div>
-                                <div>
-                                    <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-2 ml-1">Untuk Tutup Lobang</label>
-                                    <input wire:model.live="loans.{{ $index }}.dana_tutup" type="number" class="w-full bg-slate-900 border-slate-800 rounded-xl px-4 py-3 text-slate-200 text-sm focus:ring-teal-500 focus:border-teal-500" placeholder="0">
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                
-                <div class="mt-8 pt-8 border-t border-slate-800 flex justify-center">
-                    <button wire:click="addLoan" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white font-black text-[10px] rounded-2xl uppercase tracking-[0.2em] transition-all">
-                        + Tambah Pinjol Lagi
-                    </button>
-                </div>
-            </div>
-
-            {{-- Contextual Alert --}}
-            <div class="p-6 bg-rose-500/5 border border-rose-500/20 rounded-3xl flex items-start gap-4">
-                <div class="w-12 h-12 bg-rose-500/10 rounded-2xl flex items-center justify-center text-rose-500 shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
-                    </svg>
-                </div>
+    {{-- ============================================================ --}}
+    {{-- MAIN CONTENT                                                  --}}
+    {{-- ============================================================ --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 md:py-12">
+        
+        {{-- Visual Graph Card --}}
+        <div class="mb-12 rounded-3xl border border-slate-800 bg-slate-900/50 p-6 md:p-10">
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
                 <div>
-                    <h4 class="text-white font-bold text-sm uppercase tracking-tight mb-1">Bahaya GLTL!</h4>
-                    <p class="text-rose-400/80 text-xs leading-relaxed">
-                        Membayar pinjol dengan pinjol lain hanya akan membuat hutang Anda meledak karena potongan biaya admin dan bunga yang sangat tinggi di setiap aplikasi baru.
-                    </p>
+                    <h2 class="text-2xl font-black text-white uppercase tracking-tight">Grafik Peningkatan Hutang</h2>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mt-1">Melihat bengkaknya kewajiban Anda</p>
                 </div>
+                <div class="flex gap-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded-full bg-rose-500"></div>
+                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Hutang (Plafond)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative h-[300px] md:h-[400px]" wire:ignore>
+                <canvas id="debtChart"></canvas>
             </div>
         </div>
 
-        {{-- Summary Section --}}
-        <div class="space-y-6">
-            <div class="glass p-8 rounded-[2.5rem] border-teal-500/20 bg-gradient-to-br from-slate-900 to-slate-950 sticky top-24">
-                <h3 class="text-xl font-black text-white uppercase tracking-tighter mb-8 flex items-center gap-3">
-                    <span class="w-8 h-8 bg-teal-500 rounded-xl flex items-center justify-center shadow-lg shadow-teal-500/20">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-white">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-3-9.75V18m-3-3V18m3-9.75ZM6 7.5h12M5.25 18h13.5A2.25 2.25 0 0 0 21 15.75V9.456a2.25 2.25 0 0 0-1.061-1.915l-6-3.6a2.25 2.25 0 0 0-2.378 0l-6 3.6A2.25 2.25 0 0 0 3 9.456v6.294A2.25 2.25 0 0 0 5.25 18Z" />
-                        </svg>
-                    </span>
-                    Hasil Akumulasi
-                </h3>
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
 
-                <div class="space-y-6">
-                    <div class="p-5 bg-slate-950 rounded-3xl border border-white/5">
-                        <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">Total Hutang (Plafond)</label>
-                        <div class="text-2xl font-black text-white tracking-tighter">Rp {{ number_format($totalPlafond, 0, ',', '.') }}</div>
+            {{-- ====================================================== --}}
+            {{-- LEFT: CONTROL PANEL                                    --}}
+            {{-- ====================================================== --}}
+            <div class="xl:col-span-4 space-y-6 xl:sticky xl:top-6">
+
+                {{-- Initial Debt Input --}}
+                <div class="rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8 shadow-2xl">
+                    <p class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Langkah 1 — Hutang Awal</p>
+
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-3">Berapa hutang Anda saat ini?</label>
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl font-black text-teal-500 shrink-0 select-none">Rp</span>
+                        <input
+                            wire:model.live="initialDebt"
+                            type="number"
+                            class="w-full bg-slate-950 rounded-xl border border-slate-800 px-5 py-4 text-2xl font-black text-white focus:outline-none focus:border-teal-500 transition-colors"
+                        >
                     </div>
 
-                    <div class="p-5 bg-slate-950 rounded-3xl border border-white/5">
-                        <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">Total Dana Cair</label>
-                        <div class="text-xl font-bold text-teal-400 tracking-tight">Rp {{ number_format($totalDanaCair, 0, ',', '.') }}</div>
+                    <div class="mt-6 flex items-center justify-between">
+                        <span class="text-[10px] font-black uppercase tracking-widest text-slate-600">Estimasi Biaya per Siklus</span>
+                        <span class="text-sm font-black text-rose-500">{{ $interestRate }}%</span>
                     </div>
-
-                    <div class="p-5 bg-slate-950 rounded-3xl border border-white/5">
-                        <label class="text-[9px] font-black text-slate-500 uppercase tracking-widest block mb-1">Total Dana Untuk Tutup Lobang</label>
-                        <div class="text-xl font-bold text-rose-400 tracking-tight">Rp {{ number_format($totalDanaTutup, 0, ',', '.') }}</div>
+                    <div class="mt-2 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-rose-600 to-orange-500 rounded-full" style="width: {{ $interestRate * 10 }}%"></div>
                     </div>
+                    <p class="text-[9px] text-slate-600 mt-2 italic">*Rata-rata bunga & biaya admin pinjol legal/ilegal</p>
+                </div>
 
-                    <div class="p-5 bg-teal-500/5 rounded-3xl border border-teal-500/10">
-                        <label class="text-[9px] font-black text-teal-500 uppercase tracking-widest block mb-1">Sisa Dana Cair Bersih</label>
-                        <div class="text-xl font-black text-teal-400 tracking-tight">Rp {{ number_format($netCash, 0, ',', '.') }}</div>
-                    </div>
+                {{-- Summary Stats --}}
+                <div class="rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8">
+                    <p class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Ringkasan Tragis</p>
 
-                    <div class="pt-6 border-t border-slate-800">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Saldo Akhir (Status Finansial)</span>
-                            <span class="px-3 py-1 bg-slate-800 text-white text-[9px] font-black rounded-lg uppercase tracking-widest">Hasil Akhir</span>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Hutang Awal</span>
+                            <span class="text-sm font-black text-white">Rp {{ number_format($initial, 0, ',', '.') }}</span>
                         </div>
-                        <div class="text-3xl font-black {{ $finalBalance >= 0 ? 'text-teal-500' : 'text-rose-500' }} tracking-tighter mb-2">
-                            Rp {{ number_format($finalBalance, 0, ',', '.') }}
+                        <div class="h-px bg-slate-800"></div>
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Jumlah Aplikasi</span>
+                            <span class="text-sm font-black text-white">{{ $totalCycles }} Aplikasi</span>
                         </div>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase leading-tight">
-                            {{ $finalBalance < 0 ? 'Anda masih kekurangan dana sebesar ini untuk melunasi seluruh hutang.' : 'Selamat! Dana cair baru Anda mencukupi untuk menutup hutang lama (Sangat Jarang Terjadi).' }}
-                        </p>
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Total Uang Terbuang</span>
+                            <span class="text-sm font-black text-rose-400">Rp {{ number_format($totalInterest, 0, ',', '.') }}</span>
+                        </div>
+                        <div class="h-px bg-slate-800"></div>
+                        <div class="flex justify-between items-start">
+                            <span class="text-[10px] font-black text-slate-500 uppercase tracking-wider">Hutang Harus Dibayar</span>
+                            <span class="text-xl font-black text-white">Rp {{ number_format($finalDebt, 0, ',', '.') }}</span>
+                        </div>
                     </div>
 
-                    <div class="p-4 bg-slate-950 rounded-2xl border border-slate-800">
-                        <label class="text-[8px] font-black text-slate-500 uppercase tracking-widest block mb-1 text-center">Total Akumulasi Hutang (Jika Dilanjut)</label>
-                        <div class="text-lg font-black text-white tracking-tighter text-center opacity-60">Rp {{ number_format($debtAccumulation, 0, ',', '.') }}</div>
+                    {{-- Multiplier Badge --}}
+                    <div class="mt-6 p-5 rounded-2xl bg-gradient-to-br from-rose-900/40 to-slate-900 border border-rose-800/30 text-center">
+                        <div class="text-[9px] font-black uppercase tracking-[0.3em] text-rose-400 mb-2">Hutang Anda Menjadi</div>
+                        <div class="text-5xl font-black text-white">{{ $multiplier }}<span class="text-2xl text-rose-500">×</span></div>
+                        <div class="text-[9px] text-slate-500 mt-1">Lipat Ganda</div>
                     </div>
                 </div>
 
-                <button class="w-full mt-10 py-5 bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-black text-xs rounded-3xl uppercase tracking-widest transition-all shadow-xl shadow-rose-900/20 group">
-                    <span class="flex items-center justify-center gap-2">
-                        STOP GALI LOBANG SEKARANG!
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 group-hover:translate-x-1 transition-transform">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                        </svg>
-                    </span>
+                <button wire:click="resetSimulation" class="w-full py-4 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-600 hover:text-slate-400 transition-colors border border-slate-800 hover:border-slate-700">
+                    Reset & Ulangi Simulasi
                 </button>
             </div>
+
+            {{-- ====================================================== --}}
+            {{-- RIGHT: SPIRAL TIMELINE                                  --}}
+            {{-- ====================================================== --}}
+            <div class="xl:col-span-8">
+                <p class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 mb-6">Langkah 2 — Simulasi Gali-Tutup</p>
+
+                <div class="space-y-6">
+                    @foreach($cycles as $i => $cycle)
+                    <div class="relative group" wire:key="cycle-{{ $i }}-{{ $cycle['label'] }}">
+                        {{-- Connection line --}}
+                        @if(!$loop->last)
+                        <div class="absolute left-10 top-20 bottom-0 w-1 bg-gradient-to-b from-rose-500 to-transparent z-0"></div>
+                        @endif
+
+                        <div class="relative z-10 flex gap-6 items-start">
+                            {{-- Icon/Number --}}
+                            <div class="shrink-0">
+                                <div class="w-20 h-20 rounded-2xl border-2 border-rose-500 bg-rose-500/10 flex flex-col items-center justify-center transition-transform group-hover:scale-105">
+                                    <span class="text-xs font-black text-rose-500 uppercase">App</span>
+                                    <span class="text-3xl font-black text-white leading-none">{{ $i + 1 }}</span>
+                                </div>
+                            </div>
+
+                            {{-- Card --}}
+                            <div class="flex-1 rounded-3xl border border-slate-800 bg-slate-900 p-6 md:p-8 shadow-xl">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    {{-- Provider Selector --}}
+                                    <div>
+                                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Pilih Nama Pinjol</label>
+                                        <select wire:model.live="cycles.{{ $i }}.provider"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm font-black text-white focus:outline-none focus:border-rose-500 transition-colors">
+                                            @foreach($dummyPinjols as $name)
+                                                <option value="{{ $name }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    {{-- Amount Selector --}}
+                                    <div>
+                                        <label class="block text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Pinjam Berapa?</label>
+                                        <select wire:model.live="cycles.{{ $i }}.need"
+                                            class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm font-black text-white focus:outline-none focus:border-rose-500 transition-colors">
+                                            @foreach($amountOptions as $amt)
+                                                <option value="{{ $amt }}">Rp {{ number_format($amt, 0, ',', '.') }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                {{-- Analysis Info --}}
+                                <div class="flex items-center gap-4 mb-8 p-4 rounded-2xl {{ $analysis[$i]['diff'] >= 0 ? 'bg-teal-900/20 border border-teal-800/30' : 'bg-rose-900/20 border border-rose-800/30' }}">
+                                    <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 {{ $analysis[$i]['diff'] >= 0 ? 'bg-teal-500' : 'bg-rose-500' }}">
+                                        @if($analysis[$i]['diff'] >= 0)
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="white" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                            </svg>
+                                        @else
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="white" class="w-6 h-6">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                            </svg>
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-black uppercase tracking-widest {{ $analysis[$i]['diff'] >= 0 ? 'text-teal-400' : 'text-rose-400' }}">
+                                            Status: {{ $analysis[$i]['status'] }}
+                                        </p>
+                                        <p class="text-sm font-bold text-white">
+                                            @if($analysis[$i]['diff'] > 0)
+                                                Berhasil menutup hutang sebelumnya dengan sisa Rp {{ number_format($analysis[$i]['diff'], 0, ',', '.') }}
+                                            @elseif($analysis[$i]['diff'] == 0)
+                                                Pas-pasan untuk menutup hutang sebelumnya (Sisa Rp 0)
+                                            @else
+                                                Kurang Rp {{ number_format(abs($analysis[$i]['diff']), 0, ',', '.') }} untuk menutup hutang sebelumnya.
+                                            @endif
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {{-- Details Grid --}}
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                    <div class="p-4 rounded-2xl bg-slate-950/50 border border-slate-800">
+                                        <p class="text-[8px] font-black uppercase tracking-widest text-slate-500 mb-1">Diterima Bersih</p>
+                                        <p class="text-lg font-black text-white">Rp {{ number_format($cycle['need'], 0, ',', '.') }}</p>
+                                    </div>
+                                    <div class="p-4 rounded-2xl bg-slate-950/50 border border-slate-800">
+                                        <p class="text-[8px] font-black uppercase tracking-widest text-rose-500 mb-1">Bunga + Biaya</p>
+                                        <p class="text-lg font-black text-rose-400">Rp {{ number_format($cycle['interest'], 0, ',', '.') }}</p>
+                                    </div>
+                                    <div class="p-4 rounded-2xl bg-slate-950 border border-white/5 md:col-span-1 col-span-2">
+                                        <p class="text-[8px] font-black uppercase tracking-widest text-slate-500 mb-1">Total Hutang Baru</p>
+                                        <p class="text-lg font-black text-white">Rp {{ number_format($cycle['plafond'], 0, ',', '.') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+
+                    {{-- Actions --}}
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6" wire:key="action-buttons">
+                        <button wire:click="addCycle"
+                            class="flex-1 py-6 rounded-3xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 shadow-xl shadow-rose-900/20 active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                            Gali Lobang Lagi (Pinjam Baru)
+                        </button>
+                        <button wire:click="removeCycle"
+                            @if(count($cycles) <= 1) disabled @endif
+                            class="px-8 py-6 rounded-3xl border border-slate-800 text-slate-500 hover:text-white hover:border-slate-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                            Hapus Terakhir
+                        </button>
+                    </div>
+                </div>
+
+                {{-- Warning Footer --}}
+                <div class="mt-16 rounded-3xl border border-rose-900/30 bg-gradient-to-br from-rose-950/30 to-slate-900 p-8 md:p-12 text-center">
+                    <div class="text-4xl mb-6">🛑</div>
+                    <h3 class="text-2xl md:text-3xl font-black text-white uppercase tracking-tighter mb-4">
+                        Berhenti Sebelum Terlambat.
+                    </h3>
+                    <p class="text-slate-400 text-base leading-relaxed max-w-xl mx-auto mb-10">
+                        Visualisasi di atas menunjukkan bagaimana hutang Anda membengkak hanya untuk "menutup" hutang lama. 
+                        Ini adalah <strong class="text-rose-400">jebakan matematis</strong> yang tidak akan pernah selesai jika tidak dihentikan sekarang.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="{{ route('report') }}"
+                            class="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl bg-white text-slate-950 font-black text-xs uppercase tracking-widest hover:bg-rose-50 transition-all shadow-2xl">
+                            Saya Butuh Bantuan Sekarang
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
+@if(false)
+    {{-- This is a placeholder to help the tool find the end of the file --}}
+@endif

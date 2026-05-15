@@ -61,6 +61,7 @@ class PublicStats extends Component
                 'blocked' => '9,081',
                 'legal_apps' => '95',
                 'twp90' => '4.54',
+                'cumulative_disbursement' => '978',
                 'outstanding_history' => [
                     ['month' => 'Des 2025', 'value' => 94.85],
                     ['month' => 'Jan 2026', 'value' => 98.54],
@@ -70,19 +71,35 @@ class PublicStats extends Component
                 'composition' => [
                     ['label' => 'Konsumtif', 'value' => 65.69],
                     ['label' => 'Produktif (UMKM)', 'value' => 34.31],
+                ],
+                'lender_origin' => [
+                    ['label' => 'Dalam Negeri', 'value' => 86],
+                    ['label' => 'Luar Negeri', 'value' => 14],
+                ],
+                'geography' => [
+                    ['label' => 'Jawa', 'value' => 70],
+                    ['label' => 'Sumatera', 'value' => 15],
+                    ['label' => 'Kalimantan & Sulawesi', 'value' => 10],
+                    ['label' => 'Lainnya', 'value' => 5],
                 ]
             ],
-            // Human Impact Data (from efek.md)
+            'challenges' => [
+                ['risk' => 'Kualitas Kredit Memburuk', 'impact' => 'Kerugian lender, bunga naik', 'mitigation' => 'Penilaian lebih ketat'],
+                ['risk' => 'Pinjol Ilegal Marak', 'impact' => 'Kerugian konsumen masif', 'mitigation' => 'Satgas PASTI & Edukasi'],
+                ['risk' => 'Over-indebtedness', 'impact' => 'Gagal bayar sistemik', 'mitigation' => 'Batas pinjaman income-based'],
+                ['risk' => 'Perlindungan Data', 'impact' => 'Kebocoran & Doxing', 'mitigation' => 'Kepatuhan UU PDP'],
+            ],
+            // Human Impact Data (from efek.md & statistik.md)
             'humanImpact' => [
                 'suicideTrend' => [
                     ['year' => '2018', 'cases' => '1 Kasus', 'trend' => '-'],
                     ['year' => '2019', 'cases' => 'Meningkat', 'trend' => '↗️'],
                     ['year' => '2020', 'cases' => 'Meningkat', 'trend' => '↗️'],
-                    ['year' => '2021', 'cases' => '13 Kasus (Puncak Pandemi)', 'trend' => '↗️'],
+                    ['year' => '2021', 'cases' => '13 Kasus', 'trend' => '↗️'],
                     ['year' => '2022', 'cases' => 'Meningkat', 'trend' => '↗️'],
                     ['year' => '2023 (9 Bln)', 'cases' => '28 Kasus', 'trend' => '↗️ Drastis'],
                 ],
-                'suicideChartData' => [1, 3, 7, 13, 20, 28], // Estimated numeric values for chart line
+                'suicideChartData' => [1, 3, 7, 13, 20, 28], 
                 'suicideDetails' => [
                     'meninggal' => 49,
                     'selamat' => 23,
@@ -90,22 +107,10 @@ class PublicStats extends Component
                     'female' => 29,
                 ],
                 'mentalHealth' => [
-                    ['label' => 'Total Gangguan Mental', 'value' => 30, 'note' => '84 Juta Jiwa [21]'],
-                    ['label' => 'Terindikasi Depresi', 'value' => 2, 'note' => 'Populasi (2023) [21]'],
-                    ['label' => 'Gangguan Mental Emosional', 'value' => 9.8, 'note' => 'Naik dari 6% [24][51]'],
-                    ['label' => 'Ansietas/Kecemasan', 'value' => 14.7, 'note' => 'Gejala Klinis [53][55]'],
-                    ['label' => 'Remaja (10-17 th)', 'value' => 5.5, 'note' => '2.45 Juta Anak [21]'],
-                    ['label' => 'Remaja (Masalah Mental)', 'value' => 34.9, 'note' => '1 dari 3 [48][49]'],
-                ],
-                'undiagnosed' => [
-                    ['issue' => 'Tidak Terdiagnosis Formal', 'value' => '>60%', 'ref' => '[53]'],
-                    ['issue' => 'Tidak Akses Layanan', 'value' => '13%', 'ref' => '[21]'],
-                    ['issue' => 'Skizofrenia Dipasung', 'value' => 'Masih Umum', 'ref' => '[21]'],
-                ],
-                'crimeData' => [
-                    'total_crimes' => '561.993',
-                    'crime_clock' => '56 Detik',
-                    'reporting_rate' => '20.28%',
+                    ['label' => 'Total Gangguan Mental', 'value' => 30, 'note' => '84 Juta Jiwa'],
+                    ['label' => 'Ansietas/Kecemasan', 'value' => 14.7, 'note' => 'Gejala Klinis'],
+                    ['label' => 'Masalah Mental Remaja', 'value' => 34.9, 'note' => '1 dari 3 Remaja'],
+                    ['label' => 'Depresi Populasi', 'value' => 2, 'note' => 'Indikasi Klinis'],
                 ],
                 'blockingHistory' => [
                     ['year' => '2021', 'count' => 811],
@@ -117,28 +122,22 @@ class PublicStats extends Component
                 'nationalSuicide' => [
                     ['year' => '2022', 'cases' => '826 Kasus', 'growth' => '-'],
                     ['year' => '2023', 'cases' => '1.350 Kasus', 'growth' => '+63%'],
-                    ['year' => '2024', 'cases' => '1.450 Kasus', 'growth' => '+75% (dari 2022)'],
-                ],
-                'socialImpact' => [
-                    'affected_lives' => '188.25', // Juta Jiwa
-                    'economic_loss' => '1,054', // Triliun/Tahun
-                    'health_burden' => '116.64', // Triliun/Tahun
+                    ['year' => '2024', 'cases' => '1.450 Kasus', 'growth' => '+75%'],
                 ],
                 'keyFindings' => [
-                    ['title' => 'Lonjakan Bunuh Diri', 'stat' => '2.700%', 'desc' => 'Kenaikan kasus terverifikasi dari 2018 ke 2023 [12]'],
-                    ['title' => 'Krisis Kesehatan Mental', 'stat' => '30%', 'desc' => '84 Juta Jiwa mengalami gangguan mental, depresi & ansietas tertinggi [21]'],
-                    ['title' => 'Underreporting Masif', 'stat' => '20,28%', 'desc' => 'Hanya 1 dari 5 kejahatan dilaporkan. Teror riil jauh lebih tinggi [1]'],
-                    ['title' => 'Korelasi Utang-Depresi', 'stat' => 'Kuat', 'desc' => 'Riset internasional mengonfirmasi utang sebagai faktor utama depresi [21][47]'],
-                    ['title' => 'Dampak Lintas Generasi', 'stat' => '188 Juta', 'desc' => '70% populasi terdampak psikologis melalui efek domino keluarga [12]'],
+                    ['title' => 'Lonjakan Bunuh Diri', 'stat' => '2.700%', 'desc' => 'Kenaikan drastis kasus terverifikasi dari 2018 ke 2023.'],
+                    ['title' => 'Krisis Kesehatan Mental', 'stat' => '30%', 'desc' => '84 Juta Jiwa mengalami gangguan mental akibat tekanan ekonomi.'],
+                    ['title' => 'Underreporting Masif', 'stat' => '20,28%', 'desc' => 'Hanya 1 dari 5 kejahatan pinjol yang berani dilaporkan.'],
+                    ['title' => 'Dampak Lintas Generasi', 'stat' => '188 Juta', 'desc' => '70% populasi terdampak psikologis melalui efek domino keluarga.'],
                 ]
             ],
             'sources' => [
-                'BPS (Badan Pusat Statistik)',
-                'Kementerian Kesehatan RI (Riskesdas)',
-                'Kepolisian RI (Polri)',
-                'Jangkara Data Lab / Newstensity',
                 'Otoritas Jasa Keuangan (OJK)',
-                'WHO & Riset Internasional (PMC)'
+                'Asosiasi Fintech (AFPI)',
+                'Satgas PASTI',
+                'Kepolisian RI (Polri)',
+                'Kementerian Kesehatan RI',
+                'WHO & Riset PMC'
             ]
         ];
     }

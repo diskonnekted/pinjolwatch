@@ -1,5 +1,7 @@
 # PinjolWatch
 
+![PinjolWatch Screenshot](public/images/screenshot.png)
+
 PinjolWatch is an independent, community-driven platform designed to provide a secure and anonymous reporting mechanism for victims of illegal online lending platforms (Pinjol) in Indonesia. The application is built with a strong emphasis on user privacy, modern UI/UX design, and open-source intelligence gathering.
 
 ## Project Overview

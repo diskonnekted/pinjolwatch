@@ -21,6 +21,8 @@ class AuthenticatedSessionController extends Controller
         session(['login_captcha' => $num1 + $num2]);
 
         return view('auth.login', [
+            'num1' => $num1,
+            'num2' => $num2,
             'captcha_question' => "$num1 + $num2 = ?"
         ]);
     }

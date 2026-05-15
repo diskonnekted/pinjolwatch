@@ -22,7 +22,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased" style="background:#020617;color:#f1f5f9;font-family:'Inter',sans-serif;">
-        <div class="min-h-screen pt-20">
+        <div class="min-h-screen {{ $is_mobile ? 'pt-0' : 'pt-20' }}">
             @include('layouts.frontend-navigation')
 
             <!-- Page Heading -->
@@ -39,7 +39,9 @@
                 {{ $slot }}
             </main>
 
-            @include('layouts.dark-footer')
+            @if(!$is_mobile)
+                @include('layouts.dark-footer')
+            @endif
         </div>
         @livewireScripts
         @stack('scripts')

@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'PinjolWatch Mobile') }}</title>
+    <title>@yield('title', config('app.name', 'PinjolWatch Mobile'))</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,8 +20,8 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #0f172a;
+            background-color: #020617;
+            color: #f1f5f9;
             /* Hide scrollbar for a more app-like feel on mobile */
             -ms-overflow-style: none;  
             scrollbar-width: none;  
@@ -33,12 +33,15 @@
         .overscroll-none {
             overscroll-behavior: none;
         }
+        .safe-bottom {
+            padding-bottom: calc(70px + env(safe-area-inset-bottom));
+        }
     </style>
 </head>
-<body class="antialiased overscroll-none pb-24">
+<body class="antialiased overscroll-none">
 
     {{-- Main Content Area --}}
-    <main class="w-full max-w-md mx-auto min-h-screen relative shadow-2xl bg-white overflow-hidden">
+    <main class="w-full {{ $is_mobile ? '' : 'max-w-md mx-auto shadow-2xl border-x border-white/5' }} min-h-screen relative bg-[#020617] overflow-hidden">
         {{ $slot }}
     </main>
 
