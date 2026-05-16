@@ -169,20 +169,21 @@
     {{-- TAB 2: KEMANUSIAAN --}}
     <div x-show="activeTab === 'humanity'" x-cloak x-transition class="w-full">
         <div class="space-y-12">
+            {{-- Tragedi Headline --}}
             <div class="stat-card border-rose-500/20 bg-gradient-to-br from-rose-950/20 to-slate-900/40 relative overflow-hidden">
                 <div class="flex-balanced items-center">
                     <div class="flex-item-50 space-y-8">
                         <div class="badge-rose px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest w-fit">Darurat Kemanusiaan</div>
                         <h2 class="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-[0.85]">Tragedi <br><span class="text-rose-600 italic">Bunuh Diri.</span></h2>
-                        <p class="text-slate-300 text-lg leading-relaxed max-w-xl">Lonjakan kasus sebesar <span class="text-white font-black underline decoration-rose-600 decoration-4 underline-offset-8">2.700%</span> sejak 2018. Ini adalah angka nyawa yang hilang di balik kemudahan finansial digital.</p>
+                        <p class="text-slate-300 text-lg leading-relaxed max-w-xl">Lonjakan kasus drastis mencapai <span class="text-white font-black underline decoration-rose-600 decoration-4 underline-offset-8">2.700%</span> sejak 2018. Puncaknya pada Des 2023 dengan 25 nyawa hilang dalam 1 bulan.</p>
                         <div style="display: flex; gap: 24px;">
                             <div class="px-8 py-6 bg-rose-500/10 border border-rose-500/20 rounded-[2rem] text-center flex-1">
                                 <div class="text-5xl font-black text-rose-500">72</div>
                                 <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-3">Total Korban Jiwa</div>
                             </div>
                             <div class="px-8 py-6 bg-slate-800/50 border border-slate-700/50 rounded-[2rem] text-center flex-1">
-                                <div class="text-5xl font-black text-white">2.7k%</div>
-                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-3">Kenaikan Tren</div>
+                                <div class="text-5xl font-black text-white">25</div>
+                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-widest mt-3">Puncak Des '23</div>
                             </div>
                         </div>
                     </div>
@@ -192,42 +193,88 @@
                 </div>
             </div>
 
+            {{-- Comparison: Pinjol vs Other Credit --}}
+            <div class="stat-card border-teal-500/10">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <h3 class="text-2xl font-black text-white uppercase tracking-[0.2em]">Risiko Gangguan Mental per Jenis Kredit</h3>
+                    <p class="text-[11px] text-slate-500 font-bold uppercase mt-2">Sumber: Data Mikro Susenas BPS (Maret 2022)</p>
+                </div>
+                <div class="space-y-8 max-w-4xl mx-auto">
+                    @foreach($stats['humanImpact']['mentalHealth'] as $mh)
+                    <div class="group">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px;">
+                            <div class="flex items-center gap-4">
+                                <span class="text-xl">{{ $loop->first ? '📱' : '🏦' }}</span>
+                                <span class="text-xs font-black text-slate-300 uppercase tracking-widest">{{ $mh['label'] }}</span>
+                            </div>
+                            <span class="text-2xl font-black {{ $loop->first ? 'text-rose-500' : 'text-white' }}">{{ $mh['value'] }}%</span>
+                        </div>
+                        <div class="h-3 w-full bg-slate-950 rounded-full overflow-hidden">
+                            <div class="h-full {{ $loop->first ? 'bg-rose-600' : 'bg-teal-600' }} transition-all duration-1000" style="width: {{ $mh['value'] }}%"></div>
+                        </div>
+                        <p class="text-[9px] text-slate-500 mt-3 font-bold uppercase">{{ $mh['note'] }}</p>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="mt-12 p-6 bg-rose-950/20 border border-rose-900/20 rounded-2xl text-center">
+                    <p class="text-xs text-rose-400 font-bold uppercase tracking-widest">⚠️ Pengguna Pinjol berisiko 3X Lipat lebih tinggi dibanding Bank Umum</p>
+                </div>
+            </div>
+
             <div class="flex-balanced">
+                {{-- Demographics --}}
                 <div class="flex-item-50">
                     <div class="stat-card h-full">
-                        <h3 class="text-xs font-black text-slate-500 uppercase tracking-[0.3em] mb-12 text-center">Profil Korban Terverifikasi (Pinjol)</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
-                            <div class="p-10 bg-slate-950 rounded-[3rem] border border-slate-900 text-center group hover:border-rose-500/30 transition-all">
-                                <div class="text-5xl font-black text-rose-500">{{ $stats['humanImpact']['suicideDetails']['meninggal'] }}</div>
-                                <div class="text-[11px] font-black text-slate-600 uppercase mt-4">Meninggal</div>
+                        <h3 class="text-xs font-black text-slate-500 uppercase tracking-[0.3em] mb-12 text-center">Profil Demografi Rentan</h3>
+                        <div class="space-y-12">
+                            <div>
+                                <h4 class="text-[9px] font-black text-teal-500 uppercase tracking-widest mb-6">Berdasarkan Usia (OJK)</h4>
+                                <div class="space-y-6">
+                                    @foreach($stats['humanImpact']['demographics']['age'] as $age)
+                                    <div>
+                                        <div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase mb-2"><span>{{ $age['label'] }}</span><span>{{ $age['value'] }}%</span></div>
+                                        <div class="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden"><div class="h-full bg-teal-600" style="width: {{ $age['value'] }}%"></div></div>
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
-                            <div class="p-10 bg-slate-950 rounded-[3rem] border border-slate-900 text-center group hover:border-teal-500/30 transition-all">
-                                <div class="text-5xl font-black text-teal-500">{{ $stats['humanImpact']['suicideDetails']['selamat'] }}</div>
-                                <div class="text-[11px] font-black text-slate-600 uppercase mt-4">Selamat</div>
-                            </div>
-                            <div class="p-10 bg-slate-950 rounded-[3rem] border border-slate-900 text-center group hover:border-slate-500 transition-all">
-                                <div class="text-5xl font-black text-slate-300">{{ $stats['humanImpact']['suicideDetails']['male'] }}</div>
-                                <div class="text-[11px] font-black text-slate-600 uppercase mt-4">Laki-Laki</div>
-                            </div>
-                            <div class="p-10 bg-slate-950 rounded-[3rem] border border-slate-900 text-center group hover:border-slate-500 transition-all">
-                                <div class="text-5xl font-black text-slate-300">{{ $stats['humanImpact']['suicideDetails']['female'] }}</div>
-                                <div class="text-[11px] font-black text-slate-600 uppercase mt-4">Perempuan</div>
+                            <div class="divider-slate"></div>
+                            <div>
+                                <h4 class="text-[9px] font-black text-amber-500 uppercase tracking-widest mb-6">Berdasarkan Kelas Ekonomi (BPS)</h4>
+                                <div class="space-y-6">
+                                    @foreach($stats['humanImpact']['demographics']['economy'] as $eco)
+                                    <div>
+                                        <div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase mb-2"><span>{{ $eco['label'] }}</span><span>{{ $eco['value'] }}%</span></div>
+                                        <div class="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden"><div class="h-full bg-amber-600" style="width: {{ $eco['value'] }}%"></div></div>
+                                    </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="flex-item-50">
-                    <div class="stat-card h-full">
-                        <h3 class="text-xs font-black text-slate-500 uppercase tracking-[0.3em] mb-12 text-center">Prevalensi Krisis Mental Nasional</h3>
-                        <div class="space-y-12 px-8">
-                            @foreach($stats['humanImpact']['mentalHealth'] as $item)
-                            <div class="group">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 14px;">
-                                    <span class="text-[11px] font-black text-slate-400 uppercase tracking-widest group-hover:text-teal-400 transition-colors">{{ $item['label'] }}</span>
-                                    <span class="text-3xl font-black text-white">{{ $item['value'] }}%</span>
-                                </div>
-                                <div class="h-2.5 w-full bg-slate-950 rounded-full overflow-hidden"><div class="h-full bg-teal-600 transition-all duration-1000 delay-500" style="width: {{ $item['value'] }}%"></div></div>
-                                <p class="text-[10px] text-slate-600 mt-4 font-bold uppercase tracking-widest">{{ $item['note'] }}</p>
+
+                {{-- Women Specific & Symptoms --}}
+                <div class="flex-item-50 space-y-8">
+                    <div class="stat-card bg-indigo-950/10 border-indigo-500/20">
+                        <h3 class="text-xs font-black text-indigo-400 uppercase tracking-[0.3em] mb-10 text-center">Statistik Krisis: Perempuan</h3>
+                        <div class="grid grid-cols-3 gap-6">
+                            @foreach($stats['humanImpact']['womenSpecific'] as $ws)
+                            <div class="text-center p-6 bg-slate-950 rounded-3xl border border-slate-900">
+                                <div class="text-3xl font-black text-indigo-500">{{ $ws['value'] }}%</div>
+                                <div class="text-[8px] font-black text-slate-600 uppercase mt-2">{{ $ws['label'] }}</div>
+                            </div>
+                            @endforeach
+                        </div>
+                        <p class="text-[9px] text-slate-500 mt-8 italic text-center uppercase tracking-widest">Sumber: Riset PARAPUAN (Februari 2023)</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 class="text-xs font-black text-slate-500 uppercase tracking-[0.3em] mb-10 text-center">Gejala Psikologis Dominan</h3>
+                        <div class="grid grid-cols-1 gap-6">
+                            @foreach($stats['humanImpact']['symptoms'] as $sym)
+                            <div>
+                                <div class="flex justify-between text-[10px] font-bold text-slate-400 uppercase mb-2"><span>{{ $sym['label'] }}</span><span>{{ $sym['value'] }}%</span></div>
+                                <div class="h-2 w-full bg-slate-950 rounded-full overflow-hidden"><div class="h-full bg-rose-600" style="width: {{ $sym['value'] }}%"></div></div>
                             </div>
                             @endforeach
                         </div>
@@ -235,6 +282,7 @@
                 </div>
             </div>
 
+            {{-- National Table --}}
             <div class="stat-card border-slate-800 bg-slate-900/20 w-full p-12 md:p-20">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 64px;">
                     <div>
