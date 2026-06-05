@@ -150,7 +150,7 @@ class ReportForm extends Component
         ]);
 
         $report = Report::create([
-            'user_id' => auth()->id(),
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
             'ticket_id' => $this->generateTicket(),
             'kabupaten_id' => $this->kabupaten_id,
             'threat_type_id' => $this->threat_type_id,

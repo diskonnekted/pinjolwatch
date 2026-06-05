@@ -12,6 +12,7 @@ class Report extends Model
 
     protected $fillable = [
         'ticket_id',
+        'user_id',
         'kabupaten_id',
         'threat_type_id',
         'pinjol_count',
