@@ -12,7 +12,7 @@
 
         <form wire:submit.prevent="track" class="space-y-4">
             <div>
-                <x-text-input wire:model="ticket_id" id="ticket_id" class="block w-full text-center font-mono text-lg tracking-widest" placeholder="PW-XXXXXX-YYYYMMDD" required />
+                <x-text-input wire:model="ticket_id" id="ticket_id" class="block w-full text-center font-mono text-lg tracking-widest text-slate-900" placeholder="PW-XXXXXX-YYYYMMDD" required />
                 <x-input-error :messages="$errors->get('ticket_id')" class="mt-2 text-center" />
             </div>
 
