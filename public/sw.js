@@ -6,9 +6,7 @@ const ASSETS_TO_CACHE = [
   '/offline',
   '/menghadapi-dc',
   '/bantuan-mental',
-  '/pw-logo.png',
-  '/resources/css/app.css',
-  '/resources/js/app.js'
+  '/pw-logo.png'
 ];
 
 // Install Event
