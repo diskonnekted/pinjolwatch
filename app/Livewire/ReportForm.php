@@ -64,6 +64,12 @@ class ReportForm extends Component
 
     private function validateStep()
     {
+        $messages = [
+            'evidence.*.mimes' => 'Format file harus berupa: JPG, PNG, PDF, MP3, MP4, ENC, atau BIN.',
+            'evidence.*.max' => 'Ukuran file bukti tidak boleh lebih dari 10MB.',
+            'encryption_password.min' => 'Password enkripsi minimal 4 karakter.',
+        ];
+
         if ($this->step == 1) {
             $this->validate([
                 'province_id' => 'required|exists:provinces,id',
@@ -73,7 +79,7 @@ class ReportForm extends Component
                 'legal_pinjol_id' => 'nullable|exists:legal_pinjols,id',
                 'app_name' => 'nullable|string|max:100',
                 'involved_apps' => 'nullable|string|max:1000',
-            ]);
+            ], $messages);
         } elseif ($this->step == 2) {
             $this->validate([
                 'chronology' => 'required|string|min:20|max:2000',
@@ -84,12 +90,12 @@ class ReportForm extends Component
                 'dc_actions.*' => 'string',
                 'whatsapp_consent' => 'boolean',
                 'reporter_whatsapp' => 'nullable|required_if:whatsapp_consent,true|string|max:20',
-            ]);
+            ], $messages);
         } elseif ($this->step == 3) {
             $this->validate([
                 'evidence.*' => 'nullable|file|mimes:jpeg,png,pdf,mp3,mp4,enc,bin|max:10240',
                 'encryption_password' => 'nullable|string|min:4',
-            ]);
+            ], $messages);
         }
     }
 

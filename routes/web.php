@@ -167,6 +167,9 @@ Route::get('/tarik-persetujuan/{ticket}', [ConsentController::class, 'show'])->n
 Route::post('/tarik-persetujuan/{ticket}', [ConsentController::class, 'process'])->name('consent.process');
 
 
+// Community Route
+Route::get('/komunitas', \App\Livewire\Community\Feed::class)->name('komunitas');
+
 require __DIR__.'/auth.php';
 
 use App\Http\Controllers\ReportExportController;

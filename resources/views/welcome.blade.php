@@ -260,6 +260,11 @@ nav { background: rgba(2,6,23,.8) !important; backdrop-filter: blur(20px); borde
 
 <div class="divider"></div>
 
+{{-- BERBAGI PENGALAMAN PREVIEW --}}
+@livewire('community.landing-preview')
+
+<div class="divider"></div>
+
 {{-- TESTIMONIALS --}}
 <section style="background: var(--dark2); padding: 96px 32px;">
     <div style="max-width: 1100px; margin: 0 auto;">
