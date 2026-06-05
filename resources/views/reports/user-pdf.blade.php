@@ -68,8 +68,16 @@
 <body>
 
     <div class="header">
-        <h1>PinjolWatch</h1>
+        <img src="{{ $logoSrc }}" alt="PinjolWatch Logo" style="height: 60px; margin-bottom: 10px;">
         <p>Laporan Resmi Korban Pinjaman Online</p>
+    </div>
+
+    <div style="margin-bottom: 30px; font-size: 14px;">
+        <p>Kepada Yth.</p>
+        <p><strong>Satgas PASTI OJK</strong></p>
+        <p>(Satuan Tugas Pemberantasan Aktivitas Keuangan Ilegal)</p>
+        <p>Gedung Menara Radius Prawiro, Lt. 2</p>
+        <p>Jalan M.H. Thamrin No. 2, Gambir, Jakarta Pusat, 10110.</p>
     </div>
 
     <div class="section">
@@ -149,6 +157,32 @@
             </tr>
         </table>
     </div>
+
+    @if(!empty($evidenceItems))
+    <div style="page-break-before: always;"></div>
+    <div class="header">
+        <img src="{{ $logoSrc }}" alt="PinjolWatch Logo" style="height: 60px; margin-bottom: 10px;">
+        <p>Lampiran Bukti Laporan</p>
+    </div>
+    <div class="section">
+        @foreach($evidenceItems as $index => $item)
+            <div style="margin-bottom: 30px; border: 1px solid #e2e8f0; padding: 15px;">
+                <h4 style="margin-top: 0;">Lampiran {{ $index + 1 }}: {{ $item['original_name'] }}</h4>
+                <p style="font-size: 12px; color: #64748b;">Tipe File: {{ $item['mime_type'] }}</p>
+                
+                @if($item['is_image'] && $item['base64'])
+                    <div style="text-align: center; margin-top: 15px;">
+                        <img src="{{ $item['base64'] }}" style="max-width: 100%; max-height: 800px; border: 1px solid #cbd5e1;">
+                    </div>
+                @elseif($item['is_image'])
+                    <p style="color: #ef4444; font-size: 12px;">(Gambar tidak dapat ditampilkan atau terenkripsi secara eksternal)</p>
+                @else
+                    <p style="font-style: italic; font-size: 12px;">(File berupa audio, video, atau dokumen non-gambar. Tersimpan aman di dalam server dan akan diserahkan kepada pihak berwenang sesuai persetujuan).</p>
+                @endif
+            </div>
+        @endforeach
+    </div>
+    @endif
 
     <div class="footer">
         <p>Dokumen ini di-generate secara otomatis oleh sistem PinjolWatch pada {{ now()->format('d F Y H:i') }}.</p>
