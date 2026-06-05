@@ -65,7 +65,7 @@ class ReportForm extends Component
     private function validateStep()
     {
         $messages = [
-            'evidence.*.mimes' => 'Format file harus berupa: JPG, PNG, PDF, MP3, MP4, ENC, atau BIN.',
+            'evidence.*.extensions' => 'Format file harus berupa: JPG, PNG, PDF, MP3, MP4, ENC, atau BIN.',
             'evidence.*.max' => 'Ukuran file bukti tidak boleh lebih dari 10MB.',
             'encryption_password.min' => 'Password enkripsi minimal 4 karakter.',
         ];
@@ -93,7 +93,7 @@ class ReportForm extends Component
             ], $messages);
         } elseif ($this->step == 3) {
             $this->validate([
-                'evidence.*' => 'nullable|file|mimes:jpeg,png,pdf,mp3,mp4,enc,bin|max:10240',
+                'evidence.*' => 'nullable|file|extensions:jpeg,jpg,png,pdf,mp3,mp4,enc,bin|max:10240',
                 'encryption_password' => 'nullable|string|min:4',
             ], $messages);
         }
