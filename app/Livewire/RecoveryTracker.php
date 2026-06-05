@@ -14,6 +14,7 @@ class RecoveryTracker extends Component
     public $currentStageTasks = [];
     public $selectedMood = null;
     public $note = '';
+    public $currentStageIndex = 0;
 
     public function mount()
     {
