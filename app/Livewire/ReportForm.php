@@ -45,6 +45,7 @@ class ReportForm extends Component
     public $is_anonymous = true;
     public $ticket_id = null;
     public $success = false;
+    public $previousReports = [];
 
     // Client-side encryption properties
     public $encryption_password = '';
@@ -88,6 +89,8 @@ class ReportForm extends Component
                 'communication_tone' => 'nullable|in:santun_resmi,kasar_ancaman',
                 'dc_actions' => 'nullable|array',
                 'dc_actions.*' => 'string',
+                'previousReports' => 'nullable|array',
+                'previousReports.*' => 'string',
                 'whatsapp_consent' => 'boolean',
                 'reporter_whatsapp' => 'nullable|required_if:whatsapp_consent,true|string|max:20',
             ], $messages);
@@ -237,7 +240,7 @@ class ReportForm extends Component
 
     protected function resetForm()
     {
-        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'pinjol_count', 'legal_pinjol_id', 'app_name', 'involved_apps', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'whatsapp_consent', 'reporter_whatsapp', 'evidence', 'consent_scope', 'step']);
+        $this->reset(['province_id', 'kabupaten_id', 'threat_type_id', 'pinjol_count', 'legal_pinjol_id', 'app_name', 'involved_apps', 'app_legal_status', 'chronology', 'contact_phone_number', 'identity_disclosure', 'communication_tone', 'dc_actions', 'whatsapp_consent', 'reporter_whatsapp', 'evidence', 'consent_scope', 'step', 'previousReports']);
     }
 
     protected function generateTicket(): string
