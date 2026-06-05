@@ -151,6 +151,8 @@ Route::middleware('auth')->group(function () {
         return view('my-report', ['ticket' => $ticket]);
     })->name('report.show');
 
+    Route::get('/my-reports/{ticket}/pdf', [\App\Http\Controllers\UserReportPdfController::class, 'download'])->name('report.pdf');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

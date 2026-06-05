@@ -256,6 +256,9 @@
                                     <a href="{{ route('report.show', $report->ticket_id) }}" class="px-6 py-3 bg-slate-800 text-slate-400 font-black text-[10px] rounded-xl uppercase tracking-widest hover:bg-teal-600 hover:text-white transition-all">
                                         Lihat Detail
                                     </a>
+                                    <a href="{{ route('report.pdf', $report->ticket_id) }}" class="px-6 py-3 bg-teal-600/10 text-teal-400 font-black text-[10px] rounded-xl uppercase tracking-widest hover:bg-teal-600 hover:text-white transition-all border border-teal-500/20" target="_blank">
+                                        Download PDF
+                                    </a>
                                 </div>
                             </div>
                         </div>
